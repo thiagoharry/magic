@@ -302,7 +302,8 @@ MAIN_LOOP main_loop(void){ // The game loop
                             nomes[carta]);
     caos1 -> visible = false;
   }
-  else if(W.keyboard[W_C] == 1){
+  else if(W.keyboard[W_C] == 1 || W.mouse.buttons[W_MOUSE_RIGHT] == 1 ||
+          W.mouse.buttons[W_MOUSE_RIGHT] == -1){
     // Mostra e oculta o efeito caótico
     if(caos1 -> visible){
       W.cancel(apaga_caos);
@@ -319,7 +320,8 @@ MAIN_LOOP main_loop(void){ // The game loop
       W.run_futurelly(apaga_caos, 5.0);
     }
   }
-  else if(W.keyboard[W_ENTER] == 1 && caos1 -> visible == false &&
+  else if((W.keyboard[W_ENTER] == 1 || W.mouse.buttons[W_MOUSE_LEFT] == 1 ||
+           W.mouse.buttons[W_MOUSE_LEFT] == -1) && caos1 -> visible == false &&
           fundo -> integer == 0){
     // Tentativa de planinaltear
     num = W.random() % 6;
