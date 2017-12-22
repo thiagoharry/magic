@@ -63,7 +63,7 @@ MAIN_LOOP menu_embaralha(void){
     selecao -> visible = false;
   if(W.mouse.buttons[W_MOUSE_LEFT] == 1 ||
      W.mouse.buttons[W_MOUSE_LEFT] == -1)
-    if(selecao -> visible){
+    if(selecao -> visible && !W.pending_files){
       if(selecao -> x == escolha1 -> x)
         cartas = 40;
       else
@@ -80,7 +80,6 @@ static void executa(void){
   int pilha_escolhida, carta_escolhida = 0, soma = 0;
   struct interface *p;
   int escolha = W.random() % cartas;
-  printf("ESCOLHA: %d\n", escolha);
   if(paused || terminou || W.pending_files)
     return;
   for(pilha_escolhida = 0; pilha_escolhida < 10; pilha_escolhida ++){
