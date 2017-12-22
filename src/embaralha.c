@@ -45,6 +45,7 @@ MAIN_LOOP menu_embaralha(void){
  LOOP_BODY:
   if(W.keyboard[W_ESC])
     Wexit_loop();
+  selecao -> visible = false;
   if(W.mouse.x > escolha1 -> x - escolha1 -> width / 2 &&
      W.mouse.x < escolha1 -> x + escolha1 -> width / 2 &&
      W.mouse.y > escolha1 -> y - escolha1 -> height / 2 &&
@@ -59,8 +60,6 @@ MAIN_LOOP menu_embaralha(void){
     W.move_interface(selecao, escolha2 -> x, escolha2 -> y);
     selecao -> visible = true;
   }
-  else
-    selecao -> visible = false;
   if(W.mouse.buttons[W_MOUSE_LEFT] == 1 ||
      W.mouse.buttons[W_MOUSE_LEFT] == -1)
     if(selecao -> visible && !W.pending_files){
