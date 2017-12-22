@@ -81,7 +81,7 @@ static void executa(void){
   struct interface *p;
   int escolha = W.random() % cartas;
   printf("ESCOLHA: %d\n", escolha);
-  if(paused || terminou)
+  if(paused || terminou || W.pending_files)
     return;
   for(pilha_escolhida = 0; pilha_escolhida < 10; pilha_escolhida ++){
     if(soma + total_pilha[pilha_escolhida] > escolha){

@@ -751,23 +751,23 @@ void(*delete_float)(char*);
 void(*delete_string)(char*);
 void(*delete_all)(void);
 /*:737*//*760:*/
-#line 16711 "cweb/weaver.w"
+#line 16713 "cweb/weaver.w"
 
 bool(*play_music)(char*,bool);
 /*:760*//*764:*/
-#line 16772 "cweb/weaver.w"
+#line 16774 "cweb/weaver.w"
 
 bool(*pause_music)(char*);
 /*:764*//*770:*/
-#line 16877 "cweb/weaver.w"
+#line 16879 "cweb/weaver.w"
 
 bool(*stop_music)(char*);
 /*:770*//*774:*/
-#line 16908 "cweb/weaver.w"
+#line 16910 "cweb/weaver.w"
 
 float(*get_volume)(char*);
 /*:774*//*778:*/
-#line 16968 "cweb/weaver.w"
+#line 16970 "cweb/weaver.w"
 
 float(*increase_volume)(char*,float);
 /*:778*/

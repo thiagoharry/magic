@@ -76,7 +76,7 @@ else{
 _final_shader[_number_of_loops]= W_NONE;
 }
 /*:509*//*783:*/
-#line 17085 "cweb/weaver.w"
+#line 17087 "cweb/weaver.w"
 
 {
 int i;
@@ -142,7 +142,7 @@ emscripten_sleep(1);
 
 _finalize_all();
 /*:606*//*781:*/
-#line 17021 "cweb/weaver.w"
+#line 17023 "cweb/weaver.w"
 
 {
 #ifdef W_MULTITHREAD
@@ -255,7 +255,7 @@ emscripten_sleep(1);
 
 _finalize_all();
 /*:607*//*780:*/
-#line 16986 "cweb/weaver.w"
+#line 16988 "cweb/weaver.w"
 
 {
 #ifdef W_MULTITHREAD
@@ -314,7 +314,7 @@ else{
 _final_shader[_number_of_loops]= W_NONE;
 }
 /*:509*//*783:*/
-#line 17085 "cweb/weaver.w"
+#line 17087 "cweb/weaver.w"
 
 {
 int i;
@@ -381,7 +381,7 @@ else{
 _final_shader[_number_of_loops]= W_NONE;
 }
 /*:509*//*783:*/
-#line 17085 "cweb/weaver.w"
+#line 17087 "cweb/weaver.w"
 
 {
 int i;
@@ -410,7 +410,7 @@ _final_shader_integer[_number_of_loops-1]= W.final_shader_integer;
 W.final_shader_integer= 0;
 }
 /*:512*//*782:*/
-#line 17059 "cweb/weaver.w"
+#line 17061 "cweb/weaver.w"
 
 {
 int i;
@@ -1599,23 +1599,23 @@ W.delete_float= &_delete_float;
 W.delete_string= &_delete_string;
 W.delete_all= &_delete_all;
 /*:738*//*761:*/
-#line 16714 "cweb/weaver.w"
+#line 16716 "cweb/weaver.w"
 
 W.play_music= &_play_music;
 /*:761*//*765:*/
-#line 16775 "cweb/weaver.w"
+#line 16777 "cweb/weaver.w"
 
 W.pause_music= &_pause_music;
 /*:765*//*771:*/
-#line 16880 "cweb/weaver.w"
+#line 16882 "cweb/weaver.w"
 
 W.stop_music= &_stop_music;
 /*:771*//*775:*/
-#line 16911 "cweb/weaver.w"
+#line 16913 "cweb/weaver.w"
 
 W.get_volume= &_get_volume;
 /*:775*//*779:*/
-#line 16971 "cweb/weaver.w"
+#line 16973 "cweb/weaver.w"
 
 W.increase_volume= &_increase_volume;
 /*:779*/
