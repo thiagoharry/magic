@@ -1,5 +1,5 @@
 /*392:*/
-#line 8708 "cweb/weaver.w"
+#line 8709 "cweb/weaver.w"
 
 #include "interface.h"
 #include <stdarg.h>  
@@ -8,16 +8,16 @@
 #include <sys/types.h>  
 #endif
 /*666:*/
-#line 14733 "cweb/weaver.w"
+#line 14734 "cweb/weaver.w"
 
 #ifndef W_DISABLE_PNG
 #include <png.h> 
 #endif
 /*:666*/
-#line 8715 "cweb/weaver.w"
+#line 8716 "cweb/weaver.w"
 
 /*648:*/
-#line 14292 "cweb/weaver.w"
+#line 14293 "cweb/weaver.w"
 
 #if W_TARGET == W_WEB
 static void onerror_texture(unsigned undocumented,void*interface,
@@ -34,7 +34,7 @@ pthread_mutex_unlock(&(W._pending_files_mutex));
 }
 #endif
 /*:648*//*649:*/
-#line 14312 "cweb/weaver.w"
+#line 14313 "cweb/weaver.w"
 
 #if W_TARGET == W_WEB
 static void onload_texture(unsigned undocumented,
@@ -75,7 +75,7 @@ pthread_mutex_unlock(&(W._pending_files_mutex));
 }
 #endif
 /*:649*//*650:*/
-#line 14356 "cweb/weaver.w"
+#line 14357 "cweb/weaver.w"
 
 #if W_TARGET == W_WEB
 static void onprogress_texture(unsigned int undocumented,void*snd,
@@ -84,10 +84,10 @@ return;
 }
 #endif
 /*:650*/
-#line 8716 "cweb/weaver.w"
+#line 8717 "cweb/weaver.w"
 
 /*399:*/
-#line 8812 "cweb/weaver.w"
+#line 8813 "cweb/weaver.w"
 
 void _flush_interfaces(void){
 int i;
@@ -108,7 +108,7 @@ perror("Finalizing interface mutex:");
 }
 }
 /*:399*//*407:*/
-#line 8942 "cweb/weaver.w"
+#line 8943 "cweb/weaver.w"
 
 struct interface*_new_interface(int type,int x,int y,int width,
 int height,...){
@@ -148,7 +148,7 @@ _interfaces[_number_of_loops][i].height= (float)height;
 
 _interfaces[_number_of_loops][i]._mode= GL_TRIANGLE_FAN;
 /*645:*/
-#line 14177 "cweb/weaver.w"
+#line 14178 "cweb/weaver.w"
 
 {
 _interfaces[_number_of_loops][i]._texture= &_empty_texture;
@@ -165,7 +165,7 @@ _interfaces[_number_of_loops][i]._t= W.t;
 _interfaces[_number_of_loops][i].max_repetition= -1;
 }
 /*:645*/
-#line 8980 "cweb/weaver.w"
+#line 8981 "cweb/weaver.w"
 
 #ifdef W_MULTITHREAD
 if(pthread_mutex_init(&(_interfaces[_number_of_loops][i]._mutex),
@@ -189,7 +189,7 @@ _interfaces[_number_of_loops][i].a= va_arg(valist,double);
 va_end(valist);
 break;
 /*647:*/
-#line 14208 "cweb/weaver.w"
+#line 14209 "cweb/weaver.w"
 
 case W_INTERFACE_IMAGE:
 _interfaces[_number_of_loops][i]._loaded_texture= false;
@@ -258,11 +258,11 @@ _finalize_interface_texture);
 }
 break;
 /*:647*/
-#line 9002 "cweb/weaver.w"
+#line 9003 "cweb/weaver.w"
 
 default:
 /*662:*/
-#line 14561 "cweb/weaver.w"
+#line 14562 "cweb/weaver.w"
 
 {
 #if W_TARGET == W_WEB
@@ -330,12 +330,12 @@ _finalize_interface_texture);
 va_end(valist);
 }
 /*:662*/
-#line 9004 "cweb/weaver.w"
+#line 9005 "cweb/weaver.w"
 
 ;
 }
 /*431:*/
-#line 9478 "cweb/weaver.w"
+#line 9479 "cweb/weaver.w"
 
 {
 float nx,ny,cosine,sine,x1,y1;
@@ -369,15 +369,15 @@ _interfaces[_number_of_loops][i]._transform_matrix[11]= 0.0;
 _interfaces[_number_of_loops][i]._transform_matrix[15]= 1.0;
 }
 /*:431*/
-#line 9007 "cweb/weaver.w"
+#line 9008 "cweb/weaver.w"
 
 /*474:*/
-#line 10538 "cweb/weaver.w"
+#line 10539 "cweb/weaver.w"
 
 
 _insert_interface_queue(&(_interfaces[_number_of_loops][i]));
 /*:474*/
-#line 9008 "cweb/weaver.w"
+#line 9009 "cweb/weaver.w"
 
 new_interface= &(_interfaces[_number_of_loops][i]);
 }
@@ -388,7 +388,7 @@ pthread_mutex_unlock(&_interface_mutex);
 return new_interface;
 }
 /*:407*//*411:*/
-#line 9039 "cweb/weaver.w"
+#line 9040 "cweb/weaver.w"
 
 bool _destroy_interface(struct interface*inter){
 int i;
@@ -399,12 +399,12 @@ break;
 if(i==W_MAX_INTERFACES)
 return false;
 /*475:*/
-#line 10546 "cweb/weaver.w"
+#line 10547 "cweb/weaver.w"
 
 
 _remove_interface_queue(&(_interfaces[_number_of_loops][i]));
 /*:475*//*653:*/
-#line 14387 "cweb/weaver.w"
+#line 14388 "cweb/weaver.w"
 
 {
 _finalize_this(&_interfaces[_number_of_loops][i],true);
@@ -413,7 +413,7 @@ Wfree(_interfaces[_number_of_loops][i]._texture);
 _finalize_interface_texture((void*)&_interfaces[_number_of_loops][i]);
 }
 /*:653*/
-#line 9048 "cweb/weaver.w"
+#line 9049 "cweb/weaver.w"
 
 switch(_interfaces[_number_of_loops][i].type){
 
@@ -432,7 +432,7 @@ Wexit();
 return true;
 }
 /*:411*//*415:*/
-#line 9093 "cweb/weaver.w"
+#line 9094 "cweb/weaver.w"
 
 struct interface*_copy_interface(struct interface*inter){
 int i;
@@ -472,7 +472,7 @@ pthread_mutex_unlock(&_interface_mutex);
 return new_interface;
 }
 /*:415*//*420:*/
-#line 9217 "cweb/weaver.w"
+#line 9218 "cweb/weaver.w"
 
 void _move_interface(struct interface*inter,float x,float y){
 #ifdef W_MULTITHREAD
@@ -481,7 +481,7 @@ pthread_mutex_lock(&(inter->_mutex));
 inter->x= x;
 inter->y= y;
 /*432:*/
-#line 9515 "cweb/weaver.w"
+#line 9516 "cweb/weaver.w"
 
 {
 float x1,y1;
@@ -491,14 +491,14 @@ inter->_transform_matrix[12]= x1;
 inter->_transform_matrix[13]= y1;
 }
 /*:432*/
-#line 9224 "cweb/weaver.w"
+#line 9225 "cweb/weaver.w"
 
 #ifdef W_MULTITHREAD
 pthread_mutex_unlock(&(inter->_mutex));
 #endif
 }
 /*:420*//*424:*/
-#line 9296 "cweb/weaver.w"
+#line 9297 "cweb/weaver.w"
 
 void _resize_interface(struct interface*inter,float size_x,float size_y){
 #ifdef W_MULTITHREAD
@@ -507,7 +507,7 @@ pthread_mutex_lock(&(inter->_mutex));
 inter->height= size_y;
 inter->width= size_x;
 /*433:*/
-#line 9528 "cweb/weaver.w"
+#line 9529 "cweb/weaver.w"
 
 {
 float nx,ny,cosine,sine;
@@ -521,14 +521,14 @@ inter->_transform_matrix[1]= (nx*sine)/(float)W.height;
 inter->_transform_matrix[5]= (ny*cosine)/(float)W.height;
 }
 /*:433*/
-#line 9303 "cweb/weaver.w"
+#line 9304 "cweb/weaver.w"
 
 #ifdef W_MULTITHREAD
 pthread_mutex_unlock(&(inter->_mutex));
 #endif
 }
 /*:424*//*428:*/
-#line 9377 "cweb/weaver.w"
+#line 9378 "cweb/weaver.w"
 
 void _rotate_interface(struct interface*inter,float rotation){
 #ifdef W_MULTITHREAD
@@ -536,7 +536,7 @@ pthread_mutex_lock(&(inter->_mutex));
 #endif
 inter->rotation= rotation;
 /*433:*/
-#line 9528 "cweb/weaver.w"
+#line 9529 "cweb/weaver.w"
 
 {
 float nx,ny,cosine,sine;
@@ -550,14 +550,14 @@ inter->_transform_matrix[1]= (nx*sine)/(float)W.height;
 inter->_transform_matrix[5]= (ny*cosine)/(float)W.height;
 }
 /*:433*/
-#line 9383 "cweb/weaver.w"
+#line 9384 "cweb/weaver.w"
 
 #ifdef W_MULTITHREAD
 pthread_mutex_unlock(&(inter->_mutex));
 #endif
 }
 /*:428*//*435:*/
-#line 9550 "cweb/weaver.w"
+#line 9551 "cweb/weaver.w"
 
 void _update_interface_screen_size(void){
 int i,j;
@@ -586,7 +586,7 @@ pthread_mutex_unlock(&_interfaces[i][j]._mutex);
 }
 }
 /*:435*//*467:*/
-#line 10395 "cweb/weaver.w"
+#line 10396 "cweb/weaver.w"
 
 void _insert_interface_queue(struct interface*inter){
 int begin,end,middle,tmp;
@@ -626,7 +626,7 @@ _interface_queue[_number_of_loops][tmp-1];
 _interface_queue[_number_of_loops][middle]= inter;
 }
 /*:467*//*469:*/
-#line 10443 "cweb/weaver.w"
+#line 10444 "cweb/weaver.w"
 
 void _remove_interface_queue(struct interface*inter){
 int begin,end,middle,tmp;
@@ -689,7 +689,7 @@ return;
 }
 }
 /*:469*//*471:*/
-#line 10512 "cweb/weaver.w"
+#line 10513 "cweb/weaver.w"
 
 void _clean_interface_queue(void){
 int i;
@@ -697,7 +697,7 @@ for(i= 0;i<W_MAX_INTERFACES;i++)
 _interface_queue[_number_of_loops][i]= NULL;
 }
 /*:471*//*652:*/
-#line 14372 "cweb/weaver.w"
+#line 14373 "cweb/weaver.w"
 
 
 
@@ -706,6 +706,6 @@ struct interface*p= (struct interface*)data;
 glDeleteTextures(p->number_of_frames,p->_texture);
 }
 /*:652*/
-#line 8717 "cweb/weaver.w"
+#line 8718 "cweb/weaver.w"
 
 /*:392*/

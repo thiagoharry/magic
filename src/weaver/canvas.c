@@ -1,5 +1,5 @@
 /*244:*/
-#line 5613 "cweb/weaver.w"
+#line 5614 "cweb/weaver.w"
 
 /*66:*/
 #line 1927 "cweb/weaver.w"
@@ -8,7 +8,7 @@
 #include "../../conf/conf.h"
 #include "conf_end.h"
 /*:66*/
-#line 5614 "cweb/weaver.w"
+#line 5615 "cweb/weaver.w"
 
 extern int make_iso_compilers_happy;
 #if W_TARGET == W_WEB
@@ -72,7 +72,7 @@ void _finalize_canvas(void){
 SDL_FreeSurface(window);
 }
 /*253:*/
-#line 5803 "cweb/weaver.w"
+#line 5804 "cweb/weaver.w"
 
 void _Wresize_window(int width,int height){
 int old_width,old_height;
@@ -89,11 +89,11 @@ W.width= width;
 W.height= height;
 glViewport(0,0,W.width,W.height);
 /*436:*/
-#line 9581 "cweb/weaver.w"
+#line 9582 "cweb/weaver.w"
 
 _update_interface_screen_size();
 /*:436*//*478:*/
-#line 10645 "cweb/weaver.w"
+#line 10646 "cweb/weaver.w"
 
 {
 
@@ -118,20 +118,20 @@ W.resize_interface(&_interfaces[i][j],new_width,new_height);
 }
 }
 /*:478*/
-#line 5818 "cweb/weaver.w"
+#line 5819 "cweb/weaver.w"
 
 #ifdef W_MULTITHREAD
 pthread_mutex_unlock(&_window_mutex);
 #endif
 }
 /*:253*//*259:*/
-#line 5866 "cweb/weaver.w"
+#line 5867 "cweb/weaver.w"
 
 void _Wmove_window(int width,int height){
 return;
 }
 /*:259*/
-#line 5676 "cweb/weaver.w"
+#line 5677 "cweb/weaver.w"
 
 #endif
 /*:244*/

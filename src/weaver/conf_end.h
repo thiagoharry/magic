@@ -35,7 +35,7 @@
 #define W_MAX_SUBLOOP 1
 #endif
 /*:93*//*209:*/
-#line 5040 "cweb/weaver.w"
+#line 5041 "cweb/weaver.w"
 
 #ifndef W_DEFAULT_COLOR
 #define W_DEFAULT_COLOR 0.0, 0.0, 0.0
@@ -47,7 +47,7 @@
 #define W_WIDTH 0
 #endif
 /*:209*//*328:*/
-#line 7325 "cweb/weaver.w"
+#line 7326 "cweb/weaver.w"
 
 #ifndef W_INSTALL_DATA
 #define W_INSTALL_DATA "/usr/share/games/"W_PROG
@@ -66,7 +66,7 @@
 #define W_MAX_SCHEDULING 8
 #endif
 /*:328*//*729:*/
-#line 15938 "cweb/weaver.w"
+#line 15939 "cweb/weaver.w"
 
 
 #ifndef W_MAX_MUSIC
