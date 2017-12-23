@@ -391,8 +391,8 @@ W.resize_interface(&_interfaces[i][j],new_width,new_height);
 void _change_final_shader(int type){
 _final_shader[_number_of_loops]= type;
 }
-/*:503*//*676:*/
-#line 14968 "cweb/weaver.w"
+/*:503*//*658:*/
+#line 14464 "cweb/weaver.w"
 
 char _vertex_image_interface[]= {
 #include "vertex_image_interface.data"
@@ -400,7 +400,7 @@ char _vertex_image_interface[]= {
 char _fragment_image_interface[]= {
 #include "fragment_image_interface.data"
 ,0x00};
-/*:676*/
+/*:658*/
 #line 9651 "cweb/weaver.w"
 
 /*:440*/

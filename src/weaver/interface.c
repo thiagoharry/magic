@@ -7,17 +7,17 @@
 #include <sys/stat.h>  
 #include <sys/types.h>  
 #endif
-/*684:*/
-#line 15251 "cweb/weaver.w"
+/*666:*/
+#line 14733 "cweb/weaver.w"
 
 #ifndef W_DISABLE_PNG
 #include <png.h> 
 #endif
-/*:684*/
+/*:666*/
 #line 8715 "cweb/weaver.w"
 
-/*663:*/
-#line 14718 "cweb/weaver.w"
+/*648:*/
+#line 14292 "cweb/weaver.w"
 
 #if W_TARGET == W_WEB
 static void onerror_texture(unsigned undocumented,void*interface,
@@ -33,8 +33,8 @@ pthread_mutex_unlock(&(W._pending_files_mutex));
 #endif
 }
 #endif
-/*:663*//*664:*/
-#line 14738 "cweb/weaver.w"
+/*:648*//*649:*/
+#line 14312 "cweb/weaver.w"
 
 #if W_TARGET == W_WEB
 static void onload_texture(unsigned undocumented,
@@ -74,31 +74,8 @@ pthread_mutex_unlock(&(W._pending_files_mutex));
 #endif
 }
 #endif
-/*:664*//*665:*/
-#line 14782 "cweb/weaver.w"
-
-#if W_TARGET == W_ELF && defined(W_MULTITHREAD)
-
-static void*onload_texture(void*p){
-struct _thread_file_info*file_info= (struct _thread_file_info*)p;
-struct interface*my_interface= (struct interface*)(file_info->target);
-my_interface->_loaded_texture= true;
-return NULL;
-}
-#endif
-/*:665*//*666:*/
-#line 14796 "cweb/weaver.w"
-
-#if W_TARGET == W_ELF && defined(W_MULTITHREAD)
-static void*onerror_texture(void*p){
-struct _thread_file_info*file_info= (struct _thread_file_info*)p;
-fprintf(stderr,"Warning (0): Failed to load texture file: %s\n",
-file_info->filename);
-return NULL;
-}
-#endif
-/*:666*//*667:*/
-#line 14810 "cweb/weaver.w"
+/*:649*//*650:*/
+#line 14356 "cweb/weaver.w"
 
 #if W_TARGET == W_WEB
 static void onprogress_texture(unsigned int undocumented,void*snd,
@@ -106,55 +83,7 @@ int percent){
 return;
 }
 #endif
-/*:667*//*668:*/
-#line 14822 "cweb/weaver.w"
-
-#if defined(W_MULTITHREAD) && W_TARGET == W_ELF
-static void*process_texture(void*p){
-char*ext;
-bool ret= true;
-struct _thread_file_info*file_info= (struct _thread_file_info*)p;
-struct interface*my_interface= (struct interface*)(file_info->target);
-ext= strrchr(file_info->filename,'.');
-if(!ext){
-file_info->onerror(p);
-}
-else if(!strcmp(ext,".gif")||!strcmp(ext,".GIF")){
-my_interface->_texture= 
-_extract_gif(file_info->filename,
-&(my_interface->number_of_frames),
-&(my_interface->frame_duration),
-&(my_interface->max_repetition),&ret);
-}
-if(ret){
-my_interface->type= W_NONE;
-return NULL;
-}
-if(my_interface->number_of_frames> 1)
-my_interface->animate= true;
-_finalize_after(my_interface,_finalize_interface_texture);
-if(ret){
-file_info->onerror(p);
-}
-else{
-file_info->onload(p);
-}
-
-#if W_THREAD_POOL == 0
-Wfree(p);
-
-#endif
-#ifdef W_MULTITHREAD
-pthread_mutex_lock(&(W._pending_files_mutex));
-#endif
-W.pending_files--;
-#ifdef W_MULTITHREAD
-pthread_mutex_unlock(&(W._pending_files_mutex));
-#endif
-return NULL;
-}
-#endif
-/*:668*/
+/*:650*/
 #line 8716 "cweb/weaver.w"
 
 /*399:*/
@@ -218,8 +147,8 @@ _interfaces[_number_of_loops][i].width= (float)width;
 _interfaces[_number_of_loops][i].height= (float)height;
 
 _interfaces[_number_of_loops][i]._mode= GL_TRIANGLE_FAN;
-/*660:*/
-#line 14587 "cweb/weaver.w"
+/*645:*/
+#line 14177 "cweb/weaver.w"
 
 {
 _interfaces[_number_of_loops][i]._texture= &_empty_texture;
@@ -235,7 +164,7 @@ _interfaces[_number_of_loops][i].frame_duration= NULL;
 _interfaces[_number_of_loops][i]._t= W.t;
 _interfaces[_number_of_loops][i].max_repetition= -1;
 }
-/*:660*/
+/*:645*/
 #line 8980 "cweb/weaver.w"
 
 #ifdef W_MULTITHREAD
@@ -259,8 +188,8 @@ _interfaces[_number_of_loops][i].b= va_arg(valist,double);
 _interfaces[_number_of_loops][i].a= va_arg(valist,double);
 va_end(valist);
 break;
-/*662:*/
-#line 14618 "cweb/weaver.w"
+/*647:*/
+#line 14208 "cweb/weaver.w"
 
 case W_INTERFACE_IMAGE:
 _interfaces[_number_of_loops][i]._loaded_texture= false;
@@ -272,7 +201,7 @@ char dir[]= "./image/";
 #elif W_TARGET == W_ELF
 char dir[]= W_INSTALL_DATA"/image/";
 #endif
-#if W_TARGET == W_ELF && !defined(W_MULTITHREAD)
+#if W_TARGET == W_ELF
 char*ext;
 bool ret= true;
 #endif
@@ -284,31 +213,17 @@ va_end(valist);
 strncpy(complete_path,dir,256);
 complete_path[255]= '\0';
 strncat(complete_path,filename,256-strlen(complete_path));
-#if W_TARGET == W_WEB || defined(W_MULTITHREAD)
-
 #if W_TARGET == W_WEB
+
 if(mkdir("image/",0777)==-1)
 perror(NULL);
-#ifdef W_MULTITHREAD
-pthread_mutex_lock(&(W._pending_files_mutex));
-#endif
 W.pending_files++;
-#ifdef W_MULTITHREAD
-pthread_mutex_unlock(&(W._pending_files_mutex));
-#endif
 
 emscripten_async_wget2(complete_path,complete_path,
 "GET","",
 (void*)&(_interfaces[_number_of_loops][i]),
 &onload_texture,&onerror_texture,
 &onprogress_texture);
-#else
-
-_multithread_load_file(complete_path,
-(void*)&(_interfaces[_number_of_loops][i]),
-&process_texture,
-&onload_texture,&onerror_texture);
-#endif
 #else
 
 ext= strrchr(filename,'.');
@@ -342,12 +257,12 @@ _finalize_interface_texture);
 #endif
 }
 break;
-/*:662*/
+/*:647*/
 #line 9002 "cweb/weaver.w"
 
 default:
-/*680:*/
-#line 15065 "cweb/weaver.w"
+/*662:*/
+#line 14561 "cweb/weaver.w"
 
 {
 #if W_TARGET == W_WEB
@@ -357,7 +272,7 @@ char dir[]= "./image/";
 #elif W_TARGET == W_ELF
 char dir[]= W_INSTALL_DATA"/image/";
 #endif
-#if W_TARGET == W_ELF && !defined(W_MULTITHREAD)
+#if W_TARGET == W_ELF
 char*ext;
 bool ret= true;
 #endif
@@ -370,30 +285,16 @@ _interfaces[_number_of_loops][i]._loaded_texture= false;
 strncpy(complete_path,dir,256);
 complete_path[255]= '\0';
 strncat(complete_path,filename,256-strlen(complete_path));
-#if W_TARGET==W_WEB||defined(W_MULTITHREAD)
 
 #if W_TARGET == W_WEB
 mkdir("images/",0777);
-#ifdef W_MULTITHREAD
-pthread_mutex_lock(&(W._pending_files_mutex));
-#endif
 W.pending_files++;
-#ifdef W_MULTITHREAD
-pthread_mutex_unlock(&(W._pending_files_mutex));
-#endif
 
 emscripten_async_wget2(complete_path,complete_path,
 "GET","",
 (void*)&(_interfaces[_number_of_loops][i]),
 &onload_texture,&onerror_texture,
 &onprogress_texture);
-#else
-
-_multithread_load_file(complete_path,
-(void*)&(_interfaces[_number_of_loops][i]),
-&process_texture,
-&onload_texture,&onerror_texture);
-#endif
 #else
 
 ext= strrchr(filename,'.');
@@ -428,7 +329,7 @@ _finalize_interface_texture);
 }
 va_end(valist);
 }
-/*:680*/
+/*:662*/
 #line 9004 "cweb/weaver.w"
 
 ;
@@ -502,8 +403,8 @@ return false;
 
 
 _remove_interface_queue(&(_interfaces[_number_of_loops][i]));
-/*:475*//*671:*/
-#line 14891 "cweb/weaver.w"
+/*:475*//*653:*/
+#line 14387 "cweb/weaver.w"
 
 {
 _finalize_this(&_interfaces[_number_of_loops][i],true);
@@ -511,7 +412,7 @@ if(_interfaces[_number_of_loops][i]._texture!=&_empty_texture)
 Wfree(_interfaces[_number_of_loops][i]._texture);
 _finalize_interface_texture((void*)&_interfaces[_number_of_loops][i]);
 }
-/*:671*/
+/*:653*/
 #line 9048 "cweb/weaver.w"
 
 switch(_interfaces[_number_of_loops][i].type){
@@ -795,8 +696,8 @@ int i;
 for(i= 0;i<W_MAX_INTERFACES;i++)
 _interface_queue[_number_of_loops][i]= NULL;
 }
-/*:471*//*670:*/
-#line 14876 "cweb/weaver.w"
+/*:471*//*652:*/
+#line 14372 "cweb/weaver.w"
 
 
 
@@ -804,7 +705,7 @@ void _finalize_interface_texture(void*data){
 struct interface*p= (struct interface*)data;
 glDeleteTextures(p->number_of_frames,p->_texture);
 }
-/*:670*/
+/*:652*/
 #line 8717 "cweb/weaver.w"
 
 /*:392*/

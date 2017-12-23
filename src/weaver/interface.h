@@ -32,8 +32,8 @@ bool visible;
 GLfloat _transform_matrix[16];
 
 GLenum _mode;
-/*656:*/
-#line 14541 "cweb/weaver.w"
+/*641:*/
+#line 14131 "cweb/weaver.w"
 
 
 GLuint*_texture;
@@ -44,7 +44,7 @@ unsigned current_frame;
 unsigned*frame_duration;
 unsigned long _t;
 int max_repetition;
-/*:656*/
+/*:641*/
 #line 8746 "cweb/weaver.w"
 
 
@@ -120,22 +120,22 @@ void _remove_interface_queue(struct interface*inter);
 #line 10508 "cweb/weaver.w"
 
 void _clean_interface_queue(void);
-/*:470*//*661:*/
-#line 14610 "cweb/weaver.w"
+/*:470*//*646:*/
+#line 14200 "cweb/weaver.w"
 
 #define W_INTERFACE_IMAGE -3
-/*:661*//*669:*/
-#line 14872 "cweb/weaver.w"
+/*:646*//*651:*/
+#line 14368 "cweb/weaver.w"
 
 void _finalize_interface_texture(void*);
-/*:669*//*685:*/
-#line 15260 "cweb/weaver.w"
+/*:651*//*667:*/
+#line 14742 "cweb/weaver.w"
 
 #ifndef W_DISABLE_PNG
 GLuint*_extract_png(char*,unsigned*,unsigned**,int*,bool*);
 #endif
-/*:685*//*686:*/
-#line 15274 "cweb/weaver.w"
+/*:667*//*668:*/
+#line 14756 "cweb/weaver.w"
 
 #ifndef W_DISABLE_PNG
 GLuint*_extract_png(char*filename,unsigned*number_of_frames,
@@ -155,8 +155,8 @@ if(fp==NULL){
 fprintf(stderr,"ERROR: Can't open file %s.\n",filename);
 goto error_png;
 }
-/*687:*/
-#line 15316 "cweb/weaver.w"
+/*669:*/
+#line 14798 "cweb/weaver.w"
 
 {
 char header[8];
@@ -172,8 +172,8 @@ fprintf(stderr,"ERROR: %s don't have a PNG header.\n",filename);
 goto error_png;
 }
 }
-/*:687*//*688:*/
-#line 15336 "cweb/weaver.w"
+/*:669*//*670:*/
+#line 14818 "cweb/weaver.w"
 
 {
 
@@ -193,8 +193,8 @@ fprintf(stderr,"ERROR: Can't create structure to read PNG.\n");
 goto error_png;
 }
 }
-/*:688*//*689:*/
-#line 15364 "cweb/weaver.w"
+/*:670*//*671:*/
+#line 14846 "cweb/weaver.w"
 
 {
 if(setjmp(png_jmpbuf(png_ptr))){
@@ -202,20 +202,20 @@ fprintf(stderr,"ERROR: %s initialization failed.\n",filename);
 goto error_png;
 }
 }
-/*:689*//*690:*/
-#line 15377 "cweb/weaver.w"
+/*:671*//*672:*/
+#line 14859 "cweb/weaver.w"
 
 {
 png_init_io(png_ptr,fp);
 }
-/*:690*//*691:*/
-#line 15388 "cweb/weaver.w"
+/*:672*//*673:*/
+#line 14870 "cweb/weaver.w"
 
 {
 png_set_sig_bytes(png_ptr,8);
 }
-/*:691*//*692:*/
-#line 15399 "cweb/weaver.w"
+/*:673*//*674:*/
+#line 14881 "cweb/weaver.w"
 
 {
 png_read_info(png_ptr,info_ptr);
@@ -224,14 +224,14 @@ height= png_get_image_height(png_ptr,info_ptr);
 color_type= png_get_color_type(png_ptr,info_ptr);
 bit_depth= png_get_bit_depth(png_ptr,info_ptr);
 }
-/*:692*//*693:*/
-#line 15413 "cweb/weaver.w"
+/*:674*//*675:*/
+#line 14895 "cweb/weaver.w"
 
 {
 number_of_passes= png_set_interlace_handling(png_ptr);
 }
-/*:693*//*694:*/
-#line 15424 "cweb/weaver.w"
+/*:675*//*676:*/
+#line 14906 "cweb/weaver.w"
 
 {
 png_read_update_info(png_ptr,info_ptr);
@@ -240,8 +240,8 @@ fprintf(stderr,"ERROR: Failed to interpret %s .\n",filename);
 goto error_png;
 }
 }
-/*:694*//*695:*/
-#line 15440 "cweb/weaver.w"
+/*:676*//*677:*/
+#line 14922 "cweb/weaver.w"
 
 {
 int y,z;
@@ -276,8 +276,8 @@ goto error_png;
 png_read_image(png_ptr,row_pointers);
 fclose(fp);
 }
-/*:695*/
-#line 15293 "cweb/weaver.w"
+/*:677*/
+#line 14775 "cweb/weaver.w"
 
 goto end_of_png;
 error_png:
@@ -294,7 +294,7 @@ fclose(fp);
 return returned_data;
 }
 #endif
-/*:686*/
+/*:668*/
 #line 8702 "cweb/weaver.w"
 
 #ifdef __cplusplus

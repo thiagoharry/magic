@@ -80,13 +80,13 @@ void _change_resolution(int resolution_x,int resolution_y);
 #line 11188 "cweb/weaver.w"
 
 void _change_final_shader(int type);
-/*:502*//*675:*/
-#line 14963 "cweb/weaver.w"
+/*:502*//*657:*/
+#line 14459 "cweb/weaver.w"
 
 extern char _vertex_image_interface[];
 extern char _fragment_image_interface[];
 struct _shader _image_interface_shader;
-/*:675*/
+/*:657*/
 #line 9636 "cweb/weaver.w"
 
 #ifdef __cplusplus

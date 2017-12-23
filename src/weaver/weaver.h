@@ -449,11 +449,11 @@ GLuint _depth_stencil;
 
 int _final_shader_integer[W_MAX_SUBLOOP];
 /*:511*//*519:*/
-#line 11381 "cweb/weaver.w"
+#line 11364 "cweb/weaver.w"
 
 #include "sound.h"
-/*:519*//*599:*/
-#line 12877 "cweb/weaver.w"
+/*:519*//*584:*/
+#line 12467 "cweb/weaver.w"
 
 #ifdef W_MULTITHREAD
 pthread_mutex_t _finalizing_mutex;
@@ -464,32 +464,32 @@ void(*finalize)(void*);
 struct _finalize_element*prev,*next;
 };
 struct _finalize_element*_finalize_list[W_MAX_SUBLOOP];
-/*:599*//*602:*/
-#line 12921 "cweb/weaver.w"
+/*:584*//*587:*/
+#line 12511 "cweb/weaver.w"
 
 void _finalize_after(void*,void(*f)(void*));
-/*:602*//*604:*/
-#line 12963 "cweb/weaver.w"
+/*:587*//*589:*/
+#line 12553 "cweb/weaver.w"
 
 void _finalize_all(void);
-/*:604*//*608:*/
-#line 13001 "cweb/weaver.w"
+/*:589*//*593:*/
+#line 12591 "cweb/weaver.w"
 
 void _finalize_this(void*,bool);
-/*:608*//*614:*/
-#line 13140 "cweb/weaver.w"
+/*:593*//*599:*/
+#line 12730 "cweb/weaver.w"
 
 #include "gif.h"
-/*:614*//*657:*/
-#line 14561 "cweb/weaver.w"
+/*:599*//*642:*/
+#line 14151 "cweb/weaver.w"
 
 GLuint _empty_texture;
 char _empty_image[4];
-/*:657*//*700:*/
-#line 15551 "cweb/weaver.w"
+/*:642*//*682:*/
+#line 15033 "cweb/weaver.w"
 
 #include "database.h"
-/*:700*/
+/*:682*/
 #line 1988 "cweb/weaver.w"
 
 
@@ -536,13 +536,13 @@ struct _mouse mouse;
 
 int final_shader_integer;
 /*:506*//*529:*/
-#line 11462 "cweb/weaver.w"
+#line 11445 "cweb/weaver.w"
 
 
 int number_of_sound_devices;
 char**sound_device_name;
 /*:529*//*549:*/
-#line 11774 "cweb/weaver.w"
+#line 11757 "cweb/weaver.w"
 
 unsigned pending_files;
 #ifdef W_MULTITHREAD
@@ -706,71 +706,71 @@ void(*change_resolution)(int,int);
 
 void(*change_final_shader)(int);
 /*:504*//*536:*/
-#line 11571 "cweb/weaver.w"
+#line 11554 "cweb/weaver.w"
 
 bool(*select_sound_device)(int);
 /*:536*//*540:*/
-#line 11604 "cweb/weaver.w"
+#line 11587 "cweb/weaver.w"
 
 int(*current_sound_device)(void);
-/*:540*//*575:*/
-#line 12423 "cweb/weaver.w"
+/*:540*//*573:*/
+#line 12361 "cweb/weaver.w"
 
 struct sound*(*new_sound)(char*);
-/*:575*//*579:*/
-#line 12455 "cweb/weaver.w"
+/*:573*//*577:*/
+#line 12393 "cweb/weaver.w"
 
 void(*play_sound)(struct sound*);
-/*:579*//*583:*/
-#line 12504 "cweb/weaver.w"
+/*:577*//*581:*/
+#line 12442 "cweb/weaver.w"
 
 void(*destroy_sound)(struct sound*);
-/*:583*//*711:*/
-#line 15742 "cweb/weaver.w"
+/*:581*//*693:*/
+#line 15224 "cweb/weaver.w"
 
 void(*write_integer)(char*,int);
-/*:711*//*716:*/
-#line 15814 "cweb/weaver.w"
+/*:693*//*698:*/
+#line 15296 "cweb/weaver.w"
 
 void(*write_float)(char*,float);
-/*:716*//*721:*/
-#line 15882 "cweb/weaver.w"
+/*:698*//*703:*/
+#line 15364 "cweb/weaver.w"
 
 void(*write_string)(char*,char*);
-/*:721*//*727:*/
-#line 15954 "cweb/weaver.w"
+/*:703*//*709:*/
+#line 15436 "cweb/weaver.w"
 
 bool(*read_integer)(char*,int*);
 bool(*read_float)(char*,float*);
 bool(*read_string)(char*,char*,int);
-/*:727*//*737:*/
-#line 16203 "cweb/weaver.w"
+/*:709*//*719:*/
+#line 15685 "cweb/weaver.w"
 
 void(*delete_integer)(char*);
 void(*delete_float)(char*);
 void(*delete_string)(char*);
 void(*delete_all)(void);
-/*:737*//*760:*/
-#line 16713 "cweb/weaver.w"
+/*:719*//*742:*/
+#line 16200 "cweb/weaver.w"
 
 bool(*play_music)(char*,bool);
-/*:760*//*764:*/
-#line 16774 "cweb/weaver.w"
+/*:742*//*746:*/
+#line 16261 "cweb/weaver.w"
 
 bool(*pause_music)(char*);
-/*:764*//*770:*/
-#line 16879 "cweb/weaver.w"
+/*:746*//*752:*/
+#line 16366 "cweb/weaver.w"
 
 bool(*stop_music)(char*);
-/*:770*//*774:*/
-#line 16910 "cweb/weaver.w"
+/*:752*//*756:*/
+#line 16397 "cweb/weaver.w"
 
 float(*get_volume)(char*);
-/*:774*//*778:*/
-#line 16970 "cweb/weaver.w"
+/*:756*//*760:*/
+#line 16457 "cweb/weaver.w"
 
 float(*increase_volume)(char*,float);
-/*:778*/
+/*:760*/
 #line 2093 "cweb/weaver.w"
 
 }W;

@@ -1,5 +1,5 @@
-/*673:*/
-#line 14907 "cweb/weaver.w"
+/*655:*/
+#line 14403 "cweb/weaver.w"
 
 
 #version 100
@@ -19,7 +19,7 @@ precision lowp samplerCube;
 
 attribute vec3 vertex_position;
 /*:445*/
-#line 14921 "cweb/weaver.w"
+#line 14417 "cweb/weaver.w"
 
 
 
@@ -33,7 +33,7 @@ uniform float time;
 uniform sampler2D texture1;
 uniform int integer;
 /*:446*/
-#line 14924 "cweb/weaver.w"
+#line 14420 "cweb/weaver.w"
 
 
 varying mediump vec2 coordinate;
@@ -43,4 +43,4 @@ gl_Position= model_view_matrix*vec4(vertex_position,1.0);
 
 coordinate= vec2(vertex_position[0]+0.5,vertex_position[1]+0.5);
 }
-/*:673*/
+/*:655*/

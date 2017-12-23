@@ -65,11 +65,11 @@
 #ifndef W_MAX_SCHEDULING
 #define W_MAX_SCHEDULING 8
 #endif
-/*:328*//*747:*/
-#line 16456 "cweb/weaver.w"
+/*:328*//*729:*/
+#line 15938 "cweb/weaver.w"
 
 
 #ifndef W_MAX_MUSIC
 #define W_MAX_MUSIC 1
 #endif
-/*:747*/
+/*:729*/

@@ -128,6 +128,7 @@ MAIN_LOOP embaralha(void){
  LOOP_INIT:
   terminou = false;
   pause_sound = W.new_sound("fail.wav");
+  printf("%p\n", pause_sound);
   avanca_som = W.new_sound("click.wav");
   paused = false;
   pausado = W.new_interface(W_INTERFACE_IMAGE,

@@ -1,5 +1,5 @@
-/*674:*/
-#line 14937 "cweb/weaver.w"
+/*656:*/
+#line 14433 "cweb/weaver.w"
 
 
 #version 100
@@ -25,7 +25,7 @@ uniform float time;
 uniform sampler2D texture1;
 uniform int integer;
 /*:446*/
-#line 14952 "cweb/weaver.w"
+#line 14448 "cweb/weaver.w"
 
 
 varying mediump vec2 coordinate;
@@ -33,4 +33,4 @@ varying mediump vec2 coordinate;
 void main(){
 gl_FragData[0]= texture2D(texture1,coordinate);
 }
-/*:674*/
+/*:656*/
