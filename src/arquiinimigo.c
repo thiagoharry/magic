@@ -99,8 +99,7 @@ MAIN_LOOP arquiinimigo(void){
       }
     }
   }
-  else if(W.keyboard[W_ENTER] == 1 || W.mouse.buttons[W_MOUSE_LEFT] == 1 ||
-          W.mouse.buttons[W_MOUSE_LEFT] == -1){
+  else if(W.keyboard[W_ENTER] == 1){
     if(carta_atual == NULL){
       W.play_sound(som_compra);
       compra_arquiinimigo(&carta_atual, &nome_atual, &texto_atual);
