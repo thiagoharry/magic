@@ -28,15 +28,15 @@ MAIN_LOOP tunel(void){
                           W.width, W.height, "tunel_fundo.gif");
   gera_proximas_cartas();
   escolhido = false;
-  opcoes[0] = obtem_medio(W_INTERFACE_IMAGE,
+  opcoes[0] = obtem_medio(8,
                           W.width / 2, 5 * W.height / 6, W.game -> proximo[0]);
-  opcoes[1] = obtem_medio(W_INTERFACE_IMAGE,
+  opcoes[1] = obtem_medio(8,
                           W.width / 6, W.height / 2, W.game -> proximo[1]);
-  opcoes[2] = obtem_medio(W_INTERFACE_IMAGE,
+  opcoes[2] = obtem_medio(8,
                           W.width / 2, W.height / 2, W.game -> proximo[2]);
-  opcoes[3] = obtem_medio(W_INTERFACE_IMAGE,
+  opcoes[3] = obtem_medio(8,
                           5 * W.width / 6, W.height / 2, W.game -> proximo[3]);
-  opcoes[4] = obtem_medio(W_INTERFACE_IMAGE,
+  opcoes[4] = obtem_medio(8,
                           W.width / 2, W.height / 6, W.game -> proximo[4]);
  LOOP_BODY:
   if(W.mouse.buttons[W_MOUSE_LEFT] == 1 ||

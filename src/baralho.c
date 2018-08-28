@@ -45,7 +45,7 @@ static void adiciona_carta(int num){
   numero_de_cartas ++;
   cartas_escolhidas[i] = num;
   sprintf(nome, "arquiinimigo/%d_pequeno.gif", num);
-  miniaturas[i] = W.new_interface(5,
+  miniaturas[i] = W.new_interface(6,
                                   W.width * ((i % 2)?(0.974):(0.924)),
                                   W.height * (-(i / 2) * 0.0925 + 0.945 -
                                               (i/4) * 0.014),
@@ -75,7 +75,7 @@ static void novas_cartas(void){
     if(num >= 46)
       num += 5;
     sprintf(nome, "arquiinimigo/%d_medio.gif", num);
-    opcoes[i] = W.new_interface(6                ,
+    opcoes[i] = W.new_interface(W_INTERFACE_IMAGE,
                                 W.width * ((i % 3) * 0.3 + 0.15),
                                 W.height * (1.0  - 0.333 * (i / 3) - 0.16),
                                 0.25 * W.width, 0.3 * W.height ,

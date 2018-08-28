@@ -25,13 +25,13 @@ MAIN_LOOP escada(void){
  LOOP_INIT:
   fundo = W.new_interface(1, W.width / 2, W.height / 2, W.width, W.height,
                           "menu_escada.gif");
-  planechase = W.new_interface(W_INTERFACE_IMAGE,
+  planechase = W.new_interface(8,
                                3 * W.width / 4, W.height / 2,
                                W.width / 2, W.height / 2,
                                "planechase_medio.gif");
   if(W.game -> proximo[0] == -1)
     W.game -> proximo[0] = gera_carta();
-  carta = W.new_interface(W_INTERFACE_IMAGE,
+  carta = W.new_interface(8,
                           W.width / 4, W.height / 2,
                           W.width / 2, W.height / 2,
                           nomes[W.game -> proximo[0]]);

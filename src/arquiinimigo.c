@@ -58,14 +58,16 @@ MAIN_LOOP arquiinimigo(void){
                           "arquiinimigo/plano_em_andamento.gif");
   plano_em_andamento -> integer = 5;
   plano_em_andamento -> visible = false;
-  digitos[0] = W.new_interface(4, 37.75 * W.width / 40, 19 * W.height / 20,
+  digitos[0] = W.new_interface(9, 37.75 * W.width / 40, 19 * W.height / 20,
                                W.width / 20, W.height / 10,
                                "digitos.gif");
-  digitos[1] = W.new_interface(4, 39 * W.width / 40, 19 * W.height / 20,
+  digitos[1] = W.new_interface(9, 39 * W.width / 40, 19 * W.height / 20,
                                W.width / 20, W.height / 10,
                                "digitos.gif");
   digitos[0] -> integer = 4;
+  digitos[0] -> r = digitos[0] -> g = digitos[0] -> b =  digitos[0] -> a = 1.0;
   digitos[1] -> integer = 0;
+  digitos[1] -> r = digitos[1] -> g = digitos[1] -> b =  digitos[1] -> a = 1.0;
  LOOP_BODY:
   if(W.keyboard[W_ESC])
     Wloop(intro);
@@ -185,7 +187,7 @@ void compra_arquiinimigo(struct interface **carta,
           if(imagens_em_andamento[i][0] == NULL){
             sprintf(nome, "arquiinimigo/%d_medio.gif", compra / 2 + 1);
             imagens_em_andamento[i][0] =
-              W.new_interface(6,
+              W.new_interface(W_INTERFACE_IMAGE,
                               W.width * (0.18 * (i % 5) + 0.09),
                               W.height * (0.25 * (i / 5)  + 0.125),
                               0.18 * W.width, 0.25 * W.height,
@@ -222,9 +224,9 @@ void compra_arquiinimigo(struct interface **carta,
   if(!plano_em_andamento -> visible)
     plano -> visible = true;
   compra /= 2;
-  compra ++;  
+  compra ++;
   sprintf(nome, "arquiinimigo/%d.gif", compra);
-  *carta = W.new_interface(6,
+  *carta = W.new_interface(1,
                           W.width / 4, W.height / 2,
                           W.width / 2, W.height,
                           nome);
@@ -235,7 +237,7 @@ void compra_arquiinimigo(struct interface **carta,
                                 W.width / 3, W.height / 20,
                                 nome);
   (*nome_carta) -> integer = 5;
-  
+
   sprintf(nome, "arquiinimigo/%d_texto.gif", compra);
   *texto = W.new_interface(5, W.width / 4, 8 * W.height / 40,
                            0.95 * W.width / 2, W.height / 3,

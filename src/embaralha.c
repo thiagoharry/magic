@@ -19,25 +19,31 @@ along with magic. If not, see <http://www.gnu.org/licenses/>.
 
 #include "embaralha.h"
 
-static struct interface *escolha1, *escolha2, *selecao, *pausado;
+static struct interface *escolha1, *escolha2, *escolha3, *selecao, *pausado;
 static struct interface *primeira, *segunda, *terceira, *ultima, *penultima,
   *antepenultima;
-static struct interface *pilhas[10];
-static int total_pilha[10];
-static int cartas = 0;
+static struct interface *pilhas[20];
+static int total_pilha[20];
+static int numero_de_pilhas;
+static int cartas;
 static bool paused, terminou;
 static struct sound *pause_sound, *avanca_som;
 
 MAIN_LOOP menu_embaralha(void){
  LOOP_INIT:
+  cartas = 0;
   escolha1 = W.new_interface(W_INTERFACE_IMAGE,
-                             W.width / 4, W.height / 2,
+                             W.width / 6, W.height / 2,
                              W.width / 4, W.height / 2,
                              "40_cartas.gif");
   escolha2 = W.new_interface(W_INTERFACE_IMAGE,
-                             3 * W.width / 4, W.height / 2,
+                             3 * W.width / 6, W.height / 2,
                              W.width / 4, W.height / 2,
                              "60_cartas.gif");
+  escolha3 = W.new_interface(W_INTERFACE_IMAGE,
+                             5 * W.width / 6, W.height / 2,
+                             W.width / 4, W.height / 2,
+                             "100_cartas.gif");
   selecao = W.new_interface(W_INTERFACE_PERIMETER, 3 * W.width / 4, W.height / 2,
                             W.width / 3 - 2, W.height - 2,
                             1.0, 1.0, 0.0, 1.0);
@@ -60,13 +66,28 @@ MAIN_LOOP menu_embaralha(void){
     W.move_interface(selecao, escolha2 -> x, escolha2 -> y);
     selecao -> visible = true;
   }
+  else if(W.mouse.x > escolha3 -> x - escolha3 -> width / 2 &&
+          W.mouse.x < escolha3 -> x + escolha3 -> width / 2 &&
+          W.mouse.y > escolha3 -> y - escolha3 -> height / 2 &&
+          W.mouse.y < escolha3 -> y + escolha3 -> height / 2){
+        W.move_interface(selecao, escolha3 -> x, escolha3 -> y);
+        selecao -> visible = true;
+  }
   if(W.mouse.buttons[W_MOUSE_LEFT] == 1 ||
      W.mouse.buttons[W_MOUSE_LEFT] == -1)
     if(selecao -> visible && !W.pending_files){
-      if(selecao -> x == escolha1 -> x)
+      if(selecao -> x == escolha1 -> x){
         cartas = 40;
-      else
+        numero_de_pilhas = 10;
+      }
+      else if(selecao -> x == escolha2 -> x){
         cartas = 60;
+        numero_de_pilhas = 10;
+      }
+      else{
+        cartas = 100;
+        numero_de_pilhas = 20;
+      }
     }
   if(cartas != 0){
     Wloop(embaralha);
@@ -81,7 +102,8 @@ static void executa(void){
   int escolha = W.random() % cartas;
   if(paused || terminou || W.pending_files)
     return;
-  for(pilha_escolhida = 0; pilha_escolhida < 10; pilha_escolhida ++){
+  for(pilha_escolhida = 0; pilha_escolhida < numero_de_pilhas;
+      pilha_escolhida ++){
     if(soma + total_pilha[pilha_escolhida] > escolha){
       carta_escolhida = soma + total_pilha[pilha_escolhida] - escolha;
       break;
@@ -89,7 +111,7 @@ static void executa(void){
     else
       soma += total_pilha[pilha_escolhida];
   }
-  if(pilha_escolhida == 10)
+  if(pilha_escolhida == numero_de_pilhas)
     return;
   primeira -> visible = false;
   segunda -> visible = false;
@@ -109,11 +131,9 @@ static void executa(void){
     p = terceira;
   else
     p = antepenultima;
-  printf("Pilha: %d Carta: %d/%d\n", pilha_escolhida, carta_escolhida,
-         total_pilha[pilha_escolhida]);
   W.move_interface(p,
-                   (pilha_escolhida % 5) * W.width * 0.2 + W.width * 0.1,
-                   (pilha_escolhida / 5) * 0.5 * W.height + W.height * 0.25);
+                   pilhas[pilha_escolhida] -> x,
+                   pilhas[pilha_escolhida] -> y);
   p -> visible = true;
   total_pilha[pilha_escolhida] --;
   cartas --;
@@ -131,30 +151,42 @@ MAIN_LOOP embaralha(void){
   printf("%p\n", pause_sound);
   avanca_som = W.new_sound("click.wav");
   paused = false;
-  pausado = W.new_interface(W_INTERFACE_IMAGE,
+  pausado = W.new_interface(5,
                             W.width / 2, W.height / 2,
                             80, 30, "pausado.gif");
   pausado -> visible = false;
-  primeira = W.new_interface(W_INTERFACE_IMAGE, 0, 0, 100, 80, "1.gif");
+  primeira = W.new_interface(5, 0, 0, 100, 80, "1.gif");
   primeira -> visible = false;
-  segunda = W.new_interface(W_INTERFACE_IMAGE, 0, 0, 100, 80, "2.gif");
+  segunda = W.new_interface(5, 0, 0, 100, 80, "2.gif");
   segunda -> visible = false;
-  terceira = W.new_interface(W_INTERFACE_IMAGE, 0, 0, 100, 80, "3.gif");
+  terceira = W.new_interface(5, 0, 0, 100, 80, "3.gif");
   terceira -> visible = false;
-  antepenultima = W.new_interface(W_INTERFACE_IMAGE, 0, 0, 100, 80, "6.gif");
+  antepenultima = W.new_interface(5, 0, 0, 100, 80, "6.gif");
   antepenultima -> visible = false;
-  penultima = W.new_interface(W_INTERFACE_IMAGE, 0, 0, 100, 80, "5.gif");
+  penultima = W.new_interface(5, 0, 0, 100, 80, "5.gif");
   penultima -> visible = false;
-  ultima = W.new_interface(W_INTERFACE_IMAGE, 0, 0, 100, 80, "4.gif");
+  ultima = W.new_interface(5, 0, 0, 100, 80, "4.gif");
   ultima -> visible = false;
   {
     int i;
-    for(i = 0; i < 10; i ++){
-      pilhas[i] = W.new_interface(5,
+    int card_width, card_height;
+    float y_div;
+    if(numero_de_pilhas <= 10){
+      card_width = 200;
+      card_height = 277;
+      y_div = 0.5;
+    }
+    else{
+        card_width = 124;
+        card_height = 172;
+        y_div = 0.25;
+    }
+    for(i = 0; i < numero_de_pilhas; i ++){
+      pilhas[i] = W.new_interface(W_INTERFACE_IMAGE,
                                   (i % 5) * W.width * 0.2 + W.width * 0.1,
-                                  (i / 5) * 0.5 * W.height + W.height * 0.25,
-                                  200, 277, "carta.gif");
-      total_pilha[i] = cartas / 10;
+                                  (i / 5) * y_div * W.height + W.height * y_div * 0.5,
+                                  card_width, card_height, "carta.gif");
+      total_pilha[i] = cartas / numero_de_pilhas;
     }
   }
   executa();

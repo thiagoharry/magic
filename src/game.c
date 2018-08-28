@@ -58,7 +58,7 @@ struct interface *obtem_caos(int n){
   strcpy(nome, nomes[n]);
   nome[strlen(nome) - 4] = '\0';
   strcat(nome, "_caos.gif");
-  return W.new_interface(W_INTERFACE_IMAGE, W.width / 2, W.height / 2,
+  return W.new_interface(8, W.width / 2, W.height / 2,
                          W.width, 40, nome);
 }
 
@@ -195,7 +195,7 @@ MAIN_LOOP intro(void){ // The game loop
  LOOP_END: // Code executed at the end of the loop
   return;
 }
-  
+
 MAIN_LOOP main_loop(void){ // The game loop
  LOOP_INIT: // Code executed during loop initialization
   fail = W.new_sound("fail.wav");

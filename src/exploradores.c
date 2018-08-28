@@ -85,7 +85,7 @@ static void incrementa_cor(struct interface *i){
 
 MAIN_LOOP exploradores(void){
  LOOP_INIT:
-  tabuleiro = W.new_interface(6, W.width / 2, W.height / 2,
+  tabuleiro = W.new_interface(W_INTERFACE_IMAGE, W.width / 2, W.height / 2,
                               1.082 * W.height, W.height,
                               "exploradores/tabuleiro.gif");
   som_revela = W.new_sound("caos.wav");
@@ -198,8 +198,11 @@ MAIN_LOOP exploradores(void){
                                 0.1927 * W.height, 0.1719 * W.height,
                                 nome);
     for( i = 0; i < 10; i ++){
-      custo3[i] -> a = 0.0;
-      custo3[i] -> integer = 7;
+        custo3[i] -> r = 1.0;
+        custo3[i] -> g = 1.0;
+        custo3[i] -> b = 1.0;
+        custo3[i] -> a = 0.0;
+        custo3[i] -> integer = 7;
     }
   }
   { // Gerando cartas de custo 1: 16 de 25 possibilidades
@@ -271,8 +274,11 @@ MAIN_LOOP exploradores(void){
                                   0.1927 * W.height, 0.1719 * W.height,
                                   nome);
     for( i = 0; i < 16; i ++){
-      custo1[i] -> integer = 7;
-      custo1[i] -> a = 0.0;
+        custo1[i] -> r = 1.0;
+        custo1[i] -> g = 1.0;
+        custo1[i] -> b = 1.0;
+        custo1[i] -> a = 0.0;
+        custo1[i] -> integer = 7;
     }
   }
  LOOP_BODY:
@@ -319,7 +325,7 @@ MAIN_LOOP exploradores(void){
           custo6[i] -> r = 0.0;
           custo6[i] -> g = 0.0;
           custo6[i] -> b = 0.0;
-          custo6[i] -> a = 1.0;          
+          custo6[i] -> a = 1.0;
         }
         else{
           custo6[i] -> r = 1.0;

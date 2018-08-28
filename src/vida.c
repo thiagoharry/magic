@@ -109,11 +109,12 @@ static void restaura_vida(void){
   char nome[16];
   for(i = 0; i < W.game -> numero_de_jogadores; i ++){
     sprintf(nome, "vida/%d.gif", W.game -> avatar_de_jogadores[i]);
-    avatar[i] = W.new_interface(5,
+    avatar[i] = W.new_interface(10,
                                 W.width * ((i % 2) * 0.5 + 0.25),
                                 W.height * ((1-i / 2) * 0.5 + 0.5) - 70,
                                 140, 140, nome);
     avatar[i] -> integer = 7;
+    avatar[i] -> r = avatar[i] -> g = avatar[i] -> b = avatar[i] -> a = 1.0;
     r = g = b = 0.8;
     switch(i){
     case 0:
@@ -131,19 +132,23 @@ static void restaura_vida(void){
       break;
     }
     fundo[i] = W.new_interface(7,
-                               W.width * ((i % 2) * 0.5 + 0.25),
-                               W.height * ((1-i / 2) * 0.5 + 0.25),
-                               W.width / 2, W.height / 2,
+                               (W.width * ((i % 2) * 0.5 + 0.25)),
+                               (W.game -> numero_de_jogadores == 2)?
+                               (W.height/2):(W.height * ((1-i / 2) * 0.5 + 0.25)),
+                               W.width / 2,
+                               (W.game -> numero_de_jogadores == 2)?
+                               (W.height):(W.height / 2),
                                NULL);
     fundo[i] -> r = r;
     fundo[i] -> g = g;
     fundo[i] -> b = b;
-    digitos[i][0] = W.new_interface(4,
+    fundo[i] -> a = 1.0;
+    digitos[i][0] = W.new_interface(9,
                                     W.width * ((i % 2) * 0.5 + 0.24),
                                     W.height * ((1-i / 2) * 0.5 + 0.25),
                                     W.width / 20, W.height / 10,
                                     "digitos.gif");
-    digitos[i][1] = W.new_interface(4,
+    digitos[i][1] = W.new_interface(9,
                                     W.width * ((i % 2) * 0.5 + 0.27),
                                     W.height * ((1-i / 2) * 0.5 + 0.25),
                                     W.width / 20, W.height / 10,

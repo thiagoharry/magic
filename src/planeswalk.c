@@ -38,7 +38,7 @@ struct interface *obtem_pequeno(float x, float y, int n){
   strcpy(nome, nomes[n]);
   nome[strlen(nome) - 4] = '\0';
   strcat(nome, "_pequeno.gif");
-  return W.new_interface(1, x, y,
+  return W.new_interface(W_INTERFACE_IMAGE, x, y,
                          W.width / 7, W.height / 7, nome);
 }
 
@@ -52,7 +52,7 @@ MAIN_LOOP planeswalk(void){
     for(i = 2; i < 5; i ++)
       for(j = 2; j < 5; j ++)
         if(W.game -> mapa[i][j] != -1)
-          mapa_eternidade[i][j] = obtem_medio(1,
+          mapa_eternidade[i][j] = obtem_medio(W_INTERFACE_IMAGE,
                                               (1 + ((4 - i) * 2)) * W.width / 6,
                                               (1 + ((4 - j) * 2)) * W.height / 6,
                                               W.game -> mapa[i][j]);
@@ -79,7 +79,7 @@ MAIN_LOOP planeswalk(void){
       if(plano_destacado == NULL)
         plano_maior = NULL;
       else{
-        plano_maior = W.new_interface(W_INTERFACE_IMAGE,
+        plano_maior = W.new_interface(1,
                                       (1 + ((4 - i) * 2)) * W.width / 6,
                                       (1 + ((4 - j) * 2)) * W.height / 6,
                                       0.45 * W.width, 0.45 * W.height,
@@ -201,7 +201,7 @@ MAIN_LOOP zoom(void){
       if(plano_destacado2 == NULL)
         plano_maior2 = NULL;
       else if(W.game -> mapa[i][j] != -1){
-        plano_maior2 = W.new_interface(W_INTERFACE_IMAGE,
+        plano_maior2 = W.new_interface(1,
                                       (1 + ((6 - i) * 2)) * W.width / 14,
                                       (1 + ((6 - j) * 2)) * W.height / 14,
                                       0.25 * W.width, 0.25 * W.height,

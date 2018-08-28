@@ -1,5 +1,5 @@
-/*518:*/
-#line 11345 "cweb/weaver.w"
+/*540:*/
+#line 11755 "cweb/weaver.w"
 
 #include <string.h>  
 #include <sys/stat.h>  
@@ -16,20 +16,20 @@
 extern ALenum alGetError(void);
 #endif
 
-/*521:*/
-#line 11378 "cweb/weaver.w"
+/*543:*/
+#line 11788 "cweb/weaver.w"
 
 static ALCdevice*default_device;
-/*:521*//*542:*/
-#line 11608 "cweb/weaver.w"
+/*:543*//*564:*/
+#line 12018 "cweb/weaver.w"
 
 static ALCcontext*default_context= NULL;
-/*:542*//*544:*/
-#line 11633 "cweb/weaver.w"
+/*:564*//*566:*/
+#line 12043 "cweb/weaver.w"
 
 static ALuint default_source[5];
-/*:544*//*552:*/
-#line 11792 "cweb/weaver.w"
+/*:566*//*574:*/
+#line 12202 "cweb/weaver.w"
 
 static ALuint extract_wave(const char*filename,unsigned long*size,int*freq,
 int*channels,int*bitrate,bool*error){
@@ -41,13 +41,14 @@ if(fp==NULL){
 *error= false;
 return 0;
 }
-/*553:*/
-#line 11812 "cweb/weaver.w"
+/*575:*/
+#line 12222 "cweb/weaver.w"
 
 {
 char data[5];
+size_t size_t_ret;
 data[0]= '\0';
-fread(data,1,4,fp);
+size_t_ret= fread(data,1,4,fp);
 data[4]= '\0';
 if(strcmp(data,"RIFF")){
 fprintf(stderr,"WARNING: Not compatible audio format: %s\n",
@@ -56,9 +57,10 @@ fclose(fp);
 *error= true;
 return 0;
 }
+if(size_t_ret){};
 }
-/*:553*//*554:*/
-#line 11835 "cweb/weaver.w"
+/*:575*//*576:*/
+#line 12247 "cweb/weaver.w"
 
 {
 int i;
@@ -77,14 +79,16 @@ return 0;
 multiplier*= 256;
 }
 }
-/*:554*//*555:*/
-#line 11860 "cweb/weaver.w"
+/*:576*//*577:*/
+#line 12272 "cweb/weaver.w"
 
 {
 char data[5];
+size_t size_t_ret;
 data[0]= '\0';
-fread(data,1,4,fp);
+size_t_ret= fread(data,1,4,fp);
 data[4]= '\0';
+if(size_t_ret){};
 if(strcmp(data,"WAVE")){
 fprintf(stderr,"WARNING: Not compatible audio format: %s\n",
 filename);
@@ -96,8 +100,8 @@ return 0;
 
 *size-= 4;
 }
-/*:555*//*556:*/
-#line 11885 "cweb/weaver.w"
+/*:577*//*578:*/
+#line 12299 "cweb/weaver.w"
 
 {
 int c,i;
@@ -113,8 +117,8 @@ return 0;
 }
 *size-= 8;
 }
-/*:556*//*557:*/
-#line 11911 "cweb/weaver.w"
+/*:578*//*579:*/
+#line 12325 "cweb/weaver.w"
 
 {
 int i,format= 0;
@@ -142,8 +146,8 @@ return 0;
 
 *size-= 2;
 }
-/*:557*//*558:*/
-#line 11943 "cweb/weaver.w"
+/*:579*//*580:*/
+#line 12357 "cweb/weaver.w"
 
 {
 int i;
@@ -165,8 +169,8 @@ multiplier*= 256;
 
 *size-= 2;
 }
-/*:558*//*559:*/
-#line 11968 "cweb/weaver.w"
+/*:580*//*581:*/
+#line 12382 "cweb/weaver.w"
 
 {
 int i;
@@ -188,8 +192,8 @@ multiplier*= 256;
 
 *size-= 4;
 }
-/*:559*//*560:*/
-#line 11995 "cweb/weaver.w"
+/*:581*//*582:*/
+#line 12409 "cweb/weaver.w"
 
 {
 int c,i;
@@ -205,8 +209,8 @@ return 0;
 }
 *size-= 6;
 }
-/*:560*//*561:*/
-#line 12015 "cweb/weaver.w"
+/*:582*//*583:*/
+#line 12429 "cweb/weaver.w"
 
 {
 int i;
@@ -228,8 +232,8 @@ multiplier*= 256;
 
 *size-= 2;
 }
-/*:561*//*562:*/
-#line 12042 "cweb/weaver.w"
+/*:583*//*584:*/
+#line 12456 "cweb/weaver.w"
 
 {
 int c,i;
@@ -245,10 +249,11 @@ return 0;
 }
 *size-= 8;
 }
-/*:562*//*563:*/
-#line 12062 "cweb/weaver.w"
+/*:584*//*585:*/
+#line 12476 "cweb/weaver.w"
 
 {
+size_t size_t_ret;
 returned_data= Walloc((size_t)*size);
 if(returned_data==NULL){
 printf("WARNING(0): Not enough memory to read file: %s.\n",
@@ -261,10 +266,11 @@ fclose(fp);
 *error= true;
 return 0;
 }
-fread(returned_data,*size,1,fp);
+size_t_ret= fread(returned_data,*size,1,fp);
+if(size_t_ret){};
 }
-/*:563*//*564:*/
-#line 12084 "cweb/weaver.w"
+/*:585*//*586:*/
+#line 12500 "cweb/weaver.w"
 
 {
 ALenum status;
@@ -328,13 +334,13 @@ return 0;
 Wfree(returned_data);
 fclose(fp);
 }
-/*:564*/
-#line 11803 "cweb/weaver.w"
+/*:586*/
+#line 12213 "cweb/weaver.w"
 
 return returned_buffer;
 }
-/*:552*//*734:*/
-#line 16008 "cweb/weaver.w"
+/*:574*//*764:*/
+#line 16859 "cweb/weaver.w"
 
 struct _music_data _music[W_MAX_MUSIC];
 #ifdef W_MULTITHREAD
@@ -342,11 +348,11 @@ struct _music_data _music[W_MAX_MUSIC];
 
 pthread_mutex_t _music_mutex;
 #endif
-/*:734*/
-#line 11361 "cweb/weaver.w"
+/*:764*/
+#line 11771 "cweb/weaver.w"
 
-/*569:*/
-#line 12260 "cweb/weaver.w"
+/*591:*/
+#line 12676 "cweb/weaver.w"
 
 
 
@@ -354,8 +360,8 @@ static void _finalize_openal(void*data){
 ALuint*p= (ALuint*)data;
 alDeleteBuffers(1,p);
 }
-/*:569*//*570:*/
-#line 12286 "cweb/weaver.w"
+/*:591*//*592:*/
+#line 12702 "cweb/weaver.w"
 
 #if W_TARGET == W_WEB
 static void onerror_sound(unsigned undocumented,void*snd,
@@ -371,8 +377,8 @@ pthread_mutex_unlock(&(W._pending_files_mutex));
 #endif
 }
 #endif
-/*:570*//*571:*/
-#line 12308 "cweb/weaver.w"
+/*:592*//*593:*/
+#line 12724 "cweb/weaver.w"
 
 #if W_TARGET == W_WEB
 static void onload_sound(unsigned undocumented,void*snd,
@@ -409,8 +415,8 @@ pthread_mutex_unlock(&(W._pending_files_mutex));
 #endif
 }
 #endif
-/*:571*//*572:*/
-#line 12350 "cweb/weaver.w"
+/*:593*//*594:*/
+#line 12766 "cweb/weaver.w"
 
 #if W_TARGET == W_WEB
 static void onprogress_sound(unsigned int undocumented,void*snd,
@@ -418,35 +424,157 @@ int percent){
 return;
 }
 #endif
-/*:572*//*731:*/
-#line 15961 "cweb/weaver.w"
+/*:594*//*761:*/
+#line 16812 "cweb/weaver.w"
 
 #if W_TARGET == W_WEB
 static char*basename(char*path){
 char*p= path,*c;
-for(c= path;c!='\0';c++)
+for(c= path;*c!='\0';c++)
 if(*c=='/'&&*(c+1)!='\0')
 p= c+1;
 return p;
 }
 #endif
-/*:731*/
-#line 11362 "cweb/weaver.w"
+/*:761*//*800:*/
+#line 17570 "cweb/weaver.w"
 
-/*523:*/
-#line 11393 "cweb/weaver.w"
+#if W_TARGET == W_ELF && !defined(W_DISABLE_MP3)
+bool _music_thread_prepare_new_music(struct _music_data*music_data,
+long*rate,int*channels,int*encoding,
+int*bits,int*current_format,
+size_t*size){
+*current_format= 0xfff5;
+if(mpg123_open(music_data->mpg_handle,
+music_data->filename[_number_of_loops])!=MPG123_OK)
+return false;
+mpg123_getformat(music_data->mpg_handle,rate,channels,encoding);
+*bits= mpg123_encsize(*encoding)*8;
+if(*bits==8){
+if(*channels==1)*current_format= AL_FORMAT_MONO8;
+else if(*channels==2)*current_format= AL_FORMAT_STEREO8;
+}else if(*bits==16){
+if(*channels==1)*current_format= AL_FORMAT_MONO16;
+else if(*channels==2)*current_format= AL_FORMAT_STEREO16;
+}
+if(*current_format==0xfff5)
+return false;
+
+mpg123_read(music_data->mpg_handle,music_data->buffer,
+music_data->buffer_size,size);
+alBufferData(music_data->openal_buffer[0],
+*current_format,music_data->buffer,
+(ALsizei)*size,*rate);
+mpg123_read(music_data->mpg_handle,music_data->buffer,
+music_data->buffer_size,size);
+alBufferData(music_data->openal_buffer[1],
+*current_format,music_data->buffer,
+(ALsizei)*size,*rate);
+alSourceQueueBuffers(music_data->sound_source,2,
+music_data->openal_buffer);
+alSourcef(music_data->sound_source,AL_GAIN,
+music_data->volume[_number_of_loops]);
+alSourcePlay(music_data->sound_source);
+return true;
+}
+#endif
+/*:800*//*801:*/
+#line 17614 "cweb/weaver.w"
+
+#if W_TARGET == W_ELF && !defined(W_DISABLE_MP3)
+bool _music_thread_play_music(struct _music_data*music_data,
+long rate,int current_format,size_t size){
+int buffers,ret;
+ALuint buf;
+
+if(music_data->status[_number_of_loops]!=_PLAYING)
+return true;
+
+alGetSourcei(music_data->sound_source,AL_BUFFERS_PROCESSED,&buffers);
+if(!buffers)
+return true;
+alSourceUnqueueBuffers(music_data->sound_source,1,&buf);
+ret= mpg123_read(music_data->mpg_handle,music_data->buffer,
+music_data->buffer_size,&size);
+if(ret==MPG123_OK){
+alBufferData(buf,current_format,music_data->buffer,
+(ALsizei)size,rate);
+alSourceQueueBuffers(music_data->sound_source,1,&buf);
+}
+else if(ret==MPG123_DONE)
+return false;
+return true;
+}
+#endif
+/*:801*//*802:*/
+#line 17644 "cweb/weaver.w"
+
+#if W_TARGET == W_ELF && !defined(W_DISABLE_MP3)
+void _music_thread_end_music(struct _music_data*music_data){
+ALuint buf;
+ALint stat;
+int ret;
+
+do{
+alSourceUnqueueBuffers(music_data->sound_source,1,&buf);
+ret= alGetError();
+}while(ret==AL_INVALID_VALUE);
+do{
+alGetSourcei(music_data->sound_source,AL_SOURCE_STATE,&stat);
+}while(stat==AL_PLAYING);
+
+mpg123_close(music_data->mpg_handle);
+}
+#endif
+/*:802*//*803:*/
+#line 17666 "cweb/weaver.w"
+
+#if W_TARGET == W_ELF && !defined(W_DISABLE_MP3)
+void _music_thread_interrupt_music(struct _music_data*music_data){
+ALuint buf;
+ALint stat;
+int ret;
+mpg123_close(music_data->mpg_handle);
+alSourceStop(music_data->sound_source);
+do{
+alSourceUnqueueBuffers(music_data->sound_source,1,&buf);
+ret= alGetError();
+}while(ret==AL_INVALID_VALUE);
+do{
+alSourceUnqueueBuffers(music_data->sound_source,1,&buf);
+ret= alGetError();
+}while(ret==AL_INVALID_VALUE);
+do{
+alGetSourcei(music_data->sound_source,AL_SOURCE_STATE,&stat);
+}while(stat==AL_PLAYING);
+}
+#endif
+/*:803*//*804:*/
+#line 17691 "cweb/weaver.w"
+
+#if W_TARGET == W_ELF && !defined(W_DISABLE_MP3)
+void _music_thread_update_volume(struct _music_data*music_data){
+alSourcef(music_data->sound_source,AL_GAIN,
+music_data->volume[_number_of_loops]);
+}
+#endif
+/*:804*/
+#line 11772 "cweb/weaver.w"
+
+/*545:*/
+#line 11803 "cweb/weaver.w"
 
 void _initialize_sound(void){
 default_device= alcOpenDevice(NULL);
 if(default_device==NULL)
 fprintf(stderr,"WARNING (0): No sound device detected.\n");
-/*530:*/
-#line 11454 "cweb/weaver.w"
+/*552:*/
+#line 11864 "cweb/weaver.w"
 
 W.number_of_sound_devices= 0;
 W.sound_device_name= NULL;
-/*:530*//*531:*/
-#line 11469 "cweb/weaver.w"
+/*:552*//*553:*/
+#line 11879 "cweb/weaver.w"
 
 {
 char*devices,*c;
@@ -465,8 +593,8 @@ c++;
 if(W.number_of_sound_devices==0)
 goto AFTER_SOUND_INITIALIZATION;
 }
-/*:531*//*532:*/
-#line 11493 "cweb/weaver.w"
+/*:553*//*554:*/
+#line 11903 "cweb/weaver.w"
 
 {
 char*devices,*c;
@@ -491,8 +619,8 @@ break;
 }
 }
 }
-/*:532*//*543:*/
-#line 11612 "cweb/weaver.w"
+/*:554*//*565:*/
+#line 12022 "cweb/weaver.w"
 
 {
 if(default_device){
@@ -502,8 +630,8 @@ alcMakeContextCurrent(default_context);
 }
 alGetError();
 }
-/*:543*//*545:*/
-#line 11639 "cweb/weaver.w"
+/*:565*//*567:*/
+#line 12049 "cweb/weaver.w"
 
 {
 ALenum error;
@@ -516,8 +644,8 @@ fprintf(stderr,"WARNING(0)): No sound source could be created. "
 }
 }
 }
-/*:545*//*736:*/
-#line 16028 "cweb/weaver.w"
+/*:567*//*766:*/
+#line 16879 "cweb/weaver.w"
 
 {
 int i,j;
@@ -556,8 +684,8 @@ exit(1);
 }
 #endif
 }
-/*:736*//*766:*/
-#line 16597 "cweb/weaver.w"
+/*:766*//*796:*/
+#line 17441 "cweb/weaver.w"
 
 #if W_TARGET == W_ELF
 {
@@ -581,18 +709,18 @@ break;
 }
 }
 #endif
-/*:766*/
-#line 11398 "cweb/weaver.w"
+/*:796*/
+#line 11808 "cweb/weaver.w"
 
 AFTER_SOUND_INITIALIZATION:
 return;
 }
-/*:523*//*525:*/
-#line 11412 "cweb/weaver.w"
+/*:545*//*547:*/
+#line 11822 "cweb/weaver.w"
 
 void _finalize_sound(void){
-/*737:*/
-#line 16071 "cweb/weaver.w"
+/*767:*/
+#line 16922 "cweb/weaver.w"
 
 #if W_TARGET == W_ELF
 {
@@ -616,27 +744,27 @@ mpg123_exit();
 #ifdef W_MULTITHREAD
 pthread_mutex_destroy(&_music_mutex);
 #endif
-/*:737*/
-#line 11414 "cweb/weaver.w"
+/*:767*/
+#line 11824 "cweb/weaver.w"
 
-/*533:*/
-#line 11523 "cweb/weaver.w"
+/*555:*/
+#line 11933 "cweb/weaver.w"
 
 {
 if(W.sound_device_name!=NULL)
 Wfree(W.sound_device_name);
 }
 
-/*:533*//*546:*/
-#line 11655 "cweb/weaver.w"
+/*:555*//*568:*/
+#line 12065 "cweb/weaver.w"
 
 {
 alDeleteSources(5,default_source);
 if(default_context!=NULL)
 alcDestroyContext(default_context);
 }
-/*:546*//*767:*/
-#line 16625 "cweb/weaver.w"
+/*:568*//*797:*/
+#line 17469 "cweb/weaver.w"
 
 #if W_TARGET == W_ELF
 {
@@ -649,31 +777,31 @@ pthread_cancel(_music[i].thread);
 }
 }
 #endif
-/*:767*/
-#line 11415 "cweb/weaver.w"
+/*:797*/
+#line 11825 "cweb/weaver.w"
 
 
 
 alcCloseDevice(default_device);
 }
-/*:525*//*535:*/
-#line 11539 "cweb/weaver.w"
+/*:547*//*557:*/
+#line 11949 "cweb/weaver.w"
 
 bool _select_sound_device(int position){
 if(position<0||position>=W.number_of_sound_devices)
 return false;
 
 
-/*547:*/
-#line 11667 "cweb/weaver.w"
+/*569:*/
+#line 12077 "cweb/weaver.w"
 
 {
 alDeleteSources(5,default_source);
 if(default_context!=NULL)
 alcDestroyContext(default_context);
 }
-/*:547*//*738:*/
-#line 16099 "cweb/weaver.w"
+/*:569*//*768:*/
+#line 16950 "cweb/weaver.w"
 
 #if W_TARGET == W_ELF
 {
@@ -683,13 +811,13 @@ alGenSources(1,&_music[i].sound_source);
 }
 }
 #endif
-/*:738*/
-#line 11545 "cweb/weaver.w"
+/*:768*/
+#line 11955 "cweb/weaver.w"
 
 alcCloseDevice(default_device);
 default_device= alcOpenDevice(W.sound_device_name[position]);
-/*739:*/
-#line 16113 "cweb/weaver.w"
+/*769:*/
+#line 16964 "cweb/weaver.w"
 
 #if W_TARGET == W_ELF
 {
@@ -699,13 +827,13 @@ alDeleteSources(1,&_music[i].sound_source);
 }
 }
 #endif
-/*:739*/
-#line 11548 "cweb/weaver.w"
+/*:769*/
+#line 11958 "cweb/weaver.w"
 
 return true;
 }
-/*:535*//*539:*/
-#line 11572 "cweb/weaver.w"
+/*:557*//*561:*/
+#line 11982 "cweb/weaver.w"
 
 int _current_sound_device(void){
 int i;
@@ -718,8 +846,8 @@ if(!strcmp(query,W.sound_device_name[i]))
 return i;
 return-1;
 }
-/*:539*//*568:*/
-#line 12184 "cweb/weaver.w"
+/*:561*//*590:*/
+#line 12600 "cweb/weaver.w"
 
 struct sound*_new_sound(char*filename){
 char complete_path[256];
@@ -774,13 +902,13 @@ snd->_data= extract_wave(complete_path,&(snd->size),
 
 _finalize_after(&(snd->_data),_finalize_openal);
 }
-/*771:*/
-#line 16848 "cweb/weaver.w"
+/*806:*/
+#line 17712 "cweb/weaver.w"
 
 #ifndef W_DISABLE_MP3
 else if(!strcmp(ext,".mp3")||!strcmp(ext,".MP3")){
-/*772:*/
-#line 16866 "cweb/weaver.w"
+/*807:*/
+#line 17730 "cweb/weaver.w"
 
 int current_format= 0xfff5;
 size_t buffer_size;
@@ -850,8 +978,8 @@ else break;
 
 snd->size= buffer_size;
 }
-/*:772*//*773:*/
-#line 16942 "cweb/weaver.w"
+/*:807*//*808:*/
+#line 17806 "cweb/weaver.w"
 
 if(buffer!=NULL){
 int status;
@@ -885,13 +1013,13 @@ snd->_data= openal_buffer;
 _finalize_after(&(snd->_data),_finalize_openal);
 }
 }
-/*:773*/
-#line 16851 "cweb/weaver.w"
+/*:808*/
+#line 17715 "cweb/weaver.w"
 
 }
 #endif
-/*:771*/
-#line 12238 "cweb/weaver.w"
+/*:806*/
+#line 12654 "cweb/weaver.w"
 
 if(ret){
 
@@ -906,8 +1034,8 @@ snd->loaded= true;
 return snd;
 #endif
 }
-/*:568*//*576:*/
-#line 12376 "cweb/weaver.w"
+/*:590*//*598:*/
+#line 12792 "cweb/weaver.w"
 
 void _play_sound(struct sound*snd){
 if(!snd->loaded)return;
@@ -922,8 +1050,8 @@ status= alGetError();
 }while(status!=AL_NO_ERROR);
 alSourcePlay(default_source[i]);
 }
-/*:576*//*580:*/
-#line 12411 "cweb/weaver.w"
+/*:598*//*602:*/
+#line 12827 "cweb/weaver.w"
 
 void _destroy_sound(struct sound*snd){
 
@@ -954,8 +1082,8 @@ if(_running_loop)
 _finalize_this(&(snd->_data),false);
 Wfree(snd);
 }
-/*:580*//*741:*/
-#line 16139 "cweb/weaver.w"
+/*:602*//*771:*/
+#line 16990 "cweb/weaver.w"
 
 bool _play_music(char*name,bool loop){
 int i;
@@ -974,7 +1102,7 @@ if(_music[i].status[_number_of_loops]==_NOT_LOADED){
 #if W_TARGET == W_WEB
 
 EM_ASM_({
-document["music"+$0]= new Audio(Pointer_stringify($1));
+document["music"+$0]= new Audio("music/"+Pointer_stringify($1));
 document["music"+$0].volume= 0.5;
 if($2){
 document["music"+$0].loop= true;
@@ -1014,8 +1142,8 @@ return success&&false;
 return success;
 #endif
 }
-/*:741*//*745:*/
-#line 16220 "cweb/weaver.w"
+/*:771*//*775:*/
+#line 17071 "cweb/weaver.w"
 
 bool _pause_music(char*name){
 int i;
@@ -1034,12 +1162,6 @@ document["music"+$0].pause();
 }
 },i);
 #endif
-#if W_TARGET == W_ELF
-if(_music[i].status[_number_of_loops]==_PLAYING){
-
-sem_wait(&(_music[i].semaphore));
-}
-#endif
 _music[i].status[_number_of_loops]= _PAUSED;
 success= true;
 break;
@@ -1054,8 +1176,8 @@ return success&&false;
 return success;
 #endif
 }
-/*:745*//*749:*/
-#line 16276 "cweb/weaver.w"
+/*:775*//*779:*/
+#line 17121 "cweb/weaver.w"
 
 bool _resume_music(char*name){
 int i;
@@ -1074,11 +1196,11 @@ document["music"+$0].play();
 }
 },i);
 #endif
+_music[i].status[_number_of_loops]= _PLAYING;
 #if W_TARGET == W_ELF
 
 sem_post(&(_music[i].semaphore));
 #endif
-_music[i].status[_number_of_loops]= _PLAYING;
 success= true;
 break;
 }
@@ -1092,8 +1214,8 @@ return success&&false;
 return success;
 #endif
 }
-/*:749*//*751:*/
-#line 16323 "cweb/weaver.w"
+/*:779*//*781:*/
+#line 17168 "cweb/weaver.w"
 
 bool _stop_music(char*name){
 int i;
@@ -1116,10 +1238,9 @@ document["music"+$0]= undefined;
 _music[i].filename[_number_of_loops][0]= '\0';
 _music[i].status[_number_of_loops]= _NOT_LOADED;
 #if W_TARGET == W_ELF
-if(_music[i].status[_number_of_loops]==_PLAYING){
 
-sem_wait(&(_music[i].semaphore));
-}
+if(_music[i].status[_number_of_loops]==_PAUSED)
+sem_post(&(_music[i].semaphore));
 #endif
 success= true;
 break;
@@ -1134,8 +1255,8 @@ return success&&false;
 return success;
 #endif
 }
-/*:751*//*755:*/
-#line 16384 "cweb/weaver.w"
+/*:781*//*785:*/
+#line 17228 "cweb/weaver.w"
 
 float _get_volume(char*name){
 int i;
@@ -1146,8 +1267,8 @@ return _music[i].volume[_number_of_loops];
 }
 return-1.0;
 }
-/*:755*//*759:*/
-#line 16418 "cweb/weaver.w"
+/*:785*//*789:*/
+#line 17262 "cweb/weaver.w"
 
 float _increase_volume(char*name,float increment){
 int i;
@@ -1184,195 +1305,79 @@ return success&&false;
 return success;
 #endif
 }
-/*:759*//*769:*/
-#line 16648 "cweb/weaver.w"
+/*:789*//*799:*/
+#line 17496 "cweb/weaver.w"
 
 #if W_TARGET == W_ELF && !defined(W_DISABLE_MP3)
 void*_music_thread(void*arg){
+
 struct _music_data*music_data= (struct _music_data*)arg;
-int last_status= music_data->status[_number_of_loops];
+
 int last_loop= _number_of_loops;
-int ret;
+
+float last_volume= music_data->volume[last_loop];
+
 int current_format= 0xfff5;
 size_t size;
 long rate;
 int channels,encoding,bits;
-float last_volume= music_data->volume[last_loop];
-for(;;){
-
-while(music_data->status[_number_of_loops]!=_PLAYING)
+sem_musica_nenhuma:
+while(music_data->status[_number_of_loops]==_NOT_LOADED)
 sem_wait(&(music_data->semaphore));
-if(last_loop!=_number_of_loops){
 
+if(!_music_thread_prepare_new_music(music_data,&rate,&channels,&encoding,
+&bits,&current_format,&size)){
 
-
-last_loop= _number_of_loops;
-last_status= music_data->status[last_loop];
-}
-else{
-
-
-if(last_status!=music_data->status[_number_of_loops]){
-
-
-if(music_data->status[_number_of_loops]==_PLAYING&&
-last_status==_NOT_LOADED){
-last_status= music_data->status[_number_of_loops];
-ret= mpg123_open(music_data->mpg_handle,
-music_data->filename[last_loop]);
-if(ret!=MPG123_OK){
+music_data->status[_number_of_loops]= _NOT_LOADED;
 fprintf(stderr,"Error opening %s\n",
 music_data->filename[last_loop]);
-music_data->status[last_loop]= _NOT_LOADED;
+goto sem_musica_nenhuma;
 }
-else{
-mpg123_getformat(music_data->mpg_handle,
-&rate,&channels,&encoding);
-bits= mpg123_encsize(encoding)*8;
-current_format= 0xfff5;
-if(bits==8){
-if(channels==1)current_format= AL_FORMAT_MONO8;
-else if(channels==2)current_format= AL_FORMAT_STEREO8;
-}else if(bits==16){
-if(channels==1)current_format= AL_FORMAT_MONO16;
-else if(channels==2)current_format= AL_FORMAT_STEREO16;
-}
-if(current_format==0xfff5){
-fprintf(stderr,
-"WARNING(0): Combination of channel and bitrate not "
-"supported (sound have %d channels and %d bitrate while "
-"we support just 1 or 2 channels and 8 or 16 as "
-"bitrate).\n",
-channels,bits);
-}
+tocando_musica:
+if(!_music_thread_play_music(music_data,rate,current_format,size)){
 
-
-mpg123_read(music_data->mpg_handle,music_data->buffer,
-music_data->buffer_size,&size);
-alBufferData(music_data->openal_buffer[0],
-current_format,music_data->buffer,
-(ALsizei)size,rate);
-mpg123_read(music_data->mpg_handle,music_data->buffer,
-music_data->buffer_size,&size);
-alBufferData(music_data->openal_buffer[1],
-current_format,music_data->buffer,
-(ALsizei)size,rate);
-alSourceQueueBuffers(music_data->sound_source,2,
-music_data->openal_buffer);
-alSourcef(music_data->sound_source,AL_GAIN,
-music_data->volume[last_loop]);
-alSourcePlay(music_data->sound_source);
-}
-}
-else if(music_data->status[_number_of_loops]==_PLAYING&&
-last_status==_PAUSED){
-
-alSourcePlay(music_data->sound_source);
-last_status= music_data->status[_number_of_loops];
-}
-else{
-
-last_status= music_data->status[_number_of_loops];
-}
-}
-else if(music_data->status[last_loop]==_PLAYING){
-int buffers;
-
-if(last_volume!=music_data->volume[last_loop]){
-alSourcef(music_data->sound_source,AL_GAIN,
-music_data->volume[last_loop]);
-last_volume= music_data->volume[last_loop];
-}
-
-alGetSourcei(music_data->sound_source,AL_BUFFERS_PROCESSED,&buffers);
-if(buffers){
-ALuint buf;
-alSourceUnqueueBuffers(music_data->sound_source,1,&buf);
-ret= mpg123_read(music_data->mpg_handle,music_data->buffer,
-music_data->buffer_size,&size);
-if(ret==MPG123_OK){
-alBufferData(buf,
-current_format,music_data->buffer,
-(ALsizei)size,rate);
-alSourceQueueBuffers(music_data->sound_source,1,&buf);
-}
-else if(ret==MPG123_DONE){
-
-do{
-alSourceUnqueueBuffers(music_data->sound_source,1,&buf);
-ret= alGetError();
-}while(ret==AL_INVALID_VALUE);
-{
-ALint val;
-do{
-alGetSourcei(music_data->sound_source,AL_SOURCE_STATE,&val);
-}while(val==AL_PLAYING);
-}
-mpg123_close(music_data->mpg_handle);
-music_data->status[last_loop]= _NOT_LOADED;
-
-
+_music_thread_end_music(music_data);
 if(music_data->loop[last_loop]){
-ret= mpg123_open(music_data->mpg_handle,
-music_data->filename[last_loop]);
-if(ret!=MPG123_OK){
-fprintf(stderr,"Error opening %s\n",
-music_data->filename[last_loop]);
+
+_music_thread_prepare_new_music(music_data,&rate,&channels,&encoding,
+&bits,&current_format,&size);
+goto tocando_musica;
 }
 else{
-mpg123_read(music_data->mpg_handle,music_data->buffer,
-music_data->buffer_size,&size);
-alBufferData(music_data->openal_buffer[0],
-current_format,music_data->buffer,
-(ALsizei)size,rate);
-mpg123_read(music_data->mpg_handle,music_data->buffer,
-music_data->buffer_size,&size);
-alBufferData(music_data->openal_buffer[1],
-current_format,music_data->buffer,
-(ALsizei)size,rate);
-alSourceQueueBuffers(music_data->sound_source,2,
-music_data->openal_buffer);
-alSourcePlay(music_data->sound_source);
-music_data->status[last_loop]= _PLAYING;
-}
-}
-}
-}
+music_data->status[_number_of_loops]= _NOT_LOADED;
+goto sem_musica_nenhuma;
 }
 }
 
-if(music_data->status[_number_of_loops]==_PAUSED){
+if(last_loop!=_number_of_loops){
+last_loop= _number_of_loops;
+if(music_data->status[_number_of_loops]==_NOT_LOADED)
+goto sem_musica_nenhuma;
+}
+
+else if(last_volume!=music_data->volume[_number_of_loops]){
+_music_thread_update_volume(music_data);
+last_volume= music_data->volume[_number_of_loops];
+}
+
+else if(music_data->status[_number_of_loops]==_PAUSED){
 alSourcePause(music_data->sound_source);
-last_status= _PAUSED;
+
+while(music_data->status[_number_of_loops]==_PAUSED)
+sem_wait(&(music_data->semaphore));
+
+alSourcePlay(music_data->sound_source);
 }
 
-else if(music_data->status[_number_of_loops]==_NOT_LOADED){
-ALuint buf;
-mpg123_close(music_data->mpg_handle);
-alSourceStop(music_data->sound_source);
-last_status= _NOT_LOADED;
-do{
-alSourceUnqueueBuffers(music_data->sound_source,1,&buf);
-ret= alGetError();
-}while(ret==AL_INVALID_VALUE);
-do{
-alSourceUnqueueBuffers(music_data->sound_source,1,&buf);
-ret= alGetError();
-}while(ret==AL_INVALID_VALUE);
-{
-ALint val;
-do{
-alGetSourcei(music_data->sound_source,AL_SOURCE_STATE,&val);
-}while(val==AL_PLAYING);
-}
-}
+if(music_data->status[_number_of_loops]==_NOT_LOADED){
 
-
-sem_post(&(music_data->semaphore));
+_music_thread_interrupt_music(music_data);
+goto sem_musica_nenhuma;
 }
+goto tocando_musica;
 }
 #endif
-/*:769*/
-#line 11363 "cweb/weaver.w"
+/*:799*/
+#line 11773 "cweb/weaver.w"
 
-/*:518*/
+/*:540*/

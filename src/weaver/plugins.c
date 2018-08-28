@@ -1,12 +1,12 @@
-/*332:*/
-#line 7381 "cweb/weaver.w"
+/*354:*/
+#line 7756 "cweb/weaver.w"
 
 #include "plugins.h"
 #if W_TARGET == W_ELF
 #include <error.h> 
 #endif
-/*:332*//*335:*/
-#line 7454 "cweb/weaver.w"
+/*:354*//*357:*/
+#line 7829 "cweb/weaver.w"
 
 #if W_TARGET == W_ELF
 void _initialize_plugin(struct _plugin_data*data,char*path){
@@ -115,8 +115,8 @@ fprintf(stderr,"WARNING (3): New plugin loaded: %s.\n",data->plugin_name);
 #endif
 }
 #endif
-/*:335*//*337:*/
-#line 7592 "cweb/weaver.w"
+/*:357*//*359:*/
+#line 7967 "cweb/weaver.w"
 
 #if W_TARGET == W_ELF
 void _finalize_plugin(struct _plugin_data*data){
@@ -139,8 +139,8 @@ fprintf(stderr,"WARNING (3): Plugin finalized: %s.\n",data->plugin_name);
 #endif
 }
 #endif
-/*:337*//*339:*/
-#line 7632 "cweb/weaver.w"
+/*:359*//*361:*/
+#line 8007 "cweb/weaver.w"
 
 #if W_TARGET == W_ELF
 bool _reload_plugin(int plugin_id){
@@ -238,16 +238,16 @@ data->plugin_name);
 return true;
 }
 #endif
-/*:339*//*342:*/
-#line 7745 "cweb/weaver.w"
+/*:361*//*364:*/
+#line 8120 "cweb/weaver.w"
 
 #if W_TARGET == W_WEB
 bool _reload_plugin(int plugin_id){
 return(bool)(plugin_id+1);
 }
 #endif
-/*:342*//*350:*/
-#line 7949 "cweb/weaver.w"
+/*:364*//*372:*/
+#line 8324 "cweb/weaver.w"
 
 int _Wget_plugin(char*plugin_name){
 int i;
@@ -256,8 +256,8 @@ if(!strcmp(plugin_name,_plugins[i].plugin_name))
 return i;
 return-1;
 }
-/*:350*//*354:*/
-#line 7983 "cweb/weaver.w"
+/*:372*//*376:*/
+#line 8358 "cweb/weaver.w"
 
 #if W_TARGET == W_ELF
 void _reload_all_plugins(void){
@@ -336,16 +336,16 @@ pthread_mutex_unlock(&(_plugin_mutex));
 }
 }
 #endif
-/*:354*//*358:*/
-#line 8092 "cweb/weaver.w"
+/*:376*//*380:*/
+#line 8467 "cweb/weaver.w"
 
 #if W_TARGET == W_WEB
 void _reload_all_plugins(void){
 return;
 }
 #endif
-/*:358*//*381:*/
-#line 8489 "cweb/weaver.w"
+/*:380*//*403:*/
+#line 8872 "cweb/weaver.w"
 
 bool _Wenable_plugin(int plugin_id){
 #ifdef W_PREVENT_SELF_ENABLING_PLUGINS
@@ -399,8 +399,8 @@ if(plugin_id>=_max_number_of_plugins||
 return false;
 return _plugins[plugin_id].enabled;
 }
-/*:381*//*385:*/
-#line 8579 "cweb/weaver.w"
+/*:403*//*407:*/
+#line 8962 "cweb/weaver.w"
 
 #if W_TARGET == W_ELF
 void*_Wget_plugin_data(int plugin_id){
@@ -417,4 +417,4 @@ _plugins[plugin_id].plugin_data= data;
 return true;
 }
 #endif
-/*:385*/
+/*:407*/

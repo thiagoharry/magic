@@ -10,20 +10,20 @@
 // 1: Info about non-fatal errors will be printed
 // 2: General warnings will be printed
 // Before installing and distributing this game, set the macro to 0
-#define W_DEBUG_LEVEL 0
+#define W_DEBUG_LEVEL 1
 
 // This macro determines if we are building a native program (W_ELF) or
 // a web program to be run in a browser (W_WEB). In the first case,
 // running "make" creates an executable with the project name. In the
 // second, creates a "web" directory with a web application
-#define W_TARGET W_WEB
+#define W_TARGET W_ELF
 
 // This macro determines if we are writting a C program (W_C) or a C++
 // program (W_CPP):
 #define W_SOURCE W_C
 
 // The maximum ammount of memory for the game
-#define W_MAX_MEMORY 1000000
+#define W_MAX_MEMORY 2000000
 #define W_INTERNAL_MEMORY 8000000
 // When compiling for the web, we usually need aditional memory. So we
 // sum the memory above with the value below:
@@ -59,5 +59,5 @@
 /* Various Limits */
 #define W_MAX_SUBLOOP 16 // Max number of subloops
 #define W_MAX_PERIODIC_FUNCTIONS 16 // Max periodic functions in a loop
-#define W_MAX_INTERFACES         80 // Max number of interface elements
+#define W_MAX_INTERFACES         140 // Max number of interface elements
 #define W_DISABLE_PNG

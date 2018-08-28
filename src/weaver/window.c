@@ -1,14 +1,14 @@
-/*215:*/
-#line 5145 "cweb/weaver.w"
+/*237:*/
+#line 5515 "cweb/weaver.w"
 
 /*66:*/
-#line 1927 "cweb/weaver.w"
+#line 1928 "cweb/weaver.w"
 
 #include "conf_begin.h"
 #include "../../conf/conf.h"
 #include "conf_end.h"
 /*:66*/
-#line 5146 "cweb/weaver.w"
+#line 5516 "cweb/weaver.w"
 
 
 
@@ -20,40 +20,40 @@ extern int make_iso_compilers_happy;
 #ifdef W_MULTITHREAD
 pthread_mutex_t _window_mutex;
 #endif
-/*218:*/
-#line 5205 "cweb/weaver.w"
+/*240:*/
+#line 5575 "cweb/weaver.w"
 
 Display*_dpy;
-/*:218*//*221:*/
-#line 5241 "cweb/weaver.w"
+/*:240*//*243:*/
+#line 5611 "cweb/weaver.w"
 
 int _screen;
-/*:221*//*224:*/
-#line 5264 "cweb/weaver.w"
+/*:243*//*246:*/
+#line 5634 "cweb/weaver.w"
 
 static int depth;
-/*:224*//*226:*/
-#line 5283 "cweb/weaver.w"
+/*:246*//*248:*/
+#line 5653 "cweb/weaver.w"
 
 Window _window;
-/*:226*//*229:*/
-#line 5356 "cweb/weaver.w"
+/*:248*//*251:*/
+#line 5726 "cweb/weaver.w"
 
 static XSetWindowAttributes at;
-/*:229*//*234:*/
-#line 5462 "cweb/weaver.w"
+/*:251*//*256:*/
+#line 5837 "cweb/weaver.w"
 
 GLXContext _context;
-/*:234*//*236:*/
-#line 5475 "cweb/weaver.w"
+/*:256*//*258:*/
+#line 5850 "cweb/weaver.w"
 
 static GLXFBConfig*fbConfigs;
-/*:236*/
-#line 5157 "cweb/weaver.w"
+/*:258*/
+#line 5527 "cweb/weaver.w"
 
 void _initialize_window(void){
-/*220:*/
-#line 5222 "cweb/weaver.w"
+/*242:*/
+#line 5592 "cweb/weaver.w"
 
 _dpy= XOpenDisplay(NULL);
 if(_dpy==NULL){
@@ -62,19 +62,19 @@ fprintf(stderr,
 "graphical interface?\n");
 exit(1);
 }
-/*:220*//*223:*/
-#line 5255 "cweb/weaver.w"
+/*:242*//*245:*/
+#line 5625 "cweb/weaver.w"
 
 _screen= DefaultScreen(_dpy);
-/*:223*//*225:*/
-#line 5273 "cweb/weaver.w"
+/*:245*//*247:*/
+#line 5643 "cweb/weaver.w"
 
 depth= DisplayPlanes(_dpy,_screen);
 #if W_DEBUG_LEVEL>=3
 printf("WARNING (3): Color depth: %d\n",depth);
 #endif
-/*:225*//*228:*/
-#line 5296 "cweb/weaver.w"
+/*:247*//*250:*/
+#line 5666 "cweb/weaver.w"
 
 
 W.resolution_x= DisplayWidth(_dpy,_screen);
@@ -106,8 +106,8 @@ W.width,
 W.height,
 0,0,
 0);
-/*:228*//*230:*/
-#line 5360 "cweb/weaver.w"
+/*:250*//*252:*/
+#line 5730 "cweb/weaver.w"
 
 {
 #if W_WIDTH == 0 && W_HEIGHT == 0
@@ -125,8 +125,8 @@ KeyReleaseMask|ButtonPressMask|ButtonReleaseMask|
 PointerMotionMask|ExposureMask|StructureNotifyMask|
 FocusChangeMask);
 }
-/*:230*//*231:*/
-#line 5390 "cweb/weaver.w"
+/*:252*//*253:*/
+#line 5760 "cweb/weaver.w"
 
 XMapWindow(_dpy,_window);
 {
@@ -157,8 +157,8 @@ XStoreName(_dpy,_window,W_PROG);
 #ifdef W_MULTITHREAD
 XInitThreads();
 #endif
-/*:231*//*232:*/
-#line 5427 "cweb/weaver.w"
+/*:253*//*254:*/
+#line 5797 "cweb/weaver.w"
 
 {
 XSizeHints*hints= XAllocSizeHints();
@@ -168,12 +168,14 @@ hints->min_height= hints->max_height= W.height;
 XSetWMNormalHints(_dpy,_window,hints);
 XFree(hints);
 }
-/*:232*//*233:*/
-#line 5444 "cweb/weaver.w"
+/*:254*//*255:*/
+#line 5814 "cweb/weaver.w"
 
 {
-int glx_major,glx_minor;
+int glx_major,glx_minor,gl_major= 0,gl_minor= 0;
 Bool ret;
+glGetIntegerv(GL_MAJOR_VERSION,&gl_major);
+glGetIntegerv(GL_MINOR_VERSION,&gl_minor);
 ret= glXQueryVersion(_dpy,&glx_major,&glx_minor);
 if(!ret||((glx_major==1)&&(glx_minor<3))||glx_major<1){
 fprintf(stderr,
@@ -181,9 +183,12 @@ fprintf(stderr,
 glx_major,glx_minor);
 exit(1);
 }
+#if W_DEBUG_LEVEL >= 3
+printf("WARNING (3): GLX Version: %d.%d\n",glx_major,glx_minor);
+#endif
 }
-/*:233*//*237:*/
-#line 5482 "cweb/weaver.w"
+/*:255*//*259:*/
+#line 5857 "cweb/weaver.w"
 
 {
 int return_value;
@@ -206,14 +211,14 @@ fprintf(stderr,
 exit(1);
 }
 }
-/*:237*//*239:*/
-#line 5523 "cweb/weaver.w"
+/*:259*//*261:*/
+#line 5898 "cweb/weaver.w"
 
 {
 int context_attribs[]= 
 {
-GLX_CONTEXT_MAJOR_VERSION_ARB,3,
-GLX_CONTEXT_MINOR_VERSION_ARB,3,
+GLX_CONTEXT_MAJOR_VERSION_ARB,2,
+GLX_CONTEXT_MINOR_VERSION_ARB,0,
 None
 };
 glXCreateContextAttribsARBProc glXCreateContextAttribsARB= 0;
@@ -221,7 +226,7 @@ glXCreateContextAttribsARBProc glXCreateContextAttribsARB= 0;
 
 const char*glxExts= glXQueryExtensionsString(_dpy,_screen);
 if(strstr(glxExts,"GLX_ARB_create_context")==NULL){
-fprintf(stderr,"ERROR: Can't create an OpenGL 3.0 context.\n");
+fprintf(stderr,"ERROR: Can't create an OpenGL 2.0 ES context.\n");
 exit(1);
 }
 }
@@ -232,7 +237,7 @@ glXGetProcAddressARB((const GLubyte*)"glXCreateContextAttribsARB");
 _context= glXCreateContextAttribsARB(_dpy,*fbConfigs,NULL,GL_TRUE,
 context_attribs);
 if(_context==NULL){
-fprintf(stderr,"ERROR: Couldn't create an OpenGL 3.0 context.\n");
+fprintf(stderr,"ERROR: Couldn't create an OpenGL 2.0 ES context.\n");
 exit(1);
 }
 
@@ -242,24 +247,24 @@ exit(1);
 
 glXMakeCurrent(_dpy,_window,_context);
 }
-/*:239*/
-#line 5159 "cweb/weaver.w"
+/*:261*/
+#line 5529 "cweb/weaver.w"
 
 }
 void _finalize_window(void){
-/*240:*/
-#line 5566 "cweb/weaver.w"
+/*262:*/
+#line 5941 "cweb/weaver.w"
 
 glXMakeCurrent(_dpy,None,NULL);
 glXDestroyContext(_dpy,_context);
 XDestroyWindow(_dpy,_window);
 XCloseDisplay(_dpy);
-/*:240*/
-#line 5162 "cweb/weaver.w"
+/*:262*/
+#line 5532 "cweb/weaver.w"
 
 }
-/*251:*/
-#line 5777 "cweb/weaver.w"
+/*273:*/
+#line 6152 "cweb/weaver.w"
 
 void _Wresize_window(int width,int height){
 int old_width,old_height;
@@ -272,12 +277,12 @@ old_height= W.height;
 W.width= width;
 W.height= height;
 glViewport(0,0,W.width,W.height);
-/*436:*/
-#line 9582 "cweb/weaver.w"
+/*458:*/
+#line 9977 "cweb/weaver.w"
 
 _update_interface_screen_size();
-/*:436*//*478:*/
-#line 10646 "cweb/weaver.w"
+/*:458*//*500:*/
+#line 11054 "cweb/weaver.w"
 
 {
 
@@ -301,15 +306,15 @@ new_height= _interfaces[i][j].height*
 W.resize_interface(&_interfaces[i][j],new_width,new_height);
 }
 }
-/*:478*/
-#line 5789 "cweb/weaver.w"
+/*:500*/
+#line 6164 "cweb/weaver.w"
 
 #ifdef W_MULTITHREAD
 pthread_mutex_unlock(&_window_mutex);
 #endif
 }
-/*:251*//*257:*/
-#line 5846 "cweb/weaver.w"
+/*:273*//*279:*/
+#line 6221 "cweb/weaver.w"
 
 void _Wmove_window(int x,int y){
 #ifdef W_MULTITHREAD
@@ -322,8 +327,8 @@ W.y= y;
 pthread_mutex_unlock(&_window_mutex);
 #endif
 }
-/*:257*/
-#line 5164 "cweb/weaver.w"
+/*:279*/
+#line 5534 "cweb/weaver.w"
 
 #endif
-/*:215*/
+/*:237*/
