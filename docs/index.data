@@ -1,0 +1,731 @@
+#version 100
+
+#if GL_FRAGMENT_PRECISION_HIGH == 1
+  precision highp float;
+  precision highp int;
+#else
+  precision mediump float;
+  precision mediump int;
+#endif
+  precision lowp sampler2D;
+  precision lowp samplerCube;
+
+uniform vec4 object_color;
+
+uniform float time;
+uniform vec2 object_size;
+uniform int integer;
+
+uniform sampler2D texture1;
+varying mediump vec2 texture_coordinate;
+
+void main(){
+  vec4 texture = texture2D(texture1, texture_coordinate);
+  float final_alpha = texture.a;
+  vec3 final_color;
+  int branco = 0;
+  if(distance(texture.rgb, vec3(1.0, 1.0, 1.0)) < 0.3){
+    if(integer == 5 || integer == 3)
+      final_alpha = 0.6;
+    branco = 1;
+  }
+  if(integer == 7){ // Tile
+    if(object_color.a == 0.0){// Invisível
+      if(object_color.rgb != vec3(1.0, 1.0, 1.0)){
+        if(final_alpha == 0.0)
+          gl_FragData[0] = vec4(1.0, 0.0, 0.0, 0.0);
+        else
+          gl_FragData[0] = vec4(object_color.rgb, 0.4);
+      }
+      else
+        gl_FragData[0] = vec4(0.0, 0.0, 0.0, 0.0);
+    }
+    else if(object_color == vec4(0.0, 0.0, 0.0, 1.0)){ // Tile removido
+      gl_FragData[0] = vec4(vec3(0.0, 0.0, 0.0), final_alpha);
+    }
+    else{ // Revelado
+      if(branco == 1 && object_color.rgb != vec3(1.0, 1.0, 1.0)){
+        final_color.r = clamp(0.0, object_color.r + 0.6, 1.0);
+        final_color.g = clamp(0.0, object_color.g + 0.6, 1.0);
+        final_color.b = clamp(0.0, object_color.b + 0.6, 1.0);
+        gl_FragData[0] = vec4(final_color.rgb, final_alpha);
+      }
+      else
+        gl_FragData[0] = vec4(texture.rgb, final_alpha);
+    }
+  }
+  else{
+    if(object_color == vec4(0.0, 0.0, 0.0, 1.0)){
+      gl_FragData[0] = vec4(vec3(0.0, 0.0, 0.0), final_alpha);
+    }
+    else
+      gl_FragData[0] = vec4(texture.rgb, final_alpha);
+  }
+}
+#version 100
+
+#if GL_FRAGMENT_PRECISION_HIGH == 1
+  precision highp float;
+  precision highp int;
+#else
+  precision mediump float;
+  precision mediump int;
+#endif
+  precision lowp sampler2D;
+  precision lowp samplerCube;
+
+
+attribute vec3 vertex_position;
+
+uniform vec4 object_color;
+uniform mat4 model_view_matrix;
+uniform float time;
+uniform vec2 object_size;
+uniform int integer;
+
+varying mediump vec2 texture_coordinate;
+
+void main(){
+  gl_Position = model_view_matrix * vec4(vertex_position, 1.0);
+  //gl_Position = gl_Position + vec4(0.0, 0.0, 1.0 - 1.0/float(integer), 0.0);
+  gl_Position.z = -1.0 + 1.0/float(integer+1);
+  texture_coordinate = vec2(vertex_position[0] + 0.5, vertex_position[1] + 0.5);
+}
+#version 100
+
+#if GL_FRAGMENT_PRECISION_HIGH == 1
+  precision highp float;
+  precision highp int;
+#else
+  precision mediump float;
+  precision mediump int;
+#endif
+  precision lowp sampler2D;
+  precision lowp samplerCube;
+
+uniform vec4 object_color;
+
+uniform float time;
+uniform vec2 object_size;
+uniform int integer;
+
+uniform sampler2D texture1;
+varying mediump vec2 texture_coordinate;
+
+void main(){
+  vec4 texture = texture2D(texture1, texture_coordinate);
+  float final_alpha = texture.a + object_color.a * (1.0 - texture.a);
+  gl_FragData[0] = vec4((texture.a * texture.rgb +
+                         object_color.rgb * object_color.a *
+                         (1.0 - texture.a)) /                        final_alpha, final_alpha);
+}
+#version 100
+
+#if GL_FRAGMENT_PRECISION_HIGH == 1
+  precision highp float;
+  precision highp int;
+#else
+  precision mediump float;
+  precision mediump int;
+#endif
+  precision lowp sampler2D;
+  precision lowp samplerCube;
+
+
+attribute vec3 vertex_position;
+
+uniform vec4 object_color;
+uniform mat4 model_view_matrix;
+uniform float time;
+uniform vec2 object_size;
+uniform int integer;
+
+varying mediump vec2 texture_coordinate;
+
+void main(){
+  gl_Position = model_view_matrix * vec4(vertex_position, 1.0);
+  if(integer == 5){
+    gl_Position = gl_Position + vec4(sin(time*100.0) * 0.01, 0.0, 0.0, 0.0);
+  }
+  texture_coordinate = vec2(vertex_position[0] + 0.5, vertex_position[1] + 0.5);
+}
+#version 100
+
+#if GL_FRAGMENT_PRECISION_HIGH == 1
+  precision highp float;
+  precision highp int;
+#else
+  precision mediump float;
+  precision mediump int;
+#endif
+  precision lowp sampler2D;
+  precision lowp samplerCube;
+
+uniform vec4 object_color;
+
+uniform float time;
+uniform vec2 object_size;
+uniform int integer;
+
+uniform sampler2D texture1;
+varying mediump vec2 texture_coordinate;
+
+// top
+void main(){
+  float alpha = 0.6;
+  vec4 texture = texture2D(texture1, texture_coordinate);
+  vec4 texture2;
+  if(texture_coordinate.y > 0.96){
+    if(distance(texture.rgb, vec3(1.0, 1.0, 1.0)) < 0.1 ||
+       distance(texture.rgb, vec3(0.0, 0.0, 0.0)) < 0.1){
+      alpha = 1.0;
+    }
+  }
+  else if(texture_coordinate.y > 0.92){
+    if(texture_coordinate.x < 0.2)
+      alpha = 0.2;
+    else
+      alpha = 0.5;
+  }
+  else if(texture_coordinate.y < 0.1){
+    if(distance(texture.rgb, vec3(1.0, 1.0, 1.0)) < 0.1 ||
+       distance(texture.rgb, vec3(0.0, 0.0, 0.0)) < 0.1)
+      alpha = 0.0;
+    else
+      alpha = 0.25;
+  }
+  else if(texture_coordinate.y < 0.2){
+    texture2 = texture2D(texture1, texture_coordinate + vec2(0.0, -0.1));
+    if(distance(texture2.rgb, vec3(1.0, 1.0, 1.0)) < 0.1 ||
+       distance(texture2.rgb, vec3(0.0, 0.0, 0.0)) < 0.1){
+      alpha = 1.0;
+      texture = texture2;
+    }
+  }
+  gl_FragData[0] = vec4(texture.rgb, alpha);
+}
+#version 100
+
+#if GL_FRAGMENT_PRECISION_HIGH == 1
+  precision highp float;
+  precision highp int;
+#else
+  precision mediump float;
+  precision mediump int;
+#endif
+  precision lowp sampler2D;
+  precision lowp samplerCube;
+
+
+attribute vec3 vertex_position;
+
+uniform vec4 object_color;
+uniform mat4 model_view_matrix;
+uniform float time;
+uniform vec2 object_size;
+uniform int integer;
+
+varying mediump vec2 texture_coordinate;
+
+void main(){
+  gl_Position = model_view_matrix * vec4(vertex_position, 1.0);
+  if(integer == 5){
+    gl_Position = gl_Position + vec4(sin(time*100.0) * 0.01, 0.0, 0.0, 0.0);
+  }
+  texture_coordinate = vec2(vertex_position[0] + 0.5, vertex_position[1] + 0.5);
+}
+#version 100
+
+#if GL_FRAGMENT_PRECISION_HIGH == 1
+  precision highp float;
+  precision highp int;
+#else
+  precision mediump float;
+  precision mediump int;
+#endif
+  precision lowp sampler2D;
+  precision lowp samplerCube;
+
+uniform vec4 object_color;
+
+uniform float time;
+uniform vec2 object_size;
+uniform int integer;
+
+uniform sampler2D texture1;
+varying mediump vec2 texture_coordinate;
+
+// Bot
+void main(){
+  float alpha = 1.0;
+  vec4 texture;
+  if(texture_coordinate.y > 0.96){
+    texture = texture2D(texture1, texture_coordinate);
+    if(distance(texture.rgb, vec3(1.0, 1.0, 1.0)) < 0.1 ||
+       distance(texture.rgb, vec3(0.0, 0.0, 0.0)) < 0.1)
+      alpha = 0.0;
+    else
+      alpha = 0.3;
+  }
+  else if(texture_coordinate.y > 0.92){
+    texture = texture2D(texture1, texture_coordinate + vec2(0.0, 0.04));
+    if(distance(texture.rgb, vec3(1.0, 1.0, 1.0)) < 0.1 ||
+       distance(texture.rgb, vec3(0.0, 0.0, 0.0)) < 0.1)
+      alpha = 1.0;
+    else
+      texture = texture2D(texture1, texture_coordinate);
+  }
+  else if(texture_coordinate.y < 0.1){
+    texture = texture2D(texture1, texture_coordinate);
+    if(distance(texture.rgb, vec3(1.0, 1.0, 1.0)) < 0.1 ||
+       distance(texture.rgb, vec3(0.0, 0.0, 0.0)) < 0.1)
+      alpha = 1.0;
+    else
+      alpha = 0.3;
+  }
+  else if(texture_coordinate.y < 0.2){
+    texture = texture2D(texture1, texture_coordinate);
+    alpha = 0.3;
+  }
+  else{
+    texture = texture2D(texture1, texture_coordinate);
+  }
+  gl_FragData[0] = vec4(texture.rgb, alpha);
+}
+#version 100
+
+#if GL_FRAGMENT_PRECISION_HIGH == 1
+  precision highp float;
+  precision highp int;
+#else
+  precision mediump float;
+  precision mediump int;
+#endif
+  precision lowp sampler2D;
+  precision lowp samplerCube;
+
+
+attribute vec3 vertex_position;
+
+uniform vec4 object_color;
+uniform mat4 model_view_matrix;
+uniform float time;
+uniform vec2 object_size;
+uniform int integer;
+
+varying mediump vec2 texture_coordinate;
+
+void main(){
+  gl_Position = model_view_matrix * vec4(vertex_position, 1.0);
+  if(integer == 5){
+    gl_Position = gl_Position + vec4(sin(time*100.0 + 50.0) * 0.01, 0.0, 0.0, 0.0);
+  }
+  texture_coordinate = vec2(vertex_position[0] + 0.5, vertex_position[1] + 0.5);
+}
+#version 100
+
+#if GL_FRAGMENT_PRECISION_HIGH == 1
+  precision highp float;
+  precision highp int;
+#else
+  precision mediump float;
+  precision mediump int;
+#endif
+  precision lowp sampler2D;
+  precision lowp samplerCube;
+
+uniform vec4 object_color;
+
+uniform float time;
+uniform vec2 object_size;
+uniform int integer;
+
+uniform sampler2D texture1;
+varying mediump vec2 texture_coordinate;
+
+void main(){
+  float r, g, b;
+  vec4 texture = texture2D(texture1, texture_coordinate);
+  if(object_color.r < texture.r)
+    r = object_color.r;
+  else
+    r = texture.r;
+  if(object_color.g < texture.g)
+    g = object_color.g;
+  else
+    g = texture.g;
+  if(object_color.b < texture.b)
+    b = object_color.b;
+  else
+    b = texture.b;
+  if(texture.a != 0.0)
+    gl_FragData[0] = vec4(r, g, b, texture.a);
+  else
+    gl_FragData[0] = texture;
+}
+#version 100
+
+#if GL_FRAGMENT_PRECISION_HIGH == 1
+  precision highp float;
+  precision highp int;
+#else
+  precision mediump float;
+  precision mediump int;
+#endif
+  precision lowp sampler2D;
+  precision lowp samplerCube;
+
+
+attribute vec3 vertex_position;
+
+uniform vec4 object_color;
+uniform mat4 model_view_matrix;
+uniform float time;
+uniform vec2 object_size;
+uniform int integer;
+
+varying mediump vec2 texture_coordinate;
+
+void main(){
+  gl_Position = model_view_matrix * vec4(vertex_position, 1.0);
+  gl_Position.z = -0.9;
+  texture_coordinate = vec2((vertex_position[0] + 0.5) / 10.0 +
+                            0.1 * float(integer),
+                            vertex_position[1] + 0.5);
+}
+#version 100
+
+#if GL_FRAGMENT_PRECISION_HIGH == 1
+  precision highp float;
+  precision highp int;
+#else
+  precision mediump float;
+  precision mediump int;
+#endif
+  precision lowp sampler2D;
+  precision lowp samplerCube;
+
+uniform vec4 object_color;
+
+uniform float time;
+uniform vec2 object_size;
+uniform int integer;
+
+uniform sampler2D texture1;
+varying mediump vec2 texture_coordinate;
+
+void main(){
+  vec4 texture = texture2D(texture1, texture_coordinate);
+  float final_alpha = texture.a;
+  vec3 final_color;
+  int branco = 0;
+  if(distance(texture.rgb, vec3(1.0, 1.0, 1.0)) < 0.3){
+    if(integer == 5 || integer == 3)
+      final_alpha = 0.6;
+    branco = 1;
+  }
+  if(integer == 7){ // Tile
+    if(object_color.a == 0.0){// Invisível
+      if(object_color.rgb != vec3(1.0, 1.0, 1.0)){
+        if(final_alpha == 0.0)
+          gl_FragData[0] = vec4(1.0, 0.0, 0.0, 0.0);
+        else
+          gl_FragData[0] = vec4(object_color.rgb, 0.4);
+      }
+      else
+        gl_FragData[0] = vec4(0.0, 0.0, 0.0, 0.0);
+    }
+    else if(object_color == vec4(0.0, 0.0, 0.0, 1.0)){ // Tile removido
+      gl_FragData[0] = vec4(vec3(0.0, 0.0, 0.0), final_alpha);
+    }
+    else{ // Revelado
+      if(branco == 1 && object_color.rgb != vec3(1.0, 1.0, 1.0)){
+        final_color.r = clamp(0.0, object_color.r + 0.6, 1.0);
+        final_color.g = clamp(0.0, object_color.g + 0.6, 1.0);
+        final_color.b = clamp(0.0, object_color.b + 0.6, 1.0);
+        gl_FragData[0] = vec4(final_color.rgb, final_alpha);
+      }
+      else
+        gl_FragData[0] = vec4(texture.rgb, final_alpha);
+    }
+  }
+  else{
+    if(object_color == vec4(0.0, 0.0, 0.0, 1.0)){
+      gl_FragData[0] = vec4(vec3(0.0, 0.0, 0.0), final_alpha);
+    }
+    else
+      gl_FragData[0] = vec4(texture.rgb, final_alpha);
+  }
+}
+#version 100
+
+#if GL_FRAGMENT_PRECISION_HIGH == 1
+  precision highp float;
+  precision highp int;
+#else
+  precision mediump float;
+  precision mediump int;
+#endif
+  precision lowp sampler2D;
+  precision lowp samplerCube;
+
+
+attribute vec3 vertex_position;
+
+uniform vec4 object_color;
+uniform mat4 model_view_matrix;
+uniform float time;
+uniform vec2 object_size;
+uniform int integer;
+
+varying mediump vec2 texture_coordinate;
+
+void main(){
+  gl_Position = model_view_matrix * vec4(vertex_position, 1.0);
+  //gl_Position = gl_Position + vec4(0.0, 0.0, 1.0 - 1.0/float(integer), 0.0);
+  gl_Position.z = -1.0 + 1.0/float(integer+1);
+  texture_coordinate = vec2(vertex_position[0] + 0.5, vertex_position[1] + 0.5);
+}
+#version 100
+
+#if GL_FRAGMENT_PRECISION_HIGH == 1
+  precision highp float;
+  precision highp int;
+#else
+  precision mediump float;
+  precision mediump int;
+#endif
+  precision lowp sampler2D;
+  precision lowp samplerCube;
+
+uniform vec4 object_color;
+
+uniform float time;
+uniform vec2 object_size;
+uniform int integer;
+
+uniform sampler2D texture1;
+varying mediump vec2 texture_coordinate;
+
+void main(){
+  vec4 texture = texture2D(texture1, texture_coordinate);
+  float final_alpha;
+  if(distance(texture.rgb, vec3(1.0, 1.0, 1.0)) < 0.3 &&
+     (integer == 5 || integer == 3))
+    final_alpha = 0.6;
+  else
+    final_alpha = texture.a;
+  gl_FragData[0] = vec4((texture.a * texture.rgb +
+                         object_color.rgb * object_color.a *
+                         (1.0 - texture.a)) / final_alpha, final_alpha);
+}
+#version 100
+
+#if GL_FRAGMENT_PRECISION_HIGH == 1
+  precision highp float;
+  precision highp int;
+#else
+  precision mediump float;
+  precision mediump int;
+#endif
+  precision lowp sampler2D;
+  precision lowp samplerCube;
+
+
+attribute vec3 vertex_position;
+
+uniform vec4 object_color;
+uniform mat4 model_view_matrix;
+uniform float time;
+uniform vec2 object_size;
+uniform int integer;
+
+varying mediump vec2 texture_coordinate;
+
+void main(){
+  gl_Position = model_view_matrix * vec4(vertex_position, 1.0);
+  //gl_Position = gl_Position + vec4(0.0, 0.0, 1.0 - 1.0/float(integer), 0.0);
+  gl_Position.z = -1.0 + 1.0/float(integer+1);
+  texture_coordinate = vec2(vertex_position[0] + 0.5, vertex_position[1] + 0.5);
+}
+#version 100
+
+#if GL_FRAGMENT_PRECISION_HIGH == 1
+  precision highp float;
+  precision highp int;
+#else
+  precision mediump float;
+  precision mediump int;
+#endif
+  precision lowp sampler2D;
+  precision lowp samplerCube;
+
+uniform vec4 object_color;
+
+uniform float time;
+uniform vec2 object_size;
+uniform int integer;
+
+uniform sampler2D texture1;
+varying mediump vec2 texture_coordinate;
+
+void main(){
+  gl_FragData[0] = object_color;
+}
+#version 100
+
+#if GL_FRAGMENT_PRECISION_HIGH == 1
+  precision highp float;
+  precision highp int;
+#else
+  precision mediump float;
+  precision mediump int;
+#endif
+  precision lowp sampler2D;
+  precision lowp samplerCube;
+
+
+attribute vec3 vertex_position;
+
+uniform vec4 object_color;
+uniform mat4 model_view_matrix;
+uniform float time;
+uniform vec2 object_size;
+uniform int integer;
+
+varying mediump vec2 texture_coordinate;
+
+void main(){
+  gl_Position = model_view_matrix * vec4(vertex_position, 1.0);
+  gl_Position.z = -0.5;
+  texture_coordinate = vec2(vertex_position[0] + 0.5, vertex_position[1] + 0.5);
+}
+#version 100
+
+#if GL_FRAGMENT_PRECISION_HIGH == 1
+  precision highp float;
+  precision highp int;
+#else
+  precision mediump float;
+  precision mediump int;
+#endif
+  precision lowp sampler2D;
+  precision lowp samplerCube;
+
+uniform vec4 object_color;
+
+uniform float time;
+uniform vec2 object_size;
+uniform int integer;
+
+uniform sampler2D texture1;
+varying mediump vec2 texture_coordinate;
+
+void main(){
+  vec4 texture = texture2D(texture1, texture_coordinate);
+  float final_alpha = texture.a + object_color.a * (1.0 - texture.a);
+  gl_FragData[0] = vec4((texture.a * texture.rgb +
+                         object_color.rgb * object_color.a *
+                         (1.0 - texture.a)) /                        final_alpha, final_alpha);
+}
+#version 100
+
+#if GL_FRAGMENT_PRECISION_HIGH == 1
+  precision highp float;
+  precision highp int;
+#else
+  precision mediump float;
+  precision mediump int;
+#endif
+  precision lowp sampler2D;
+  precision lowp samplerCube;
+
+
+attribute vec3 vertex_position;
+
+uniform vec4 object_color;
+uniform mat4 model_view_matrix;
+uniform float time;
+uniform vec2 object_size;
+uniform int integer;
+
+varying mediump vec2 texture_coordinate;
+
+void main(){
+  gl_Position = model_view_matrix * vec4(vertex_position, 1.0);
+  if(integer == 5){
+    gl_Position = gl_Position + vec4(sin(time*100.0) * 0.01, 0.0, 0.0, 0.0);
+  }
+  texture_coordinate = vec2(vertex_position[0] + 0.5, vertex_position[1] + 0.5);
+}
+#version 100
+
+#if GL_FRAGMENT_PRECISION_HIGH == 1
+  precision highp float;
+  precision highp int;
+#else
+  precision mediump float;
+  precision mediump int;
+#endif
+  precision lowp sampler2D;
+  precision lowp samplerCube;
+
+uniform vec4 object_color;
+
+uniform float time;
+uniform vec2 object_size;
+uniform int integer;
+
+uniform sampler2D texture1;
+varying mediump vec2 texture_coordinate;
+
+void main(){
+  float r, g, b;
+  vec4 texture = texture2D(texture1, texture_coordinate);
+  if(object_color.r < texture.r)
+    r = object_color.r;
+  else
+    r = texture.r;
+  if(object_color.g < texture.g)
+    g = object_color.g;
+  else
+    g = texture.g;
+  if(object_color.b < texture.b)
+    b = object_color.b;
+  else
+    b = texture.b;
+  if(texture.a != 0.0)
+    gl_FragData[0] = vec4(r, g, b, texture.a);
+  else
+    gl_FragData[0] = texture;
+}
+#version 100
+
+#if GL_FRAGMENT_PRECISION_HIGH == 1
+  precision highp float;
+  precision highp int;
+#else
+  precision mediump float;
+  precision mediump int;
+#endif
+  precision lowp sampler2D;
+  precision lowp samplerCube;
+
+
+attribute vec3 vertex_position;
+
+uniform vec4 object_color;
+uniform mat4 model_view_matrix;
+uniform float time;
+uniform vec2 object_size;
+uniform int integer;
+
+varying mediump vec2 texture_coordinate;
+
+void main(){
+  gl_Position = model_view_matrix * vec4(vertex_position, 1.0);
+  gl_Position.z = -0.9;
+  texture_coordinate = vec2((vertex_position[0] + 0.5) / 10.0 +
+                            0.1 * float(integer),
+                            vertex_position[1] + 0.5);
+}
