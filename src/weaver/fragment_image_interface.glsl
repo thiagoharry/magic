@@ -1,5 +1,5 @@
-/*679:*/
-#line 15119 "cweb/weaver.w"
+/*683:*/
+#line 15292 "./cweb/weaver.w"
 
 
 #version 100
@@ -15,8 +15,8 @@ precision lowp sampler2D;
 precision lowp samplerCube;
 
 
-/*468:*/
-#line 10119 "cweb/weaver.w"
+/*472:*/
+#line 10269 "./cweb/weaver.w"
 
 uniform vec4 object_color;
 uniform mat4 model_view_matrix;
@@ -24,8 +24,8 @@ uniform vec2 object_size;
 uniform float time;
 uniform sampler2D texture1;
 uniform int integer;
-/*:468*/
-#line 15134 "cweb/weaver.w"
+/*:472*/
+#line 15307 "./cweb/weaver.w"
 
 
 varying mediump vec2 coordinate;
@@ -33,4 +33,4 @@ varying mediump vec2 coordinate;
 void main(){
 gl_FragData[0]= texture2D(texture1,coordinate);
 }
-/*:679*/
+/*:683*/

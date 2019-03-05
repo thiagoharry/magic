@@ -184,14 +184,14 @@ void compra_arquiinimigo(struct interface **carta,
         plano_em_andamento -> visible = true;
         for(i = 0; i < 20; i ++){
           if(imagens_em_andamento[i][0] == NULL){
-            sprintf(nome, "arquiinimigo/%d_medio.gif", compra / 2 + 1);
+            snprintf(nome, 32, "arquiinimigo/%d_medio.gif", compra / 2 + 1);
             imagens_em_andamento[i][0] =
               W.new_interface(W_INTERFACE_IMAGE,
                               W.width * (0.18 * (i % 5) + 0.09),
                               W.height * (0.25 * (i / 5)  + 0.125),
                               0.18 * W.width, 0.25 * W.height,
                               nome);
-            sprintf(nome, "arquiinimigo/%d_texto.gif", compra / 2 + 1);
+            snprintf(nome, 32, "arquiinimigo/%d_texto.gif", compra / 2 + 1);
             imagens_em_andamento[i][1] =
               W.new_interface(5,
                               W.width * (0.18 * (i % 5) + 0.09),
@@ -224,20 +224,20 @@ void compra_arquiinimigo(struct interface **carta,
     plano -> visible = true;
   compra /= 2;
   compra ++;
-  sprintf(nome, "arquiinimigo/%d.gif", compra);
+  snprintf(nome, 32, "arquiinimigo/%d.gif", compra);
   *carta = W.new_interface(1,
                           W.width / 4, W.height / 2,
                           W.width / 2, W.height,
                           nome);
   (*carta) -> integer = 4;
 
-  sprintf(nome, "arquiinimigo/%d_nome.gif", compra);
+  snprintf(nome, 32, "arquiinimigo/%d_nome.gif", compra);
     *nome_carta = W.new_interface(5, W.width / 4, 39 * W.height / 40,
                                 W.width / 3, W.height / 20,
                                 nome);
   (*nome_carta) -> integer = 5;
 
-  sprintf(nome, "arquiinimigo/%d_texto.gif", compra);
+  snprintf(nome, 32, "arquiinimigo/%d_texto.gif", compra);
   *texto = W.new_interface(5, W.width / 4, 8 * W.height / 40,
                            0.95 * W.width / 2, W.height / 3,
                            nome);

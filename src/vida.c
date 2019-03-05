@@ -108,7 +108,7 @@ static void restaura_vida(void){
   float r, g, b;
   char nome[16];
   for(i = 0; i < W.game -> numero_de_jogadores; i ++){
-    sprintf(nome, "vida/%d.gif", W.game -> avatar_de_jogadores[i]);
+    snprintf(nome, 16, "vida/%d.gif", W.game -> avatar_de_jogadores[i]);
     avatar[i] = W.new_interface(10,
                                 W.width * ((i % 2) * 0.5 + 0.25),
                                 W.height * ((1-i / 2) * 0.5 + 0.5) - 70,

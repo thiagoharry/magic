@@ -105,22 +105,22 @@ MAIN_LOOP exploradores(void){
     }
     // Uma das cartas é Orazca
     cartas_finais[W.random() % 4] = 0;
-    sprintf(nome, "exploradores/3-%d.gif", cartas_finais[0]);
+    snprintf(nome, 32, "exploradores/3-%d.gif", cartas_finais[0]);
     custo6[0] = W.new_interface(5, W.width / 2 - 0.144 * W.height,
                                 W.height / 2 - 0.001 * W.height,
                                 0.1927 * W.height, 0.1719 * W.height,
                                 nome);
-    sprintf(nome, "exploradores/3-%d.gif", cartas_finais[1]);
+    snprintf(nome, 32, "exploradores/3-%d.gif", cartas_finais[1]);
     custo6[1] = W.new_interface(5, W.width / 2 + 0.144 * W.height,
                                 W.height / 2 + 0.017 * W.height,
                                 0.1927 * W.height, 0.1719 * W.height,
                                 nome);
-    sprintf(nome, "exploradores/3-%d.gif", cartas_finais[2]);
+    snprintf(nome, 32, "exploradores/3-%d.gif", cartas_finais[2]);
     custo6[2] = W.new_interface(5, W.width / 2 - 0.005 * W.height,
                                 W.height / 2 + 0.088 * W.height,
                                 0.1927 * W.height, 0.1719 * W.height,
                                 nome);
-    sprintf(nome, "exploradores/3-%d.gif", cartas_finais[3]);
+    snprintf(nome, 32, "exploradores/3-%d.gif", cartas_finais[3]);
     custo6[3] = W.new_interface(5, W.width / 2 + 0.004 * W.height,
                                 W.height / 2 - 0.075 * W.height,
                                 0.1927 * W.height, 0.1719 * W.height,
@@ -147,52 +147,52 @@ MAIN_LOOP exploradores(void){
         todas_as_cartas[j] = todas_as_cartas[j + 1];
       cartas_restantes --;
     }
-    sprintf(nome, "exploradores/2-%d.gif", cartas_finais[0]);
+    snprintf(nome, 32, "exploradores/2-%d.gif", cartas_finais[0]);
     custo3[0] = W.new_interface(5, W.width / 2 - 0.29 * W.height,
                                 W.height / 2 + 0.072 * W.height,
                                 0.1927 * W.height, 0.1719 * W.height,
                                 nome);
-    sprintf(nome, "exploradores/2-%d.gif", cartas_finais[1]);
+    snprintf(nome, 32, "exploradores/2-%d.gif", cartas_finais[1]);
     custo3[1] = W.new_interface(5, W.width / 2 - 0.28 * W.height,
                                 W.height / 2 - 0.092 * W.height,
                                 0.1927 * W.height, 0.1719 * W.height,
                                 nome);
-    sprintf(nome, "exploradores/2-%d.gif", cartas_finais[2]);
+    snprintf(nome, 32, "exploradores/2-%d.gif", cartas_finais[2]);
     custo3[2] = W.new_interface(5, W.width / 2 + 0.29 * W.height,
                                 W.height / 2 - 0.057 * W.height,
                                 0.1927 * W.height, 0.1719 * W.height,
                                 nome);
-    sprintf(nome, "exploradores/2-%d.gif", cartas_finais[3]);
+    snprintf(nome, 32, "exploradores/2-%d.gif", cartas_finais[3]);
     custo3[3] = W.new_interface(5, W.width / 2 + 0.28 * W.height,
                                 W.height / 2 + 0.108 * W.height,
                                 0.1927 * W.height, 0.1719 * W.height,
                                 nome);
-    sprintf(nome, "exploradores/2-%d.gif", cartas_finais[4]);
+    snprintf(nome, 32, "exploradores/2-%d.gif", cartas_finais[4]);
     custo3[4] = W.new_interface(5, W.width / 2 + 0.134 * W.height,
                                 W.height / 2 + 0.18 * W.height,
                                 0.1927 * W.height, 0.1719 * W.height,
                                 nome);
-    sprintf(nome, "exploradores/2-%d.gif", cartas_finais[5]);
+    snprintf(nome, 32, "exploradores/2-%d.gif", cartas_finais[5]);
     custo3[5] = W.new_interface(5, W.width / 2 + 0.154 * W.height,
                                 W.height / 2 - 0.147 * W.height,
                                 0.1927 * W.height, 0.1719 * W.height,
                                 nome);
-    sprintf(nome, "exploradores/2-%d.gif", cartas_finais[6]);
+    snprintf(nome, 32, "exploradores/2-%d.gif", cartas_finais[6]);
     custo3[6] = W.new_interface(5, W.width / 2 - 0.133 * W.height,
                                 W.height / 2 - 0.166 * W.height,
                                 0.1927 * W.height, 0.1719 * W.height,
                                 nome);
-    sprintf(nome, "exploradores/2-%d.gif", cartas_finais[7]);
+    snprintf(nome, 32, "exploradores/2-%d.gif", cartas_finais[7]);
     custo3[7] = W.new_interface(5, W.width / 2 - 0.151 * W.height,
                                 W.height / 2 + 0.162 * W.height,
                                 0.1927 * W.height, 0.1719 * W.height,
                                 nome);
-    sprintf(nome, "exploradores/2-%d.gif", cartas_finais[8]);
+    snprintf(nome, 32, "exploradores/2-%d.gif", cartas_finais[8]);
     custo3[8] = W.new_interface(5, W.width / 2 - 0.015 * W.height,
                                 W.height / 2 + 0.252 * W.height,
                                 0.1927 * W.height, 0.1719 * W.height,
                                 nome);
-    sprintf(nome, "exploradores/2-%d.gif", cartas_finais[9]);
+    snprintf(nome, 32, "exploradores/2-%d.gif", cartas_finais[9]);
     custo3[9] = W.new_interface(5, W.width / 2 + 0.015 * W.height,
                                 W.height / 2 - 0.24 * W.height,
                                 0.1927 * W.height, 0.1719 * W.height,
@@ -224,7 +224,7 @@ MAIN_LOOP exploradores(void){
     offset_x = 0.148;
     offset_y = -0.073;
     for(i = 0 ; i < 4; i ++){
-      sprintf(nome, "exploradores/1-%d.gif", cartas_finais[i]);
+      snprintf(nome, 32, "exploradores/1-%d.gif", cartas_finais[i]);
       custo1[i] = W.new_interface(5,
                                   W.width / 2 + (- 0.024 + i * offset_x) *
                                   W.height,
@@ -232,7 +232,7 @@ MAIN_LOOP exploradores(void){
                                   W.height,
                                   0.1927 * W.height, 0.1719 * W.height,
                                   nome);
-      sprintf(nome, "exploradores/1-%d.gif", cartas_finais[i+4]);
+      snprintf(nome, 32, "exploradores/1-%d.gif", cartas_finais[i+4]);
       custo1[i+4] = W.new_interface(5,
                                     W.width / 2 + (- 0.416 + i * offset_x) *
                                     W.height,
@@ -244,7 +244,7 @@ MAIN_LOOP exploradores(void){
     offset_y = 0.09;
     offset_x = 0.136;
     for(i = 0; i < 3; i ++){
-      sprintf(nome, "exploradores/1-%d.gif", cartas_finais[i+8]);
+      snprintf(nome, 32, "exploradores/1-%d.gif", cartas_finais[i+8]);
       custo1[i+8] = W.new_interface(5,
                                   W.width / 2 + (- 0.435 + i * offset_x) *
                                   W.height,
@@ -252,7 +252,7 @@ MAIN_LOOP exploradores(void){
                                   W.height,
                                   0.1927 * W.height, 0.1719 * W.height,
                                   nome);
-      sprintf(nome, "exploradores/1-%d.gif", cartas_finais[i+11]);
+      snprintf(nome, 32, "exploradores/1-%d.gif", cartas_finais[i+11]);
       custo1[i+11] = W.new_interface(5,
                                      W.width / 2 + (0.166 + i * offset_x) *
                                      W.height,
@@ -261,13 +261,13 @@ MAIN_LOOP exploradores(void){
                                      0.1927 * W.height, 0.1719 * W.height,
                                      nome);
     }
-    sprintf(nome, "exploradores/1-%d.gif", cartas_finais[14]);
+    snprintf(nome, 32, "exploradores/1-%d.gif", cartas_finais[14]);
     custo1[14] = W.new_interface(5,
                                  W.width / 2 - 0.428 *  W.height,
                                  W.height / 2 - 0.02 *  W.height,
                                   0.1927 * W.height, 0.1719 * W.height,
                                   nome);
-    sprintf(nome, "exploradores/1-%d.gif", cartas_finais[15]);
+    snprintf(nome, 32, "exploradores/1-%d.gif", cartas_finais[15]);
     custo1[15] = W.new_interface(5,
                                  W.width / 2 + 0.428 *  W.height,
                                  W.height / 2 + 0.03 *  W.height,

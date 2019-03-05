@@ -1,5 +1,5 @@
-/*414:*/
-#line 9098 "cweb/weaver.w"
+/*418:*/
+#line 9239 "./cweb/weaver.w"
 
 #include "interface.h"
 #include <stdarg.h>  
@@ -7,23 +7,23 @@
 #include <sys/stat.h>  
 #include <sys/types.h>  
 #endif
-/*671:*/
-#line 14945 "cweb/weaver.w"
+/*675:*/
+#line 15118 "./cweb/weaver.w"
 
 #if W_TARGET == W_WEB
 #include <SDL/SDL_image.h> 
 #endif
-/*:671*//*689:*/
-#line 15421 "cweb/weaver.w"
+/*:675*//*693:*/
+#line 15594 "./cweb/weaver.w"
 
 #if !defined(W_DISABLE_PNG) && (W_TARGET == W_ELF)
 #include <png.h> 
 #endif
-/*:689*/
-#line 9105 "cweb/weaver.w"
+/*:693*/
+#line 9246 "./cweb/weaver.w"
 
-/*670:*/
-#line 14925 "cweb/weaver.w"
+/*674:*/
+#line 15098 "./cweb/weaver.w"
 
 #if W_TARGET == W_WEB
 static void onerror_texture(unsigned undocumented,void*interface,
@@ -39,8 +39,8 @@ pthread_mutex_unlock(&(W._pending_files_mutex));
 #endif
 }
 #endif
-/*:670*//*672:*/
-#line 14951 "cweb/weaver.w"
+/*:674*//*676:*/
+#line 15124 "./cweb/weaver.w"
 
 #if W_TARGET == W_WEB
 static void onload_texture(unsigned undocumented,
@@ -127,8 +127,8 @@ pthread_mutex_unlock(&(W._pending_files_mutex));
 #endif
 }
 #endif
-/*:672*//*673:*/
-#line 15042 "cweb/weaver.w"
+/*:676*//*677:*/
+#line 15215 "./cweb/weaver.w"
 
 #if W_TARGET == W_WEB
 static void onprogress_texture(unsigned int undocumented,void*snd,
@@ -136,14 +136,16 @@ int percent){
 return;
 }
 #endif
-/*:673*/
-#line 9106 "cweb/weaver.w"
+/*:677*/
+#line 9247 "./cweb/weaver.w"
 
-/*421:*/
-#line 9202 "cweb/weaver.w"
+/*425:*/
+#line 9343 "./cweb/weaver.w"
 
 void _flush_interfaces(void){
 int i;
+if(!_running_loop)
+return;
 for(i= 0;i<W_MAX_INTERFACES;i++){
 switch(_interfaces[_number_of_loops][i].type){
 
@@ -154,14 +156,21 @@ default:
 _interfaces[_number_of_loops][i].type= W_NONE;
 }
 #ifdef W_MULTITHREAD
-if(pthread_mutex_destroy(&(_interfaces[_number_of_loops][i]._mutex))!=
-0)
-perror("Finalizing interface mutex:");
+{
+int ret;
+do{
+ret= pthread_mutex_destroy(&(_interfaces[_number_of_loops][i]._mutex));
+if(ret==EBUSY)
+pthread_yield();
+}while(ret!=EBUSY);
+if(ret!=0)
+perror("Finalizing user interface mutex:");
+}
 #endif
 }
 }
-/*:421*//*429:*/
-#line 9332 "cweb/weaver.w"
+/*:425*//*433:*/
+#line 9482 "./cweb/weaver.w"
 
 struct interface*_new_interface(int type,int x,int y,int width,
 int height,...){
@@ -200,8 +209,8 @@ _interfaces[_number_of_loops][i].width= (float)width;
 _interfaces[_number_of_loops][i].height= (float)height;
 
 _interfaces[_number_of_loops][i]._mode= GL_TRIANGLE_FAN;
-/*667:*/
-#line 14809 "cweb/weaver.w"
+/*671:*/
+#line 14982 "./cweb/weaver.w"
 
 {
 _interfaces[_number_of_loops][i]._texture= &_empty_texture;
@@ -217,8 +226,8 @@ _interfaces[_number_of_loops][i].frame_duration= NULL;
 _interfaces[_number_of_loops][i]._t= W.t;
 _interfaces[_number_of_loops][i].max_repetition= -1;
 }
-/*:667*/
-#line 9370 "cweb/weaver.w"
+/*:671*/
+#line 9520 "./cweb/weaver.w"
 
 #ifdef W_MULTITHREAD
 if(pthread_mutex_init(&(_interfaces[_number_of_loops][i]._mutex),
@@ -247,8 +256,8 @@ _interfaces[_number_of_loops][i].b= va_arg(valist,double);
 _interfaces[_number_of_loops][i].a= va_arg(valist,double);
 va_end(valist);
 break;
-/*669:*/
-#line 14840 "cweb/weaver.w"
+/*673:*/
+#line 15013 "./cweb/weaver.w"
 
 case W_INTERFACE_IMAGE:
 _interfaces[_number_of_loops][i]._loaded_texture= false;
@@ -313,8 +322,8 @@ _interfaces[_number_of_loops][i]._loaded_texture= true;
 _finalize_after(&(_interfaces[_number_of_loops][i]),
 _finalize_interface_texture);
 }
-/*707:*/
-#line 15784 "cweb/weaver.w"
+/*711:*/
+#line 15957 "./cweb/weaver.w"
 
 #ifndef W_DISABLE_PNG
 if(!strcmp(ext,".png")||!strcmp(ext,".PNG")){
@@ -336,18 +345,18 @@ _finalize_after(&(_interfaces[_number_of_loops][i]),
 _finalize_interface_texture);
 }
 #endif
-/*:707*/
-#line 14904 "cweb/weaver.w"
+/*:711*/
+#line 15077 "./cweb/weaver.w"
 
 #endif
 }
 break;
-/*:669*/
-#line 9398 "cweb/weaver.w"
+/*:673*/
+#line 9548 "./cweb/weaver.w"
 
 default:
-/*685:*/
-#line 15250 "cweb/weaver.w"
+/*689:*/
+#line 15423 "./cweb/weaver.w"
 
 {
 #if W_TARGET == W_WEB
@@ -410,8 +419,8 @@ _interfaces[_number_of_loops][i]._loaded_texture= true;
 _finalize_after(&(_interfaces[_number_of_loops][i]),
 _finalize_interface_texture);
 }
-/*707:*/
-#line 15784 "cweb/weaver.w"
+/*711:*/
+#line 15957 "./cweb/weaver.w"
 
 #ifndef W_DISABLE_PNG
 if(!strcmp(ext,".png")||!strcmp(ext,".PNG")){
@@ -433,20 +442,20 @@ _finalize_after(&(_interfaces[_number_of_loops][i]),
 _finalize_interface_texture);
 }
 #endif
-/*:707*/
-#line 15312 "cweb/weaver.w"
+/*:711*/
+#line 15485 "./cweb/weaver.w"
 
 #endif
 }
 va_end(valist);
 }
-/*:685*/
-#line 9400 "cweb/weaver.w"
+/*:689*/
+#line 9550 "./cweb/weaver.w"
 
 ;
 }
-/*453:*/
-#line 9874 "cweb/weaver.w"
+/*457:*/
+#line 10024 "./cweb/weaver.w"
 
 {
 float nx,ny,cosine,sine,x1,y1;
@@ -479,16 +488,16 @@ _interfaces[_number_of_loops][i]._transform_matrix[7]= 0.0;
 _interfaces[_number_of_loops][i]._transform_matrix[11]= 0.0;
 _interfaces[_number_of_loops][i]._transform_matrix[15]= 1.0;
 }
-/*:453*/
-#line 9403 "cweb/weaver.w"
+/*:457*/
+#line 9553 "./cweb/weaver.w"
 
-/*496:*/
-#line 10947 "cweb/weaver.w"
+/*500:*/
+#line 11123 "./cweb/weaver.w"
 
 
 _insert_interface_queue(&(_interfaces[_number_of_loops][i]));
-/*:496*/
-#line 9404 "cweb/weaver.w"
+/*:500*/
+#line 9554 "./cweb/weaver.w"
 
 new_interface= &(_interfaces[_number_of_loops][i]);
 }
@@ -498,8 +507,8 @@ pthread_mutex_unlock(&_interface_mutex);
 #endif
 return new_interface;
 }
-/*:429*//*433:*/
-#line 9435 "cweb/weaver.w"
+/*:433*//*437:*/
+#line 9585 "./cweb/weaver.w"
 
 bool _destroy_interface(struct interface*inter){
 int i;
@@ -509,13 +518,13 @@ if(&(_interfaces[_number_of_loops][i])==inter&&inter->type!=W_NONE)
 break;
 if(i==W_MAX_INTERFACES)
 return false;
-/*497:*/
-#line 10955 "cweb/weaver.w"
+/*501:*/
+#line 11131 "./cweb/weaver.w"
 
 
 _remove_interface_queue(&(_interfaces[_number_of_loops][i]));
-/*:497*//*676:*/
-#line 15073 "cweb/weaver.w"
+/*:501*//*680:*/
+#line 15246 "./cweb/weaver.w"
 
 {
 _finalize_this(&_interfaces[_number_of_loops][i],true);
@@ -523,8 +532,8 @@ if(_interfaces[_number_of_loops][i]._texture!=&_empty_texture)
 Wfree(_interfaces[_number_of_loops][i]._texture);
 _finalize_interface_texture((void*)&_interfaces[_number_of_loops][i]);
 }
-/*:676*/
-#line 9444 "cweb/weaver.w"
+/*:680*/
+#line 9594 "./cweb/weaver.w"
 
 switch(_interfaces[_number_of_loops][i].type){
 
@@ -542,8 +551,8 @@ Wexit();
 #endif
 return true;
 }
-/*:433*//*437:*/
-#line 9489 "cweb/weaver.w"
+/*:437*//*441:*/
+#line 9639 "./cweb/weaver.w"
 
 struct interface*_copy_interface(struct interface*inter){
 int i;
@@ -582,8 +591,8 @@ pthread_mutex_unlock(&_interface_mutex);
 #endif
 return new_interface;
 }
-/*:437*//*442:*/
-#line 9613 "cweb/weaver.w"
+/*:441*//*446:*/
+#line 9763 "./cweb/weaver.w"
 
 void _move_interface(struct interface*inter,float x,float y){
 #ifdef W_MULTITHREAD
@@ -591,8 +600,8 @@ pthread_mutex_lock(&(inter->_mutex));
 #endif
 inter->x= x;
 inter->y= y;
-/*454:*/
-#line 9911 "cweb/weaver.w"
+/*458:*/
+#line 10061 "./cweb/weaver.w"
 
 {
 float x1,y1;
@@ -601,15 +610,15 @@ y1= (2.0*((float)inter->y/(float)W.height))-1.0;
 inter->_transform_matrix[12]= x1;
 inter->_transform_matrix[13]= y1;
 }
-/*:454*/
-#line 9620 "cweb/weaver.w"
+/*:458*/
+#line 9770 "./cweb/weaver.w"
 
 #ifdef W_MULTITHREAD
 pthread_mutex_unlock(&(inter->_mutex));
 #endif
 }
-/*:442*//*446:*/
-#line 9692 "cweb/weaver.w"
+/*:446*//*450:*/
+#line 9842 "./cweb/weaver.w"
 
 void _resize_interface(struct interface*inter,float size_x,float size_y){
 #ifdef W_MULTITHREAD
@@ -617,8 +626,8 @@ pthread_mutex_lock(&(inter->_mutex));
 #endif
 inter->height= size_y;
 inter->width= size_x;
-/*455:*/
-#line 9924 "cweb/weaver.w"
+/*459:*/
+#line 10074 "./cweb/weaver.w"
 
 {
 float nx,ny,cosine,sine;
@@ -631,23 +640,23 @@ inter->_transform_matrix[4]= -(ny*sine)/(float)W.width;
 inter->_transform_matrix[1]= (nx*sine)/(float)W.height;
 inter->_transform_matrix[5]= (ny*cosine)/(float)W.height;
 }
-/*:455*/
-#line 9699 "cweb/weaver.w"
+/*:459*/
+#line 9849 "./cweb/weaver.w"
 
 #ifdef W_MULTITHREAD
 pthread_mutex_unlock(&(inter->_mutex));
 #endif
 }
-/*:446*//*450:*/
-#line 9773 "cweb/weaver.w"
+/*:450*//*454:*/
+#line 9923 "./cweb/weaver.w"
 
 void _rotate_interface(struct interface*inter,float rotation){
 #ifdef W_MULTITHREAD
 pthread_mutex_lock(&(inter->_mutex));
 #endif
 inter->rotation= rotation;
-/*455:*/
-#line 9924 "cweb/weaver.w"
+/*459:*/
+#line 10074 "./cweb/weaver.w"
 
 {
 float nx,ny,cosine,sine;
@@ -660,15 +669,15 @@ inter->_transform_matrix[4]= -(ny*sine)/(float)W.width;
 inter->_transform_matrix[1]= (nx*sine)/(float)W.height;
 inter->_transform_matrix[5]= (ny*cosine)/(float)W.height;
 }
-/*:455*/
-#line 9779 "cweb/weaver.w"
+/*:459*/
+#line 9929 "./cweb/weaver.w"
 
 #ifdef W_MULTITHREAD
 pthread_mutex_unlock(&(inter->_mutex));
 #endif
 }
-/*:450*//*457:*/
-#line 9946 "cweb/weaver.w"
+/*:454*//*461:*/
+#line 10096 "./cweb/weaver.w"
 
 void _update_interface_screen_size(void){
 int i,j;
@@ -696,8 +705,8 @@ pthread_mutex_unlock(&_interfaces[i][j]._mutex);
 #endif
 }
 }
-/*:457*//*489:*/
-#line 10804 "cweb/weaver.w"
+/*:461*//*493:*/
+#line 10980 "./cweb/weaver.w"
 
 void _insert_interface_queue(struct interface*inter){
 int begin,end,middle,tmp;
@@ -736,8 +745,8 @@ _interface_queue[_number_of_loops][tmp-1];
 
 _interface_queue[_number_of_loops][middle]= inter;
 }
-/*:489*//*491:*/
-#line 10852 "cweb/weaver.w"
+/*:493*//*495:*/
+#line 11028 "./cweb/weaver.w"
 
 void _remove_interface_queue(struct interface*inter){
 int begin,end,middle,tmp;
@@ -799,16 +808,16 @@ fprintf(stderr,
 return;
 }
 }
-/*:491*//*493:*/
-#line 10921 "cweb/weaver.w"
+/*:495*//*497:*/
+#line 11097 "./cweb/weaver.w"
 
 void _clean_interface_queue(void){
 int i;
 for(i= 0;i<W_MAX_INTERFACES;i++)
 _interface_queue[_number_of_loops][i]= NULL;
 }
-/*:493*//*675:*/
-#line 15058 "cweb/weaver.w"
+/*:497*//*679:*/
+#line 15231 "./cweb/weaver.w"
 
 
 
@@ -816,8 +825,8 @@ void _finalize_interface_texture(void*data){
 struct interface*p= (struct interface*)data;
 glDeleteTextures(p->number_of_frames,p->_texture);
 }
-/*:675*//*691:*/
-#line 15444 "cweb/weaver.w"
+/*:679*//*695:*/
+#line 15617 "./cweb/weaver.w"
 
 #if !defined(W_DISABLE_PNG) && (W_TARGET == W_ELF)
 GLuint*_extract_png(char*filename,unsigned*number_of_frames,
@@ -840,8 +849,8 @@ if(fp==NULL){
 fprintf(stderr,"ERROR: Can't open file %s.\n",filename);
 goto error_png;
 }
-/*692:*/
-#line 15489 "cweb/weaver.w"
+/*696:*/
+#line 15662 "./cweb/weaver.w"
 
 {
 size_t size_t_ret;
@@ -858,8 +867,8 @@ fprintf(stderr,"ERROR: %s don't have a PNG header.\n",filename);
 goto error_png;
 }
 }
-/*:692*//*693:*/
-#line 15510 "cweb/weaver.w"
+/*:696*//*697:*/
+#line 15683 "./cweb/weaver.w"
 
 {
 
@@ -879,8 +888,8 @@ fprintf(stderr,"ERROR: Can't create structure to read PNG.\n");
 goto error_png;
 }
 }
-/*:693*//*694:*/
-#line 15538 "cweb/weaver.w"
+/*:697*//*698:*/
+#line 15711 "./cweb/weaver.w"
 
 {
 if(setjmp(png_jmpbuf(png_ptr))){
@@ -888,20 +897,20 @@ fprintf(stderr,"ERROR: %s initialization failed.\n",filename);
 goto error_png;
 }
 }
-/*:694*//*695:*/
-#line 15551 "cweb/weaver.w"
+/*:698*//*699:*/
+#line 15724 "./cweb/weaver.w"
 
 {
 png_init_io(png_ptr,fp);
 }
-/*:695*//*696:*/
-#line 15562 "cweb/weaver.w"
+/*:699*//*700:*/
+#line 15735 "./cweb/weaver.w"
 
 {
 png_set_sig_bytes(png_ptr,8);
 }
-/*:696*//*697:*/
-#line 15573 "cweb/weaver.w"
+/*:700*//*701:*/
+#line 15746 "./cweb/weaver.w"
 
 {
 png_read_info(png_ptr,info_ptr);
@@ -910,8 +919,8 @@ height= png_get_image_height(png_ptr,info_ptr);
 color_type= png_get_color_type(png_ptr,info_ptr);
 bit_depth= png_get_bit_depth(png_ptr,info_ptr);
 }
-/*:697*//*698:*/
-#line 15586 "cweb/weaver.w"
+/*:701*//*702:*/
+#line 15759 "./cweb/weaver.w"
 
 {
 
@@ -937,8 +946,8 @@ if(color_type==PNG_COLOR_TYPE_GRAY||
 color_type==PNG_COLOR_TYPE_GRAY_ALPHA)
 png_set_gray_to_rgb(png_ptr);
 }
-/*:698*//*699:*/
-#line 15618 "cweb/weaver.w"
+/*:702*//*703:*/
+#line 15791 "./cweb/weaver.w"
 
 {
 png_read_update_info(png_ptr,info_ptr);
@@ -947,8 +956,8 @@ fprintf(stderr,"ERROR: Failed to interpret %s .\n",filename);
 goto error_png;
 }
 }
-/*:699*//*700:*/
-#line 15634 "cweb/weaver.w"
+/*:703*//*704:*/
+#line 15807 "./cweb/weaver.w"
 
 {
 int y,z;
@@ -991,15 +1000,15 @@ goto error_png;
 
 png_read_image(png_ptr,row_pointers);
 }
-/*:700*//*702:*/
-#line 15698 "cweb/weaver.w"
+/*:704*//*706:*/
+#line 15871 "./cweb/weaver.w"
 
 {
 color_type= png_get_color_type(png_ptr,info_ptr);
 switch(color_type){
 case PNG_COLOR_TYPE_RGB:
-/*704:*/
-#line 15732 "cweb/weaver.w"
+/*708:*/
+#line 15905 "./cweb/weaver.w"
 
 {
 int x,y;
@@ -1014,13 +1023,13 @@ pixel_array[4*width*(height-y-1)+x*4+3]= 255;
 }
 }
 }
-/*:704*/
-#line 15703 "cweb/weaver.w"
+/*:708*/
+#line 15876 "./cweb/weaver.w"
 
 break;
 case PNG_COLOR_TYPE_RGBA:
-/*703:*/
-#line 15714 "cweb/weaver.w"
+/*707:*/
+#line 15887 "./cweb/weaver.w"
 
 {
 int x,y;
@@ -1035,14 +1044,14 @@ pixel_array[4*width*(height-y-1)+x*4+3]= ptr[3];
 }
 }
 }
-/*:703*/
-#line 15706 "cweb/weaver.w"
+/*:707*/
+#line 15879 "./cweb/weaver.w"
 
 break;
 }
 }
-/*:702*//*705:*/
-#line 15752 "cweb/weaver.w"
+/*:706*//*709:*/
+#line 15925 "./cweb/weaver.w"
 
 {
 int z;
@@ -1051,8 +1060,8 @@ Wfree(row_pointers[z]);
 Wfree(row_pointers);
 row_pointers= NULL;
 }
-/*:705*//*706:*/
-#line 15765 "cweb/weaver.w"
+/*:709*//*710:*/
+#line 15938 "./cweb/weaver.w"
 
 {
 glGenTextures(1,returned_data);
@@ -1066,8 +1075,8 @@ glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 glBindTexture(GL_TEXTURE_2D,0);
 }
-/*:706*/
-#line 15466 "cweb/weaver.w"
+/*:710*/
+#line 15639 "./cweb/weaver.w"
 
 goto end_of_png;
 error_png:
@@ -1079,8 +1088,8 @@ end_of_png:
 #if W_TARGET == W_ELF && !defined(W_MULTITHREAD)
 fclose(fp);
 #else
-/*701:*/
-#line 15681 "cweb/weaver.w"
+/*705:*/
+#line 15854 "./cweb/weaver.w"
 
 {
 if(row_pointers!=NULL){
@@ -1092,14 +1101,14 @@ Wfree(row_pointers);
 if(pixel_array!=NULL)
 Wfree(pixel_array);
 }
-/*:701*/
-#line 15477 "cweb/weaver.w"
+/*:705*/
+#line 15650 "./cweb/weaver.w"
 
 #endif
 return returned_data;
 }
 #endif
-/*:691*/
-#line 9107 "cweb/weaver.w"
+/*:695*/
+#line 9248 "./cweb/weaver.w"
 
-/*:414*/
+/*:418*/

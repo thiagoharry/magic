@@ -44,7 +44,7 @@ static void adiciona_carta(int num){
   }
   numero_de_cartas ++;
   cartas_escolhidas[i] = num;
-  sprintf(nome, "arquiinimigo/%d_pequeno.gif", num);
+  snprintf(nome, 64, "arquiinimigo/%d_pequeno.gif", num);
   miniaturas[i] = W.new_interface(6,
                                   W.width * ((i % 2)?(0.974):(0.924)),
                                   W.height * (-(i / 2) * 0.0925 + 0.945 -
@@ -54,7 +54,7 @@ static void adiciona_carta(int num){
                                   nome);
   miniaturas[i] -> integer = 7;
   if(i){
-    sprintf(nome, "deck%dcard%d", deck_atual, i);
+    snprintf(nome, 64, "deck%dcard%d", deck_atual, i);
     W.write_integer(nome, num);
   }
 }
@@ -74,19 +74,19 @@ static void novas_cartas(void){
     num = (i + offset) % 65 + 1;
     if(num >= 46)
       num += 5;
-    sprintf(nome, "arquiinimigo/%d_medio.gif", num);
+    snprintf(nome, 64, "arquiinimigo/%d_medio.gif", num);
     opcoes[i] = W.new_interface(W_INTERFACE_IMAGE,
                                 W.width * ((i % 3) * 0.3 + 0.15),
                                 W.height * (1.0  - 0.333 * (i / 3) - 0.16),
                                 0.25 * W.width, 0.3 * W.height ,
                                 nome);
-    sprintf(nome, "arquiinimigo/%d_nome.gif", num);
+    snprintf(nome, 64, "arquiinimigo/%d_nome.gif", num);
     opcoes_nome[i] = W.new_interface(5,
                                      W.width * ((i % 3) * 0.3 + 0.15),
                                      W.height * (1.0  - 0.333 * (i / 3) - 0.025),
                                      0.14 * W.width, 0.03 * W.height,
                                      nome);
-    sprintf(nome, "arquiinimigo/%d_texto.gif", num);
+    snprintf(nome, 64, "arquiinimigo/%d_texto.gif", num);
     opcoes_texto[i] = W.new_interface(5,
                                      W.width * ((i % 3) * 0.3 + 0.15),
                                      W.height * (1.0  - 0.333 * (i / 3) - 0.19),
@@ -136,7 +136,7 @@ MAIN_LOOP baralho(void){
     char nome[16];
     bool ret;
     do{
-      sprintf(nome, "deck%dcard%d", deck_atual, 0);
+      snprintf(nome, 16, "deck%dcard%d", deck_atual, 0);
       ret = W.read_integer(nome, &i);
       deck_atual ++;
     }while(ret);
@@ -162,7 +162,7 @@ MAIN_LOOP baralho(void){
     for(i = 0; i < 20; i ++){
       W.game -> baralho_arquiinimigo[i] = cartas_escolhidas[i];
     }
-    sprintf(nome, "deck%dcard%d", deck_atual, 0);
+    snprintf(nome, 16, "deck%dcard%d", deck_atual, 0);
     W.write_integer(nome, cartas_escolhidas[0]);
     loop_terminado = true;
   }
@@ -200,7 +200,7 @@ MAIN_LOOP baralho(void){
           W.destroy_interface(miniaturas[i]);
           numero_de_cartas --;
           if(i){
-            sprintf(nome, "deck%dcard%d", deck_atual, i);
+            snprintf(nome, 16, "deck%dcard%d", deck_atual, i);
             W.delete_integer(nome);
           }
         }

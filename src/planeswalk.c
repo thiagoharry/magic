@@ -26,18 +26,20 @@ static bool escolhido;
 
 struct interface *obtem_medio(int tipo, float x, float y, int n){
   char nome[256];
-  strcpy(nome, nomes[n]);
-  nome[strlen(nome) - 4] = '\0';
-  strcat(nome, "_medio.gif");
+  size_t nome_size = strlen(nomes[n]);
+  memcpy(nome, nomes[n], nome_size);
+  nome_size -= 4;
+  memcpy(&nome[nome_size], "_medio.gif", 11);
   return W.new_interface(tipo, x, y,
                          W.width / 3, W.height / 3, nome);
 }
 
 struct interface *obtem_pequeno(float x, float y, int n){
   char nome[256];
-  strcpy(nome, nomes[n]);
-  nome[strlen(nome) - 4] = '\0';
-  strcat(nome, "_pequeno.gif");
+  size_t nome_size = strlen(nomes[n]);
+  memcpy(nome, nomes[n], nome_size);
+  nome_size -= 4;
+  memcpy(&nome[nome_size], "_pequeno.gif", 13);
   return W.new_interface(W_INTERFACE_IMAGE, x, y,
                          W.width / 7, W.height / 7, nome);
 }

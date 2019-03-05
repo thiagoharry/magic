@@ -1,5 +1,5 @@
-/*413:*/
-#line 9084 "cweb/weaver.w"
+/*417:*/
+#line 9225 "./cweb/weaver.w"
 
 #ifndef _interface_h_
 #define _interface_h_
@@ -8,16 +8,16 @@ extern"C"{
 #endif
 #include "weaver.h"
 /*66:*/
-#line 1928 "cweb/weaver.w"
+#line 1950 "./cweb/weaver.w"
 
 #include "conf_begin.h"
 #include "../../conf/conf.h"
 #include "conf_end.h"
 /*:66*/
-#line 9091 "cweb/weaver.w"
+#line 9232 "./cweb/weaver.w"
 
-/*416:*/
-#line 9122 "cweb/weaver.w"
+/*420:*/
+#line 9263 "./cweb/weaver.w"
 
 struct interface{
 int type;
@@ -32,8 +32,8 @@ bool visible;
 GLfloat _transform_matrix[16];
 
 GLenum _mode;
-/*663:*/
-#line 14763 "cweb/weaver.w"
+/*667:*/
+#line 14936 "./cweb/weaver.w"
 
 
 GLuint*_texture;
@@ -44,8 +44,8 @@ unsigned current_frame;
 unsigned*frame_duration;
 unsigned long _t;
 int max_repetition;
-/*:663*/
-#line 9136 "cweb/weaver.w"
+/*:667*/
+#line 9277 "./cweb/weaver.w"
 
 
 #ifdef W_MULTITHREAD
@@ -57,88 +57,88 @@ pthread_mutex_t _mutex;
 
 pthread_mutex_t _interface_mutex;
 #endif
-/*:416*//*417:*/
-#line 9155 "cweb/weaver.w"
+/*:420*//*421:*/
+#line 9296 "./cweb/weaver.w"
 
 #define W_NONE                 0
 #define W_INTERFACE_SQUARE    -1
 #define W_INTERFACE_PERIMETER -2
-/*:417*//*420:*/
-#line 9199 "cweb/weaver.w"
+/*:421*//*424:*/
+#line 9340 "./cweb/weaver.w"
 
 void _flush_interfaces(void);
-/*:420*//*425:*/
-#line 9271 "cweb/weaver.w"
+/*:424*//*429:*/
+#line 9421 "./cweb/weaver.w"
 
 GLfloat _interface_vertices[12];
 
 GLuint _interface_VBO;
 
 GLuint _interface_VAO;
-/*:425*//*428:*/
-#line 9328 "cweb/weaver.w"
+/*:429*//*432:*/
+#line 9478 "./cweb/weaver.w"
 
 struct interface*_new_interface(int type,int x,int y,int width,
 int height,...);
-/*:428*//*432:*/
-#line 9432 "cweb/weaver.w"
+/*:432*//*436:*/
+#line 9582 "./cweb/weaver.w"
 
 bool _destroy_interface(struct interface*inter);
-/*:432*//*436:*/
-#line 9486 "cweb/weaver.w"
+/*:436*//*440:*/
+#line 9636 "./cweb/weaver.w"
 
 struct interface*_copy_interface(struct interface*inter);
-/*:436*//*441:*/
-#line 9549 "cweb/weaver.w"
+/*:440*//*445:*/
+#line 9699 "./cweb/weaver.w"
 
 void _move_interface(struct interface*,float x,float y);
-/*:441*//*445:*/
-#line 9641 "cweb/weaver.w"
+/*:445*//*449:*/
+#line 9791 "./cweb/weaver.w"
 
 void _resize_interface(struct interface*inter,float size_x,float size_y);
-/*:445*//*449:*/
-#line 9720 "cweb/weaver.w"
+/*:449*//*453:*/
+#line 9870 "./cweb/weaver.w"
 
 void _rotate_interface(struct interface*inter,float rotation);
-/*:449*//*456:*/
-#line 9942 "cweb/weaver.w"
+/*:453*//*460:*/
+#line 10092 "./cweb/weaver.w"
 
 void _update_interface_screen_size(void);
-/*:456*//*486:*/
-#line 10773 "cweb/weaver.w"
+/*:460*//*490:*/
+#line 10949 "./cweb/weaver.w"
 
 struct interface*_interface_queue[W_MAX_SUBLOOP][W_MAX_INTERFACES];
-/*:486*//*488:*/
-#line 10800 "cweb/weaver.w"
+/*:490*//*492:*/
+#line 10976 "./cweb/weaver.w"
 
 void _insert_interface_queue(struct interface*inter);
-/*:488*//*490:*/
-#line 10848 "cweb/weaver.w"
+/*:492*//*494:*/
+#line 11024 "./cweb/weaver.w"
 
 void _remove_interface_queue(struct interface*inter);
-/*:490*//*492:*/
-#line 10917 "cweb/weaver.w"
+/*:494*//*496:*/
+#line 11093 "./cweb/weaver.w"
 
 void _clean_interface_queue(void);
-/*:492*//*668:*/
-#line 14832 "cweb/weaver.w"
+/*:496*//*672:*/
+#line 15005 "./cweb/weaver.w"
 
 #define W_INTERFACE_IMAGE -3
-/*:668*//*674:*/
-#line 15054 "cweb/weaver.w"
+/*:672*//*678:*/
+#line 15227 "./cweb/weaver.w"
 
 void _finalize_interface_texture(void*);
-/*:674*//*690:*/
-#line 15430 "cweb/weaver.w"
+/*:678*//*694:*/
+#line 15603 "./cweb/weaver.w"
 
 #if !defined(W_DISABLE_PNG) && (W_TARGET == W_ELF)
 GLuint*_extract_png(char*,unsigned*,unsigned**,int*,bool*);
 #endif
-/*:690*/
-#line 9092 "cweb/weaver.w"
+/*:694*/
+#line 9233 "./cweb/weaver.w"
 
 #ifdef __cplusplus
 }
 #endif
 #endif
-/*:413*/
+/*:417*/

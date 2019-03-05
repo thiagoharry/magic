@@ -42,7 +42,7 @@ MAIN_LOOP escolhe(void){
       salvos[i] = NULL;
       int carta_atual;
       char nome_atual[16];
-      sprintf(nome_atual, "deck%dcard0", i);
+      snprintf(nome_atual, 16, "deck%dcard0", i);
       ret = W.read_integer(nome_atual, &carta_atual);
       if(ret){
         baralhos_existentes[numero_de_opcoes] = i;
@@ -69,10 +69,10 @@ MAIN_LOOP escolhe(void){
         char nome[32];
         int num = 0;
         struct interface *tmp;
-        sprintf(nome, "deck%dcard%d", baralhos_existentes[i], j);
+        snprintf(nome, 32, "deck%dcard%d", baralhos_existentes[i], j);
         W.read_integer(nome, &num);
         if(num < 1 || num > 70) num = 1;
-        sprintf(nome, "arquiinimigo/%d_pequeno.gif", num);
+        snprintf(nome, 32, "arquiinimigo/%d_pequeno.gif", num);
         tmp = W.new_interface(5, W.width * (0.048 * j + 0.025),
                               salvos[i] -> y,
                               0.036 * W.width, 0.08 * W.height,
@@ -130,7 +130,7 @@ MAIN_LOOP escolhe(void){
         else{
           W.game -> baralho_proprio = true;
           for(i = 0; i < 20; i ++){
-            sprintf(nome, "deck%dcard%d",
+            snprintf(nome, 16, "deck%dcard%d",
                     baralhos_existentes[deck_selecionado], i);
             W.read_integer(nome, &(W.game -> baralho_arquiinimigo[i]));
           }
@@ -150,7 +150,7 @@ MAIN_LOOP escolhe(void){
   }
   if(apagando >= 0){
     char nome[16];
-    sprintf(nome, "deck%dcard%d", baralhos_existentes[apagando], apagados);
+    snprintf(nome, 16, "deck%dcard%d", baralhos_existentes[apagando], apagados);
     W.delete_integer(nome); // XXX
     apagados ++;
     if(apagados == 20){

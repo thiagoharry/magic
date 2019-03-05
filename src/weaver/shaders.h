@@ -1,5 +1,5 @@
-/*461:*/
-#line 10024 "cweb/weaver.w"
+/*465:*/
+#line 10174 "./cweb/weaver.w"
 
 #ifndef _shaders_h_
 #define _shaders_h_
@@ -8,32 +8,32 @@ extern"C"{
 #endif
 #include "weaver.h"
 /*66:*/
-#line 1928 "cweb/weaver.w"
+#line 1950 "./cweb/weaver.w"
 
 #include "conf_begin.h"
 #include "../../conf/conf.h"
 #include "conf_end.h"
 /*:66*/
-#line 10031 "cweb/weaver.w"
+#line 10181 "./cweb/weaver.w"
 
-/*469:*/
-#line 10134 "cweb/weaver.w"
+/*473:*/
+#line 10284 "./cweb/weaver.w"
 
 extern char _vertex_interface[];
 extern char _fragment_interface[];
 struct _shader _default_interface_shader;
-/*:469*//*471:*/
-#line 10151 "cweb/weaver.w"
+/*:473*//*475:*/
+#line 10301 "./cweb/weaver.w"
 
 GLuint _compile_shader(char*source,bool vertex);
 #define _compile_vertex_shader(source) _compile_shader(source, true)
 #define _compile_fragment_shader(source) _compile_shader(source, false)
-/*:471*//*473:*/
-#line 10198 "cweb/weaver.w"
+/*:475*//*477:*/
+#line 10348 "./cweb/weaver.w"
 
 GLuint _link_and_clean_shaders(GLuint vertex,GLuint fragment);
-/*:473*//*478:*/
-#line 10312 "cweb/weaver.w"
+/*:477*//*482:*/
+#line 10462 "./cweb/weaver.w"
 
 struct _shader{
 bool initialized;
@@ -61,36 +61,36 @@ struct _shader*_shader_list;
 
 #include "../../.hidden_code/shader.h"
 #endif
-/*:478*//*483:*/
-#line 10528 "cweb/weaver.w"
+/*:482*//*487:*/
+#line 10704 "./cweb/weaver.w"
 
 void _compile_and_insert_new_shader(char*dir,int position);
-/*:483*//*513:*/
-#line 11319 "cweb/weaver.w"
+/*:487*//*517:*/
+#line 11495 "./cweb/weaver.w"
 
 extern char _vertex_interface_texture[];
 extern char _fragment_interface_texture[];
 struct _shader _framebuffer_shader;
 GLfloat _framebuffer_matrix[16];
-/*:513*//*519:*/
-#line 11503 "cweb/weaver.w"
+/*:517*//*523:*/
+#line 11679 "./cweb/weaver.w"
 
 void _change_resolution(int resolution_x,int resolution_y);
-/*:519*//*524:*/
-#line 11599 "cweb/weaver.w"
+/*:523*//*528:*/
+#line 11775 "./cweb/weaver.w"
 
 void _change_final_shader(int type);
-/*:524*//*680:*/
-#line 15145 "cweb/weaver.w"
+/*:528*//*684:*/
+#line 15318 "./cweb/weaver.w"
 
 extern char _vertex_image_interface[];
 extern char _fragment_image_interface[];
 struct _shader _image_interface_shader;
-/*:680*/
-#line 10032 "cweb/weaver.w"
+/*:684*/
+#line 10182 "./cweb/weaver.w"
 
 #ifdef __cplusplus
 }
 #endif
 #endif
-/*:461*/
+/*:465*/

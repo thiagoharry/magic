@@ -1,10 +1,10 @@
-/*620:*/
-#line 13141 "cweb/weaver.w"
+/*624:*/
+#line 13317 "./cweb/weaver.w"
 
 #include "weaver.h"
 
-/*641:*/
-#line 13904 "cweb/weaver.w"
+/*645:*/
+#line 14077 "./cweb/weaver.w"
 
 #if W_TARGET != W_ELF || defined(W_MULTITHREAD)
 static void free_img_list(struct _image_list*last){
@@ -17,8 +17,8 @@ Wfree(tmp);
 }
 }
 #endif
-/*:641*//*657:*/
-#line 14460 "cweb/weaver.w"
+/*:645*//*661:*/
+#line 14633 "./cweb/weaver.w"
 
 void preenche_pixel(unsigned char*img,unsigned char**code_table,
 unsigned code,
@@ -54,8 +54,8 @@ img[4*i+3]= 255;
 }
 }
 }
-/*:657*//*658:*/
-#line 14503 "cweb/weaver.w"
+/*:661*//*662:*/
+#line 14676 "./cweb/weaver.w"
 
 unsigned char*produz_codigo(unsigned char*codigo,int size,char adicao){
 int i;
@@ -70,11 +70,11 @@ ret[i]= codigo[i];
 ret[size]= adicao;
 return ret;
 }
-/*:658*/
-#line 13144 "cweb/weaver.w"
+/*:662*/
+#line 13320 "./cweb/weaver.w"
 
-/*624:*/
-#line 13169 "cweb/weaver.w"
+/*628:*/
+#line 13345 "./cweb/weaver.w"
 
 GLuint*_extract_gif(char*filename,unsigned*number_of_frames,
 unsigned**frame_duration,
@@ -114,8 +114,8 @@ if(fp==NULL){
 fprintf(stderr,"ERROR: Can't open file %s.\n",filename);
 goto error_gif;
 }
-/*626:*/
-#line 13248 "cweb/weaver.w"
+/*630:*/
+#line 13424 "./cweb/weaver.w"
 
 {
 char data[4];
@@ -136,8 +136,8 @@ goto error_gif;
 printf("DEBUG: %s: GIF version: %s.\n",filename,data);
 #endif
 }
-/*:626*//*627:*/
-#line 13280 "cweb/weaver.w"
+/*:630*//*631:*/
+#line 13456 "./cweb/weaver.w"
 
 {
 
@@ -182,8 +182,8 @@ if(read_error){
 read_error= true;
 }
 }
-/*:627*//*628:*/
-#line 13329 "cweb/weaver.w"
+/*:631*//*632:*/
+#line 13505 "./cweb/weaver.w"
 
 if(global_color_table_flag){
 global_color_table= (unsigned char*)_iWalloc(global_color_table_size);
@@ -219,8 +219,8 @@ printf("\n");
 }
 #endif
 }
-/*:628*//*630:*/
-#line 13381 "cweb/weaver.w"
+/*:632*//*634:*/
+#line 13557 "./cweb/weaver.w"
 
 {
 unsigned block_type;
@@ -238,8 +238,8 @@ block_type= data[0];
 while(block_type!=59){
 switch(block_type){
 case 33:
-/*631:*/
-#line 13433 "cweb/weaver.w"
+/*635:*/
+#line 13609 "./cweb/weaver.w"
 
 {
 unsigned extension_type;
@@ -250,8 +250,8 @@ goto error_gif;
 extension_type= (unsigned)data[0];
 switch(extension_type){
 case 1:
-/*632:*/
-#line 13477 "cweb/weaver.w"
+/*636:*/
+#line 13653 "./cweb/weaver.w"
 
 {
 #ifdef W_DEBUG_GIF
@@ -283,8 +283,8 @@ if(read_error){
 fprintf(stderr,"WARNING: File %s couldn't be read.\n",filename);
 goto error_gif;
 }
-/*636:*/
-#line 13724 "cweb/weaver.w"
+/*640:*/
+#line 13897 "./cweb/weaver.w"
 
 {
 disposal_method= 0;
@@ -292,17 +292,17 @@ transparent_color_flag= false;
 delay_time= 0;
 transparency_index= 0;
 }
-/*:636*/
-#line 13508 "cweb/weaver.w"
+/*:640*/
+#line 13684 "./cweb/weaver.w"
 
 }
-/*:632*/
-#line 13443 "cweb/weaver.w"
+/*:636*/
+#line 13619 "./cweb/weaver.w"
 
 break;
 case 249:
-/*635:*/
-#line 13621 "cweb/weaver.w"
+/*639:*/
+#line 13794 "./cweb/weaver.w"
 
 {
 bool read_error= false;
@@ -395,13 +395,13 @@ goto error_gif;
 printf(")]\n");
 #endif
 }
-/*:635*/
-#line 13446 "cweb/weaver.w"
+/*:639*/
+#line 13622 "./cweb/weaver.w"
 
 break;
 case 254:
-/*634:*/
-#line 13588 "cweb/weaver.w"
+/*638:*/
+#line 13764 "./cweb/weaver.w"
 
 {
 unsigned char buffer[256];
@@ -414,10 +414,7 @@ do{
 if(fread(buffer,1,1,fp)!=1)
 read_error= true;
 #ifdef W_DEBUG_GIF
-{
-unsigned int i;
 printf("%c",buffer[0]);
-}
 #endif
 }while(buffer[0]!=0);
 #ifdef W_DEBUG_GIF
@@ -428,13 +425,13 @@ fprintf(stderr,"WARNING: File %s couldn't be read. J\n",filename);
 goto error_gif;
 }
 }
-/*:634*/
-#line 13449 "cweb/weaver.w"
+/*:638*/
+#line 13625 "./cweb/weaver.w"
 
 break;
 case 255:
-/*633:*/
-#line 13529 "cweb/weaver.w"
+/*637:*/
+#line 13705 "./cweb/weaver.w"
 
 {
 bool read_error= false;
@@ -485,8 +482,8 @@ else
 printf("   [Extension: Application (unknown)]\n");
 #endif
 }
-/*:633*/
-#line 13452 "cweb/weaver.w"
+/*:637*/
+#line 13628 "./cweb/weaver.w"
 
 break;
 default:
@@ -495,13 +492,13 @@ fprintf(stderr,"WARNING: Couldn't interpret GIF file %s. Invalid extension "
 goto error_gif;
 }
 }
-/*:631*/
-#line 13398 "cweb/weaver.w"
+/*:635*/
+#line 13574 "./cweb/weaver.w"
 
 break;
 case 44:
-/*637:*/
-#line 13742 "cweb/weaver.w"
+/*641:*/
+#line 13915 "./cweb/weaver.w"
 
 {
 #ifdef W_DEBUG_GIF
@@ -561,8 +558,8 @@ goto error_gif;
 }
 
 if(local_color_table_flag){
-/*638:*/
-#line 13811 "cweb/weaver.w"
+/*642:*/
+#line 13984 "./cweb/weaver.w"
 
 {
 local_color_table= (unsigned char*)_iWalloc(local_color_table_size);
@@ -578,32 +575,32 @@ fprintf(stderr,"WARNING: File %s couldn't be read N.\n",filename);
 goto error_gif;
 }
 }
-/*:638*/
-#line 13801 "cweb/weaver.w"
+/*:642*/
+#line 13974 "./cweb/weaver.w"
 
 }
-/*639:*/
-#line 13831 "cweb/weaver.w"
+/*643:*/
+#line 14004 "./cweb/weaver.w"
 
 {
 int buffer_size;
-/*644:*/
-#line 14050 "cweb/weaver.w"
+/*648:*/
+#line 14223 "./cweb/weaver.w"
 
 unsigned char*code_table[4096];
 int code_table_size[4096];
 unsigned last_value_in_code_table;
-/*:644*//*647:*/
-#line 14097 "cweb/weaver.w"
+/*:648*//*651:*/
+#line 14270 "./cweb/weaver.w"
 
 unsigned clear_code,end_of_information_code;
 bool end_of_image= false;
-/*:647*//*649:*/
-#line 14125 "cweb/weaver.w"
+/*:651*//*653:*/
+#line 14298 "./cweb/weaver.w"
 
 int bits;
-/*:649*//*651:*/
-#line 14143 "cweb/weaver.w"
+/*:653*//*655:*/
+#line 14316 "./cweb/weaver.w"
 
 int byte_offset= 0,bit_offset= 0;
 unsigned code= 0,previous_code;
@@ -615,12 +612,12 @@ bool incomplete_code= false;
 unsigned long pixel= 0;
 
 bool first_pixel= true;
-/*:651*//*653:*/
-#line 14303 "cweb/weaver.w"
+/*:655*//*657:*/
+#line 14476 "./cweb/weaver.w"
 
 unsigned char*color_table;
-/*:653*/
-#line 13834 "cweb/weaver.w"
+/*:657*/
+#line 14007 "./cweb/weaver.w"
 
 
 
@@ -632,8 +629,8 @@ unsigned char*color_table;
 if(fread(buffer,1,1,fp)!=1)
 read_error= true;
 lzw_minimum_code_size= buffer[0];
-/*642:*/
-#line 13922 "cweb/weaver.w"
+/*646:*/
+#line 14095 "./cweb/weaver.w"
 
 {
 struct _image_list*new_image;
@@ -719,8 +716,8 @@ filename);
 }
 }
 }
-/*:642*//*645:*/
-#line 14063 "cweb/weaver.w"
+/*:646*//*649:*/
+#line 14236 "./cweb/weaver.w"
 
 {
 if(lzw_minimum_code_size<2||lzw_minimum_code_size> 8){
@@ -729,8 +726,8 @@ fprintf(stderr,"WARNING (0): Invalid GIF file %s. Not allowed LZW Minimim "
 goto error_gif;
 }
 }
-/*:645*//*646:*/
-#line 14077 "cweb/weaver.w"
+/*:649*//*650:*/
+#line 14250 "./cweb/weaver.w"
 
 {
 unsigned i;
@@ -740,8 +737,8 @@ code_table[i]= NULL;
 code_table_size[i]= 1;
 }
 }
-/*:646*//*648:*/
-#line 14102 "cweb/weaver.w"
+/*:650*//*652:*/
+#line 14275 "./cweb/weaver.w"
 
 {
 clear_code= last_value_in_code_table+1;
@@ -752,21 +749,21 @@ code_table_size[clear_code]= 0;
 code_table[end_of_information_code]= NULL;
 code_table_size[end_of_information_code]= 0;
 }
-/*:648*//*650:*/
-#line 14129 "cweb/weaver.w"
+/*:652*//*654:*/
+#line 14302 "./cweb/weaver.w"
 
 {
 bits= lzw_minimum_code_size+1;
 }
-/*:650*//*654:*/
-#line 14307 "cweb/weaver.w"
+/*:654*//*658:*/
+#line 14480 "./cweb/weaver.w"
 
 if(local_color_table_flag)
 color_table= local_color_table;
 else
 color_table= global_color_table;
-/*:654*/
-#line 13845 "cweb/weaver.w"
+/*:658*/
+#line 14018 "./cweb/weaver.w"
 
 
 
@@ -779,8 +776,8 @@ buffer[buffer_size]= '\0';
 if(fread(buffer,1,buffer[0],fp)!=buffer[0])
 read_error= true;
 
-/*652:*/
-#line 14159 "cweb/weaver.w"
+/*656:*/
+#line 14332 "./cweb/weaver.w"
 
 byte_offset= 0;
 
@@ -916,8 +913,8 @@ continue;
 if(code> last_value_in_code_table+1){
 code= end_of_information_code;
 }
-/*655:*/
-#line 14318 "cweb/weaver.w"
+/*659:*/
+#line 14491 "./cweb/weaver.w"
 
 {
 
@@ -928,8 +925,8 @@ continue;
 }
 
 if(code==clear_code){
-/*656:*/
-#line 14441 "cweb/weaver.w"
+/*660:*/
+#line 14614 "./cweb/weaver.w"
 
 {
 for(;last_value_in_code_table> end_of_information_code;
@@ -940,8 +937,8 @@ last_value_in_code_table= end_of_information_code;
 bits= lzw_minimum_code_size+1;
 first_pixel= true;
 }
-/*:656*/
-#line 14328 "cweb/weaver.w"
+/*:660*/
+#line 14501 "./cweb/weaver.w"
 
 continue;
 }
@@ -1050,12 +1047,12 @@ previous_code= code;
 if(last_value_in_code_table>=(unsigned)((1<<bits)-1)&&bits<12)
 bits++;
 }
-/*:655*/
-#line 14294 "cweb/weaver.w"
+/*:659*/
+#line 14467 "./cweb/weaver.w"
 
 }
-/*:652*/
-#line 13857 "cweb/weaver.w"
+/*:656*/
+#line 14030 "./cweb/weaver.w"
 
 if(fread(buffer,1,1,fp)!=1)
 read_error= true;
@@ -1066,16 +1063,16 @@ fprintf(stderr,"WARNING: fread should be checked in "
 "Image Data.\n");
 #endif
 }
-/*659:*/
-#line 14523 "cweb/weaver.w"
+/*663:*/
+#line 14696 "./cweb/weaver.w"
 
 {
 unsigned i;
 for(i= last_value_in_code_table;i!=end_of_information_code;i--)
 Wfree(code_table[i]);
 }
-/*:659*/
-#line 13867 "cweb/weaver.w"
+/*:663*/
+#line 14040 "./cweb/weaver.w"
 
 
 
@@ -1084,12 +1081,12 @@ transparent_color_flag= false;
 delay_time= 0;
 transparency_index= 0;
 }
-/*:639*/
-#line 13803 "cweb/weaver.w"
+/*:643*/
+#line 13976 "./cweb/weaver.w"
 
 }
-/*:637*/
-#line 13401 "cweb/weaver.w"
+/*:641*/
+#line 13577 "./cweb/weaver.w"
 
 break;
 default:
@@ -1106,11 +1103,11 @@ goto error_gif;
 block_type= data[0];
 }
 }
-/*:630*/
-#line 13208 "cweb/weaver.w"
+/*:634*/
+#line 13384 "./cweb/weaver.w"
 
-/*660:*/
-#line 14549 "cweb/weaver.w"
+/*664:*/
+#line 14722 "./cweb/weaver.w"
 
 #ifdef W_MULTITHREAD
 {
@@ -1144,8 +1141,8 @@ GL_TRUE,context_attribs);
 glXMakeCurrent(_dpy,_window,thread_context);
 }
 #endif
-/*:660*//*661:*/
-#line 14587 "cweb/weaver.w"
+/*:664*//*665:*/
+#line 14760 "./cweb/weaver.w"
 
 {
 unsigned i,line_source,line_destiny,col;
@@ -1305,8 +1302,8 @@ if(previous_image!=NULL)Wfree(previous_image);
 Wfree(current_image);
 }
 }
-/*:661*/
-#line 13209 "cweb/weaver.w"
+/*:665*/
+#line 13385 "./cweb/weaver.w"
 
 
 goto end_of_gif;
@@ -1326,27 +1323,27 @@ printf("DEBUG: Exiting image %s.\n",filename);
 fclose(fp);
 _iWtrash();
 #else
-/*625:*/
-#line 13237 "cweb/weaver.w"
+/*629:*/
+#line 13413 "./cweb/weaver.w"
 
 if(fp!=NULL)fclose(fp);
-/*:625*//*629:*/
-#line 13370 "cweb/weaver.w"
+/*:629*//*633:*/
+#line 13546 "./cweb/weaver.w"
 
 if(local_color_table!=NULL)Wfree(local_color_table);
 if(global_color_table!=NULL)Wfree(global_color_table);
-/*:629*//*643:*/
-#line 14012 "cweb/weaver.w"
+/*:633*//*647:*/
+#line 14185 "./cweb/weaver.w"
 
 if(img!=NULL)
 free_img_list(last_img);
-/*:643*/
-#line 13228 "cweb/weaver.w"
+/*:647*/
+#line 13404 "./cweb/weaver.w"
 
 #endif
 return returned_data;
 }
-/*:624*/
-#line 13145 "cweb/weaver.w"
+/*:628*/
+#line 13321 "./cweb/weaver.w"
 
-/*:620*/
+/*:624*/

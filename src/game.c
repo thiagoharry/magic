@@ -55,9 +55,10 @@ static bool usa_escada;
 
 struct interface *obtem_caos(int n){
   char nome[256];
-  strcpy(nome, nomes[n]);
-  nome[strlen(nome) - 4] = '\0';
-  strcat(nome, "_caos.gif");
+  size_t nome_size = strlen(nomes[n]);
+  memcpy(nome, nomes[n], nome_size);
+  nome_size -= 4;
+  memcpy(&nome[nome_size], "_caos.gif", 10);
   return W.new_interface(8, W.width / 2, W.height / 2,
                          W.width, 40, nome);
 }
