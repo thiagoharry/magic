@@ -19,7 +19,7 @@ along with magic. If not, see <http://www.gnu.org/licenses/>.
 
 #include "vida.h"
 
-#define AVATARS 33
+#define AVATARS 49
 
 static struct interface *opcoes[3], *selecao;
 static struct interface *avatar[4];
