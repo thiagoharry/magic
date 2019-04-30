@@ -252,11 +252,11 @@ MAIN_LOOP main_loop(void){ // The game loop
         caos4 = obtem_caos(carta_sobreposta);
         caos4 -> visible = false;
         W.move_interface(caos4, caos4 -> x, caos4 -> y - caos4 -> height - 1);
-        fundo = W.new_interface(2, W.width / 2, W.height / 2,
-                                W.width, W.height,
+        fundo = W.new_interface(1, W.width / 4, W.height / 2,
+                                W.width / 2, W.height,
                                 nomes[carta]);
-        fundo_sobreposto = W.new_interface(3, W.width / 2, W.height / 2,
-                                           W.width, W.height,
+        fundo_sobreposto = W.new_interface(1, 3 * W.width / 4, W.height / 2,
+                                           W.width / 2, W.height,
                                            nomes[carta_sobreposta]);
       }
       else{
@@ -265,6 +265,35 @@ MAIN_LOOP main_loop(void){ // The game loop
                                 nomes[carta]);
       }
     }
+  }
+  else if(W.game -> fusao_espacial && fundo_sobreposto == NULL){
+    printf("sobreposicao\n");
+    //carta = W.game -> mapa[3][3];
+    caos1 = obtem_caos(carta);
+    caos1 -> visible = false;
+    if(W.game -> proximo[0] != -1){
+      carta_sobreposta = W.game -> proximo[0];
+      descarta_carta();
+    }
+    else{
+      carta_sobreposta = gera_carta();
+    }
+    if(carta_sobreposta == 5){
+      carta_sobreposta = carta;
+      carta = 5;
+    }
+    caos4 = obtem_caos(carta_sobreposta);
+    caos4 -> visible = false;
+    W.move_interface(caos4, caos4 -> x, caos4 -> y - caos4 -> height - 1);
+    W.resize_interface(fundo, W.width / 2, W.height);
+    W.move_interface(fundo, W.width / 4, W.height / 2);
+    //fundo = W.new_interface(1, W.width / 4, W.height / 2,
+    //			    W.width / 2, W.height,
+    //			    nomes[carta]);
+    fundo_sobreposto = W.new_interface(1, 3 * W.width / 4, W.height / 2,
+				       W.width / 2, W.height,
+				       nomes[carta_sobreposta]);
+    printf("'%s' e '%s'\n", nomes[carta], nomes[carta_sobreposta]);
   }
   else if(W.game -> tunel_interplanar){
     carta = W.game -> mapa[3][3];
@@ -435,7 +464,7 @@ MAIN_LOOP main_loop(void){ // The game loop
     }
     else{
       fundo -> integer = 5;
-      if(W.game -> fusao_espacial)
+      if(W.game -> fusao_espacial && fundo_sobreposto != NULL)
         fundo_sobreposto -> integer = 5;
       W.run_futurelly(nao_treme, 0.5);
       W.play_sound(fail);

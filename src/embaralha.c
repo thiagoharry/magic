@@ -78,11 +78,11 @@ MAIN_LOOP menu_embaralha(void){
     if(selecao -> visible && !W.pending_files){
       if(selecao -> x == escolha1 -> x){
         cartas = 40;
-        numero_de_pilhas = 10;
+        numero_de_pilhas = 20;
       }
       else if(selecao -> x == escolha2 -> x){
         cartas = 60;
-        numero_de_pilhas = 10;
+        numero_de_pilhas = 20;
       }
       else{
         cartas = 100;
@@ -142,6 +142,14 @@ static void executa(void){
   W.play_sound(avanca_som);
   if(cartas == 0)
     terminou = true;
+  if(!terminou){
+    if(carta_escolhida == 1)
+      W.run_futurelly(executa, 2.5);
+    else if(p == ultima)
+      W.run_futurelly(executa, 4.0);
+    else
+      W.run_futurelly(executa, 5.0);
+  }
 }
 
 MAIN_LOOP embaralha(void){
@@ -190,7 +198,7 @@ MAIN_LOOP embaralha(void){
     }
   }
   executa();
-  W.run_periodically(executa, 5.0);
+  //W.run_periodically(executa, 5.0);
  LOOP_BODY:
   if(W.keyboard[W_ESC] || terminou)
     Wexit_loop();
