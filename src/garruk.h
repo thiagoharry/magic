@@ -1,5 +1,5 @@
 /*
-Copyright (c) Thiago "Harry" Leucz Astrizi, 2017
+Copyright (c) harry, 2019
 
 This file is part of magic.
 
@@ -17,17 +17,12 @@ You should have received a copy of the GNU Affero General Public License
 along with magic. If not, see <http://www.gnu.org/licenses/>.
 */
 
-
+#ifndef _garruk_h_
+#define _garruk_h_
 #include "weaver/weaver.h"
-#include "game.h"
-#include "planeswalk.h"
-#include "escada.h"
-#include "fenomeno.h"
-#include "tunel.h"
-#include "escolhe.h"
-#include "arquiinimigo.h"
-#include "baralho.h"
-#include "exploradores.h"
-#include "vida.h"
-#include "embaralha.h"
-#include "garruk.h"
+
+#include "includes.h"
+
+MAIN_LOOP garruk(void);
+
+#endif

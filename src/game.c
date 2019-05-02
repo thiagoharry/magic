@@ -46,7 +46,7 @@ const char *nomes[] = {"bant.gif", "grixis.gif", "naya.gif",
                        "portao.gif", "zefiro.gif", "trilha.gif",
                        "selva.gif", "palacio.gif"};
 
-static struct interface *fundo, *mapa, *classico, *selecao, *fundo_sobreposto;
+static struct interface *fundo, *desafios, *classico, *selecao, *fundo_sobreposto;
 static struct interface *arqui, *explora, *marca_vida, *embaralhador;
 static struct interface *caos1, *caos2, *caos3, *caos4;
 static int num, carta, carta_anterior, carta_sobreposta;
@@ -96,8 +96,8 @@ MAIN_LOOP intro(void){ // The game loop
                             W.width / 4, W.height / 3, "exploradores.gif");
   arqui = W.new_interface(W_INTERFACE_IMAGE, W.width / 6, 0.25 * W.height,
                                  W.width / 4, W.height / 3, "arquiinimigo.gif");
-  mapa = W.new_interface(W_INTERFACE_IMAGE, 5 * W.width / 6, 0.25 * W.height,
-                         W.width / 4, W.height / 3, "mapa.gif");
+  desafios = W.new_interface(W_INTERFACE_IMAGE, 5 * W.width / 6, 0.25 * W.height,
+                         W.width / 4, W.height / 3, "desafios.gif");
   classico = W.new_interface(W_INTERFACE_IMAGE, W.width / 2, 0.25 * W.height,
                              W.width / 4, W.height / 3, "classico.gif");
   selecao = W.new_interface(W_INTERFACE_PERIMETER, 3 * W.width / 4, W.height / 2,
@@ -123,9 +123,9 @@ MAIN_LOOP intro(void){ // The game loop
       W.game -> modo_jogo = true;
       Wloop(escolhe); // Arqui-inimigo
     }
-    else if(selecao -> x == mapa -> x && selecao -> y == mapa -> y){
+    else if(selecao -> x == desafios -> x && selecao -> y == desafios -> y){
       W.game -> modo_jogo = true;
-      Wloop(main_loop);
+      Wloop(garruk);
     }
     else if(selecao -> x == classico -> x && selecao -> y == classico -> y){
       W.game -> modo_jogo = true;
@@ -154,11 +154,11 @@ MAIN_LOOP intro(void){ // The game loop
     W.game -> modo_mapa = false;
     selecao -> visible = true;
   }
-  else if(W.mouse.x > mapa -> x - mapa -> width / 2 &&
-          W.mouse.x < mapa -> x + mapa -> width / 2 &&
-          W.mouse.y > mapa -> y - mapa -> height / 2 &&
-          W.mouse.y < mapa -> y + mapa -> height / 2){
-    W.move_interface(selecao, mapa -> x, mapa -> y);
+  else if(W.mouse.x > desafios -> x - desafios -> width / 2 &&
+          W.mouse.x < desafios -> x + desafios -> width / 2 &&
+          W.mouse.y > desafios -> y - desafios -> height / 2 &&
+          W.mouse.y < desafios -> y + desafios -> height / 2){
+    W.move_interface(selecao, desafios -> x, desafios -> y);
     W.game -> modo_mapa = true;
     selecao -> visible = true;
   }
